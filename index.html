@@ -18,7 +18,7 @@
 
 <div class="logo">
 
-<img src="images/logo.png" alt="GGN">
+<img src="images/logo.png" alt="GGN Logo">
 
 <div>
 
@@ -34,14 +34,17 @@
 
 <div class="container">
 
+<!-- Sidebar -->
 <div class="sidebar">
 
 <h2>ค้นหาพื้นที่</h2>
 
-<label>จังหวัด</label>
+<label for="province">จังหวัด</label>
+
 <select id="province"></select>
 
-<label>โซน</label>
+<label for="zone">โซน</label>
+
 <select id="zone"></select>
 
 <hr>
@@ -51,15 +54,25 @@
 <input
 type="text"
 id="searchInput"
-placeholder="พิมพ์ชื่อหน่วยงาน...">
+placeholder="เช่น เคียวเซร่า หรือ เบอร์นิน่า"
+autocomplete="off"
+spellcheck="false">
 
 <div id="searchResult" class="search-result">
 
 <p class="empty">
-ยังไม่มีผลการค้นหา
+พิมพ์ชื่อหน่วยงานเพื่อค้นหา
 </p>
 
 </div>
+
+<button
+id="clearSearch"
+type="button">
+
+ล้างการค้นหา
+
+</button>
 
 <hr>
 
@@ -73,18 +86,32 @@ placeholder="พิมพ์ชื่อหน่วยงาน...">
 
 </div>
 
-<button id="openMap">
+<button
+id="openMap"
+type="button">
 
 เปิด Google My Maps
 
 </button>
 
+<div
+id="loading"
+style="display:none;text-align:center;padding:12px;">
+
+กำลังโหลดข้อมูล...
+
 </div>
+
+</div>
+
+<!-- Map -->
 
 <div class="content">
 
 <iframe
 id="mapFrame"
+title="GGN Operations Map"
+loading="lazy"
 allowfullscreen>
 </iframe>
 
@@ -93,8 +120,32 @@ allowfullscreen>
 </div>
 
 <script src="js/maps.js"></script>
-<script src="js/app.js"></script>
 <script src="js/script.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+
+// ปุ่มล้างข้อความค้นหา
+
+const clearButton = document.getElementById("clearSearch");
+
+clearButton.addEventListener("click",function(){
+
+    const input=document.getElementById("searchInput");
+
+    const result=document.getElementById("searchResult");
+
+    input.value="";
+
+    result.innerHTML='<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
+
+    result.style.display="none";
+
+    input.focus();
+
+});
+
+</script>
 
 </body>
 

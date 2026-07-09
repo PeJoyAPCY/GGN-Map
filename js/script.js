@@ -13,244 +13,121 @@ const searchResult = document.getElementById("searchResult");
 // โหลดข้อมูล KML
 // ======================================
 
-async function loadKML(filePath, province, zone){
+async function loadKML(filePath, province, zone) {
 
-    try{
+    console.log("กำลังโหลด KML :", filePath);
+
+    allLocations = [];
+
+    try {
 
         const response = await fetch(filePath);
 
-        if(!response.ok){
-
-            throw new Error("ไม่สามารถโหลดไฟล์ KML");
-
+        if (!response.ok) {
+            throw new Error(`โหลดไฟล์ไม่สำเร็จ (${response.status})`);
         }
 
         const text = await response.text();
 
         const parser = new DOMParser();
-
-        const xml = parser.parseFromString(text,"text/xml");
+        const xml = parser.parseFromString(text, "text/xml");
 
         const placemarks = xml.getElementsByTagName("Placemark");
 
-        // ล้างข้อมูลเดิม
-        allLocations = [];
+        for (let p of placemarks) {
 
-        for(let i=0;i<placemarks.length;i++){
+            const name =
+                p.getElementsByTagName("name")[0]?.textContent.trim() || "";
 
-            const placemark = placemarks[i];
+            const coord =
+                p.getElementsByTagName("coordinates")[0]?.textContent.trim();
 
-            const name = placemark
-                .getElementsByTagName("name")[0]
-                ?.textContent
-                ?.trim();
+            if (!coord) continue;
 
-            if(!name){
+            const parts = coord.split(",");
 
-                continue;
-
-            }
-
-            let lat = 0;
-            let lng = 0;
-
-            const coordinate = placemark
-                .getElementsByTagName("coordinates")[0]
-                ?.textContent
-                ?.trim();
-
-            if(coordinate){
-
-                const c = coordinate.split(",");
-
-                lng = parseFloat(c[0]);
-
-                lat = parseFloat(c[1]);
-
-            }
+            const lng = parseFloat(parts[0]);
+            const lat = parseFloat(parts[1]);
 
             allLocations.push({
-
                 name,
                 lat,
                 lng,
                 province,
                 zone
-
             });
-
         }
 
-        console.log(
-            "โหลด KML สำเร็จ",
-            province,
-            zone,
-            allLocations.length,
-            "จุด"
-        );
+        console.log("โหลด KML สำเร็จ");
+        console.log("จำนวนข้อมูล :", allLocations.length);
+        console.table(allLocations);
+
+    } catch (err) {
+
+        console.error("โหลด KML ไม่สำเร็จ :", err);
 
     }
-    catch(err){
-
-        console.error(err);
-
-    }
-
-}
-
-// ======================================
-// จัดรูปแบบข้อความ
-// ======================================
-
-function normalize(text){
-
-    return text
-        .toLowerCase()
-        .replace(/\s+/g,"")
-        .trim();
-
-}
-
-// ======================================
-// ไฮไลต์ข้อความ
-// ======================================
-
-function highlight(text, keyword){
-
-    if(keyword===""){
-
-        return text;
-
-    }
-
-    const regex = new RegExp(keyword,"ig");
-
-    return text.replace(regex,function(match){
-
-        return `<b>${match}</b>`;
-
-    });
-
 }
 
 // ======================================
 // ค้นหา
 // ======================================
 
-function searchLocation(){
+function searchLocation() {
 
-    const keyword = normalize(searchInput.value);
+    const keyword = searchInput.value.trim().toLowerCase();
+
+    if (!keyword) {
+
+        searchResult.innerHTML = "";
+        return;
+
+    }
+
+    const results = allLocations.filter(item =>
+        item.name.toLowerCase().includes(keyword)
+    );
+
+    if (results.length === 0) {
+
+        searchResult.innerHTML = `
+            <div class="result-item">
+                ไม่พบข้อมูล
+            </div>
+        `;
+        return;
+    }
 
     searchResult.innerHTML = "";
 
-    if(keyword===""){
+    results.forEach(item => {
 
-        searchResult.style.display="none";
+        const div = document.createElement("div");
 
-        return;
+        div.className = "result-item";
 
-    }
-
-    let result = allLocations.filter(location=>{
-
-        return normalize(location.name)
-            .includes(keyword);
-
-    });
-
-    result.sort((a,b)=>{
-
-        const aa = normalize(a.name).startsWith(keyword);
-
-        const bb = normalize(b.name).startsWith(keyword);
-
-        return bb-aa;
-
-    });
-
-    if(result.length===0){
-
-        searchResult.innerHTML=`
-
-            <div class="empty">
-
-                ไม่พบข้อมูล
-
-            </div>
-
+        div.innerHTML = `
+            <strong>${item.name}</strong><br>
+            ${item.province} ${item.zone}
         `;
 
-        searchResult.style.display="block";
+        div.onclick = () => {
 
-        return;
+            map.setCenter({
+                lat: item.lat,
+                lng: item.lng
+            });
 
-    }
+            map.setZoom(17);
 
-    const total=document.createElement("div");
-
-    total.className="search-total";
-
-    total.innerHTML=`พบ ${result.length} รายการ`;
-
-    searchResult.appendChild(total);
-
-    result.slice(0,20).forEach(location=>{
-
-        const item=document.createElement("div");
-
-        item.className="search-item";
-
-        item.innerHTML=`
-
-            <div class="item-title">
-
-                📍 ${highlight(location.name,keyword)}
-
-            </div>
-
-            <div class="item-sub">
-
-                ${location.province} • ${location.zone}
-
-            </div>
-
-        `;
-
-        item.onclick=function(){
-
-            moveToLocation(location);
+            searchResult.innerHTML = "";
+            searchInput.value = "";
 
         };
 
-        searchResult.appendChild(item);
+        searchResult.appendChild(div);
 
     });
-
-    searchResult.style.display="block";
-
-}
-
-// ======================================
-// เปิดตำแหน่ง
-// ======================================
-
-function moveToLocation(location){
-
-    searchInput.value = location.name;
-
-    searchResult.style.display = "none";
-
-    if(location.lat===0 && location.lng===0){
-
-        alert("ไม่พบพิกัดของจุดนี้");
-
-        return;
-
-    }
-
-    const url=`https://www.google.com/maps?q=${location.lat},${location.lng}`;
-
-    window.open(url,"_blank");
 
 }
 
@@ -258,51 +135,6 @@ function moveToLocation(location){
 // Event
 // ======================================
 
-searchInput.addEventListener("input",searchLocation);
-
-searchInput.addEventListener("keydown",function(e){
-
-    if(e.key==="Enter"){
-
-        e.preventDefault();
-
-        const keyword=normalize(searchInput.value);
-
-        const result=allLocations.filter(location=>{
-
-            return normalize(location.name)
-                .includes(keyword);
-
-        });
-
-        if(result.length){
-
-            moveToLocation(result[0]);
-
-        }
-
-    }
-
-    if(e.key==="Escape"){
-
-        searchResult.style.display="none";
-
-    }
-
-});
-
-// คลิกนอกพื้นที่ให้ปิดผลค้นหา
-document.addEventListener("click",function(e){
-
-    if(
-        !searchResult.contains(e.target) &&
-        e.target!==searchInput
-    ){
-
-        searchResult.style.display="none";
-
-    }
-
-});
+searchInput.addEventListener("input", searchLocation);
 
 console.log("GGN Search Ready");

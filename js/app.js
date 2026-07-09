@@ -1,18 +1,25 @@
+// ======================================
+// GGN Operations Map
+// app.js
+// จัดการจังหวัด / เขต / Google My Maps
+// ======================================
+
 const province = document.getElementById("province");
 const zone = document.getElementById("zone");
 const mapFrame = document.getElementById("mapFrame");
 const totalUnit = document.getElementById("totalUnit");
 const openMap = document.getElementById("openMap");
+const loading = document.getElementById("loading");
 
 // =======================
-// โหลดจังหวัด
+// โหลดรายชื่อจังหวัด
 // =======================
 
 function loadProvince(){
 
-    province.innerHTML="";
+    province.innerHTML = "";
 
-    Object.keys(maps).forEach(p=>{
+    Object.keys(maps).forEach(p => {
 
         province.insertAdjacentHTML(
             "beforeend",
@@ -31,13 +38,17 @@ function loadProvince(){
 
 function loadZone(){
 
-    zone.innerHTML="";
+    zone.innerHTML = "";
 
-    const p=province.value;
+    const p = province.value;
 
-    if(!maps[p]) return;
+    if(!maps[p]){
 
-    Object.keys(maps[p]).forEach(z=>{
+        return;
+
+    }
+
+    Object.keys(maps[p]).forEach(z => {
 
         zone.insertAdjacentHTML(
             "beforeend",
@@ -54,11 +65,10 @@ function loadZone(){
 // โหลดแผนที่
 // =======================
 
-function loadMap(){
+async function loadMap(){
 
-    const p=province.value;
-
-    const z=zone.value;
+    const p = province.value;
+    const z = zone.value;
 
     if(!maps[p] || !maps[p][z]){
 
@@ -66,45 +76,76 @@ function loadMap(){
 
     }
 
-    const data=maps[p][z];
+    const data = maps[p][z];
 
-    mapFrame.src=data.map;
+    // Google My Maps
+    mapFrame.src = data.map;
 
-    totalUnit.textContent=data.total;
+    // จำนวนหน่วยงาน
+    totalUnit.textContent = data.total;
 
-    openMap.onclick=()=>{
+    // ปุ่มเปิด Google My Maps
+    openMap.onclick = function(){
 
-        window.open(data.viewer,"_blank");
+        window.open(
+            data.viewer,
+            "_blank"
+        );
 
     };
 
-    if(typeof loadKML==="function"){
+    // แสดง Loading
+    if(loading){
 
-        loadKML(data.kml);
+        loading.style.display = "block";
+
+    }
+
+    // โหลดข้อมูล KML
+    if(typeof loadKML === "function"){
+
+        await loadKML(
+            data.kml,
+            p,
+            z
+        );
+
+    }
+
+    // ซ่อน Loading
+    if(loading){
+
+        loading.style.display = "none";
 
     }
 
 }
 
 // =======================
-// เปิดจากการค้นหา
+// เปิดตำแหน่งจากการค้นหา
 // =======================
 
 function openLocation(location){
 
-    province.value=location.province;
+    if(!location){
+
+        return;
+
+    }
+
+    province.value = location.province;
 
     loadZone();
 
-    zone.value=location.zone;
+    zone.value = location.zone;
 
     loadMap();
 
-    setTimeout(()=>{
+    setTimeout(function(){
 
         moveToLocation(location);
 
-    },700);
+    },500);
 
 }
 
@@ -112,8 +153,20 @@ function openLocation(location){
 // Event
 // =======================
 
-province.addEventListener("change",loadZone);
+province.addEventListener(
+    "change",
+    loadZone
+);
 
-zone.addEventListener("change",loadMap);
+zone.addEventListener(
+    "change",
+    loadMap
+);
+
+// =======================
+// เริ่มต้นระบบ
+// =======================
 
 loadProvince();
+
+console.log("GGN App Ready");
