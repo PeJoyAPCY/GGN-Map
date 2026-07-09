@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>GGN (ลพ.)</name>
+    <description><![CDATA[สต.ดนุพล<br>สต.ดนุเดช]]></description>
+    <NetworkLink>
+      <name>GGN (ลพ.)</name>
+      <Link>
+        <href><![CDATA[https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1ni_khdUZZ-Aad6499NhlzGJcOIXIoWQ]]></href>
+      </Link>
+    </NetworkLink>
+  </Document>
+</kml>

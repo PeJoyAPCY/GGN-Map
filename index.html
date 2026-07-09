@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GGN Operations Map</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+<img src="images/logo.png" alt="GGN">
+
+<div>
+
+<h2>GGN Operations Map</h2>
+
+<p>บริษัท รักษาความปลอดภัย เกรท การ์เดียน นอร์ทเทอร์น จำกัด</p>
+
+</div>
+
+</div>
+
+</header>
+
+<div class="container">
+
+<div class="sidebar">
+
+<h2>ค้นหาพื้นที่</h2>
+
+<label>จังหวัด</label>
+<select id="province"></select>
+
+<label>โซน</label>
+<select id="zone"></select>
+
+<hr>
+
+<h2>ค้นหาหน่วยงาน</h2>
+
+<input
+type="text"
+id="searchInput"
+placeholder="พิมพ์ชื่อหน่วยงาน...">
+
+<div id="searchResult" class="search-result">
+
+<p class="empty">
+ยังไม่มีผลการค้นหา
+</p>
+
+</div>
+
+<hr>
+
+<div class="dashboard">
+
+<h3>จำนวนหน่วยงาน</h3>
+
+<div id="totalUnit" class="total">
+0
+</div>
+
+</div>
+
+<button id="openMap">
+
+เปิด Google My Maps
+
+</button>
+
+</div>
+
+<div class="content">
+
+<iframe
+id="mapFrame"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</div>
+
+<script src="js/maps.js"></script>
+<script src="js/app.js"></script>
+<script src="js/script.js"></script>
+
+</body>
+
+</html>
