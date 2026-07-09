@@ -3,11 +3,408 @@
   <Document>
     <name>GGN (ลพ.)</name>
     <description><![CDATA[สต.ดนุพล<br>สต.ดนุเดช]]></description>
-    <NetworkLink>
-      <name>GGN (ลพ.)</name>
-      <Link>
-        <href><![CDATA[https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1ni_khdUZZ-Aad6499NhlzGJcOIXIoWQ]]></href>
-      </Link>
-    </NetworkLink>
+    <Style id="icon-1899-817717-normal">
+      <IconStyle>
+        <color>ff177781</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1899-817717-highlight">
+      <IconStyle>
+        <color>ff177781</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1899-817717">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-817717-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-817717-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Folder>
+      <name>ลำพูน จำนวน 32 จุด</name>
+      <Placemark>
+        <name>บริษัท ทรอปิคคอลพรีเมียร์ฟูดส์ จำกัด
+คุณแหวน 081-4720221 
+คุณอัมพร 081-6038189 </name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.แสวง ประทุมมา ว. 080-8460775<br>2.รปภ.ไชยา ไชยโย ค. 064-0362665]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0082048,18.5167521,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ไทยนิจิ อินดัสทรี จำกัด
+คุณอิสรา GA 081-8827293
+คุณนวพร 053-581222 ต่อ 101</name>
+        <description><![CDATA[จำนวน 3 คน(ว.1/ค.2)<br>1.รปภ.เกรียงเดช ต๊ะคำ ว. 093-1455275<br>2.รปภ.ประสิทธิ์ ธรรมธิ ค. 091-7754892<br>3.รปภ.ศักดิ์สิทธิ์ ทรายมูล ค. 080-1256345]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.046373,18.5980834,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท สยามนิสสัน เชียงใหม่ (สาขาลำพูน)
+บริษัท สยามนิสสัน เชียงใหม่ (สาขาลำพูน)
+คุณศิริวัฒน์ 081-9520235</name>
+        <description><![CDATA[จำนวน 1 คน(ค.1)<br>1.รปภ.ธีระยุทธ กองมา ค. 080-1074842]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0152161,18.5727125,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>สำนักงาน บริษัท ออคทากอน ไดมอนด์ จำกัด
+ คุณเจ (ฝ่ายบุคคล) 053-093404-5
+คุณตู่ (ฝ่ายบุคคล) 053-093403 </name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.อภิสิทธิ์ ฟองศักดิ์ ว. 088-8101645<br>2.รปภ.ประดิษฐ์ น้อยปวง ค. 084-4893659]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0303637,18.5666384,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ประชาอาภรณ์ จำกัด (มหาชน)
+คุณนงนุช 081-7647398 (053-58103)
+คุณศิริรัตน์ ไทยสปอร์ต การ์เมนต์ 0-5358-1446</name>
+        <description><![CDATA[จำนวน 5 คน(ว.2/ค.3)<br>1.รปภ.กนกณัฐ ประทุมสุวรรณ์ (หน.) ว. 096-2363188<br>2.รปภ.คำหล้า ชัยวัง ว. 061-3824945<br>3.รปภ.สุทัศน์ ดิธรรมมา (หน.) ค. 087-6853233<br>4.รปภ.ทองคำ ทิพยาบุญ ค. 088-5257686<br>5.รปภ.นิรุตติ์ บาลี ค. 080-2396489, 080-6770599]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0439987,18.5819625,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท เวิลด์แนชเชอรัลฟู้ด จำกัด
+คุณยงยุทธ 081-8854995
+คุณธนพร 053-552081-3
+คุณจำลอง 083-9449640</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.บัญญัติ ตำปาละ ว. <br>2.รปภ.อภิสิทธิ์ ศรีดอน ค. 091-4789344]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0386768,18.5871569,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ซัน-เอสึ เอนจ์ (ไทยแลนด์) จำกัด (ชูพรีมเก่า)
+คุณดวงเดือน 053-581642</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.ณรงค์เดช บุตรธรรม ว. 088-5891972<br>2.รปภ.กำธร แอมปัญเยาว์ ค. 084-7412426]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0399939,18.5877676,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ยูแทกซ์ เอฟ เอ็ม จำกัด (โรงงาน 1)
+คุณนิ่ม 099-2763286</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.สมคิด บุตรจุมปา ว. 081-6812077<br>2.รปภ.สยาม แสนใจอิ ค. 081-2889816]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.037286,18.587531,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท อินเตอร์พรีทีฟ จำกัด
+คุณณัฐริกา(คุณก้อย) 094-8285777 
+คุณฝ้าย 053-582777</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.จพาชัย มูลไว ว. <br>2.รปภ.สุพจน์ หน่อไพรสน ค. 098-8803811]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0376333,18.5866297,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท เอเชี่ยน ไฟย์โตชูติคอลส์ จำกัด(มหาชน)
+ คุณอ้อย,คุณจุติรัตน์ 053-581374</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.สุเทพ สุภาคำ ว.<br>2.รปภ.ฐิติพร ขำปาน ค. 080-9612120 ]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0384578,18.5886005,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท โกชู โคซัน จำกัด (โรงงานลำพูน)
+บริษัท โกชู โคซัน จำกัด
+คุณกาญจนา (บัญชี ) 081-4585285, 081-5942759</name>
+        <description><![CDATA[จำนวน 3 คน(ว.1/ค.2)<br>1.รปภ.ฤทธิไกร บุญส่ง ว. 087-4400302<br>2.รปภ.วีรพงศ์ อิสระวิวัฒน์ ค. 080-1283687<br>3.รปภ.วิเชียร ศรีวิชัย ค. 083-4702769]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0375085,18.5891346,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ออบเรย์ พรีซิชั่น (ประเทศไทย) จำกัด
+คุณอมรเทพ 081-8291437</name>
+        <description><![CDATA[จำนวน 8 คน(ว.5/ค.3)<br>1.รปภ.เชษฐ์ไชย มิตรชัยวงศ์ (หน.) ว. 061-3042946<br>2.รปภ.กิตติ ใจกุณา ว. 080-9159791<br>3.รปภ.หญิงวัชราภรณ์ สาริเพ็ง ว. 092-4247724<br>4.รปภ.หญิงจินตนา หมื่นแก้ว ว. 089-95361389<br>5.รปภ.หญิงพัชรีย์ สิทธิสุรินทร์ ว. 089-8200127<br>6.รปภ.หญิงกรรณิกา ปัญญามั่ง ค. 083-9492638<br>7.รปภ.วินัย จันทร์น้อย ค. 084-3736014<br>8.รปภ.วโรทัย มะโนทา ค. 084-1773727]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0347509,18.589132,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท เคียวเซร่า (ประเทศไทย) จำกัด
+คุณสยุมพร 053-581530-2</name>
+        <description><![CDATA[จำนวน 7 คน(ว.4/ค.3)<br>1.รปภ.จักรกฤษ วรรณประเสริฐ (หน.) ว. 080-1201013<br>2.รปภ.หญิงศิริพร จันทร์ฟู ว. 061-5679152<br>3.รปภ.วิชัย โพธิ ว. 062-3697390<br>4.รปภ.นิวัฒน์ ศิริสุข ว. 097-2740676<br>5.รปภ.วิโรจน์ จินะก้อน (หน.) ค. <br>6.รปภ.ธนายุทธ ศรีหาภาค ค. 084-0879370<br>7.รปภ.รุ่งเรือง หลอดทอง ค. 089-4349220]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0347981,18.5864049,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท นิปปอน เอ็กซ์เพรส โลจิสติกส์ (ประเทศไทย) จำกัด
+คุณแต 092-4552632</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.ธวัชชัย ใจยะวงศ์ ว.<br>2.รปภ.นิรันดร์ แสนฝน ค. 080-3745358 ]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0294106,18.5896859,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ทีเอสพี-ที จำกัด
+คุณวันทณีย์  098-1465870 (053-552377)</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.หล่มศักดิ์ ทันวัน ว. <br>2.รปภ.ธวัชชัย สาเจียร ค. ]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0300321,18.5908603,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท เบอร์นิน่า (ไทยแลนด์) จำกัด
+คุณภัสสุรีย์ 053-581343 ต่อ 201 </name>
+        <description><![CDATA[จำนวน 6 คน(ว.3/ค.3)<br>1.รปภ.เอกชัย มณีวรรณ ว. 082-3490090<br>2.รปภ.สมพร ชัยวงค์คำ ว. 081-0214758<br>3.รปภ.ไกรวิทย์ ศรีทาพักตร์ (S) 086-4640709<br>4.รปภ.ศรีวรรณ ปานาม ค. 084-2243702<br>5.รปภ.ประเสริฐ มณีรัตน์ ค. 080-3862739<br>6.รปภ.สุขเกษม จันดัด ค. 085-6539577]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0585832,18.5911596,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ไทย อกริ ฟู้ดส์ จำกัด (มหาชน) สาขาที่00002
+บริษัท ไทย อกริ ฟู้ดส์ จำกัด (มหาชน)
+คุณธันย์ชนก (จป.วิชาชีพ) 089-6358962</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.สิงห์เพชร ก้อนแก้ว ว. 093-6439101<br>2.รปภ.ไกรวิชญ์ ใจกาศ ค. 096-253-4307]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            98.959635,18.4705788,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท เอฟ เอ็ม บรัช (ประเทศไทย) จำกัด
+คุณนิตยา เจ้าหน้าที่บุคคล 053-581044</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.ชนะ คำมอญ ว. 088-7713184<br>2.รปภ.สมพงษ์ พงค์ปวน ค. ]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0474008,18.5943061,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ลานนาโปรดักส์ จำกัด
+คุณสุภาภรณ์ จป.วิชาชีพ 082-6180637
+คุณภาคิน 053-581170</name>
+        <description><![CDATA[จำนวน 4 คน(ว.2/ค.2)<br>1.รปภ.วิเชษฐ์ ไชยเขื่อน ว. 081-3329573<br>2.รปภ.หญิงปทุมพร ต๊ะคำ ว. 082-7627215<br>3.รปภ.รุ่งศักดิ์ สิทธิสุรินทร์ ค. 086-1846455<br>4.รปภ.ชโยดม วนาศิลป์ ค. 065-3912590]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0458062,18.590467,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท อีเทรีย โปรดักส์ (ไทยแลนด์) จำกัด
+/บริษัท ยามานาชิอิเลคทรอนิกส์ (ไทยแลนด์)
+คุณณัฐมณฑน์ จป.วิชาชีพ 064-4971777
+คุณเมย์ 053-581686</name>
+        <description><![CDATA[จำนวน 4 คน(ว.2/ค.2)<br>1.รปภ.ชวลิต ต๊ะกันทา (หน.) ว. 081-9685609<br>2.รปภ.ปริญญา กุลสัมพันธ์ชัย ว.  092-5720449<br>3.รปภ.ปรีชา บุญปัญญา ค. 085-6163173<br>4.รปภ.เสาร์คำ ติ๊บอินถา ค. 080-8284611]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0308811,18.5913333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>โกดังลานนาเฟรม
+บริษัท นิปปอน เอ็กซ์เพรส โลจิสติกส์ (ประเทศไทย) จำกัด (โกดังลานนาเฟรม)
+คุณทัศวรรณ 080-0054385
+คุณแต 092-4552632</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.ภาดา วงค์สถาน ว. 062-1302849<br>2.รปภ.ไพรวัลย์ ตากาศ ค. 080-1869501]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.054875,18.5867531,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>โรงงานแปรรูปสุกรลำพูน
+บริษัท เบทาโกรเกษตรอุตสาหกรรม จำกัด (โรงงานแปรรูปสุกรลำพูน)
+คุณศรัณยู 064-2362823</name>
+        <description><![CDATA[จำนวน 4 คน(ว.2/ค.2)<br>1.รปภ.สมชัย ภูเหมี่ย ว. 061-2968301<br>2.รปภ.(ขาดประจำ) ว.<br>3.รปภ.ไตรรงค์ ธัญน้อม ค. 081-8850225<br>4.รปภ.ชลัส สวัสดี ค. 092-9252105]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0689618,18.6401814,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท อินเตอร์เนชั่นแนล พรีซิชั่น โปรดักท์ จำกัด(บ้านครู)
+คุณมยุรี 053-559500-1</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.สว่าง คำบุรี ว. 089-4353761<br>2.รปภ.โกศล แสนคำมูล ค. 081-8428693]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0704381,18.6265685,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท เอสซีจี รูฟฟิ่ง จำกัด (โรงงานลำพูน)
+บริษัท เอสซีจี รูฟฟิ่ง จำกัด
+คุณยุพา 099-2702891</name>
+        <description><![CDATA[จำนวน 5 คน(ว.3/ค.2)<br>1.รปภ.สมชาติ ใจด้วง (หน.) ว. 063-1731350<br>2.รปภ.เอกมงคล ท่างาม ว. 099-6674067<br>3.รปภ.อภิชาติ ติ๊บพะเต่อ ว. 084-5746844<br>4.รปภ.พชราษฏร์ น้อยราษฏร์ ค. 092-3585475<br>5.รปภ.อรรถพล พงสปิน ค. 061-3821452]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0759539,18.536907,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท โตโยต้านครพิงค์ เชียงใหม่ จำกัด (ลำพูน)
+คุณผุสดารัตน์ 096-5969742,  052-030999</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.ชรินทร์ คำสุข ว. 084-3744623<br>2.รปภ.ยงยุทธ มีรอดสุวรรณ ค. 081-6216931]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0490195,18.6284521,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท เอสซีจี แลนด์สเคป จำกัด (โรงงานลำพูน)
+บริษัท เอสซีจี แลนด์สเคป จำกัด
+คุณถิรนันท์ 081-7642328</name>
+        <description><![CDATA[จำนวน 3 คน(ว.2/ค.1)<br>1.รปภ.สุรชาติ คงพุ่ม ว. 098-7735547<br>2.รปภ.อภิรักษ์ พุทธา ว. 061-0564609<br>3.รปภ.ดุสิต มุกดา ค. 094-2743179]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0755213,18.537476,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท นิชิได(ประเทศไทย)จำกัด ชื่อเดิมไทยซินเทอร์ดเมช
+บริษัท นิชิได(ประเทศไทย)จำกัด
+คุณปทิตตา 053-090088-9
+คุณส้ม 061-4045661</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.(ขาดประจำ) ว.<br>2.รปภ.จำนงค์ วินันท์ ค. 089-6326684]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.014062,18.5458618,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ไทคิชา (ประเทศไทย) จำกัด (สำนักงานลำพูน)
+คุณแอม 062-2938399</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.ธนภัทร สุนทรวารี ว. 086-1911419<br>2.รปภ.คำปัน วงศ์กาศ ค. 083-3227009]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0518429,18.5852903,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>โรงงานเบทาโกรนอร์ธเทอร์น
+ บริษัท เบทาโกร จำกัด (มหาชน)
+คุณศิรัตน์ จนท.อาวุโสธุรการ 083-1561332
+คุณตั๊ก 085-8645244</name>
+        <description><![CDATA[จำนวน 9 คน(ว.5/ค.4)<br>1.รปภ.ทนนท์ พิงคะสัน (หน.) ว. 080-7900401<br>2.รปภ.สงกรานต์ อาภา ว. 061-6624708<br>3.รปภ.พิศิษฐ มูลสุรินทร์ ว. 083-8215450<br>4.รปภ.โชษิตา ไชยเขื่อน ว. 081-3329497<br>5.รปภ.สิริวัฒน์ แฮยอ ว. 093-2725691<br>6.รปภ.ธวัชชัย แม้นเดช ค. 082-1851020<br>7.รปภ.ส่งสุข กันทะ ค. 095-1069893<br>8.รปภ.ประดิษฐ ทาแก้ว ค. 087-0957897<br>9.รปภ.ธวัชชัย ชวนนอก ค. 093-1489987]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0407651,18.592985,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท นิปปอน เอ็กซ์เพรส โลจิสติกส์ ประเทศไทย จำกัด (โกดัง LPN General Warehouse 1 (Inthorn)
+คุณแต 092-4552632</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.ทรงศักดิ์ นันทะน้อย ว. 084-9472841<br>2.รปภ.อรรถชัย ติ๊บเสือ ค. 083-8648334]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0519271,18.585761,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ธรรมสรณ์ (โรงงานลำพูน)
+บริษัท ธรรมสรณ์ จำกัด
+คุณกนกพร 062-5940541</name>
+        <description><![CDATA[จำนวน 6 คน(ว.3/ค.3)<br>1.รปภ.อุทัย มะลิ ว. 089-4292263<br>2.รปภ.(ขาดประจำ) ว.<br>3.รปภ.(ขาดประจำ) ว.<br>4.รปภ.มนัส สังข์ยา ค. 089-8388745<br>5.รปภ.(ขาดประจำ) ค.<br>6.รปภ.(ขาดประจำ) ค.]]></description>
+        <styleUrl>#icon-1899-817717</styleUrl>
+        <Point>
+          <coordinates>
+            99.0654776,18.6291256,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
   </Document>
 </kml>

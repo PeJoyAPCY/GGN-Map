@@ -3,11 +3,669 @@
   <Document>
     <name>GGN (ชม.2)</name>
     <description><![CDATA[สต.สมชาย<br>สต.พิพัฒน์]]></description>
-    <NetworkLink>
-      <name>GGN (ชม.2)</name>
-      <Link>
-        <href><![CDATA[https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=19K7BfIcAuaWrIlFLqrQHQalma-gdDKk]]></href>
-      </Link>
-    </NetworkLink>
+    <Style id="icon-1899-880E4F-normal">
+      <IconStyle>
+        <color>ff4f0e88</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1899-880E4F-highlight">
+      <IconStyle>
+        <color>ff4f0e88</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1899-880E4F">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-880E4F-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-880E4F-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Folder>
+      <name>เชียงใหม่เขต 2 จำนวน 54 จุด</name>
+      <Placemark>
+        <name>โรงอัดเศษกระดาษเชียงใหม่
+บริษัท สยามคราฟท์อุตสาหกรรม จำกัด
+คุณพอร์ 084-1232465 
+คุณนันทิยา(จัดซื้อ กทม.) 062-2294343</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.ไฉน สนนาค ว. 089-9559699<br>2.รปภ.จีรภัทร์ มณีขัติย์ ค. 084-1512464]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0484093,18.6690294,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ธารา จำกัด(สาขาสารภี)
+คุณนิตยา053-242637, 053-242995, 053-308467</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.(ขาดประจำ) ว.<br>2.รปภ.อภิชัย อ่องสถาน ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0496827,18.6845712,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท เชียงใหม่ เฮลตี้โปรดักส์ จำกัด (เฮลตี้ บี)
+คุณพัชรินทร์ 086-1855658 </name>
+        <description><![CDATA[จำนวน 1 คน(ค.1)<br>1.รปภ.(ขาดประจำ) ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0716757,18.6820159,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>โครงการหมู่บ้านจัดสรรดิเอสตีม
+นิติบุคคลหมู่บ้านจัดสรรดิเอสตีม
+คุณตู่ (กรรมการนิติฯ) 089-6536688</name>
+        <description><![CDATA[จำนวน 6 คน(ว.3/ค.3)<br>1.รปภ.(ขาดประจำ) ว.<br>2.รปภ.เจตนิพิฐ เจริญวงศ์ ว. 086-6852878<br>3.รปภ.มนัส สังข์ยา ว. 089-8388745<br>4.รปภ.ชัยพร วิมานตระการ ค. 098-9909806<br>5.รปภ.บูสุ นภาสบเมย ค. 081-0245643<br>6.รปภ.พาแนจา วนามงคลชัย ค. 093-2803225]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0719701,18.7525094,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ริชโค่ กรุ๊ป (ประเทศไทย) จำกัด (สำนักงานใหญ่)
+คุณแจง 052-080761</name>
+        <description><![CDATA[จำนวน 1คน(ค.1)<br>1.รปภ.กนกศักดิ์ สมประสงค์ ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0080176,18.7433558,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>สหกรณ์ออมทรัพย์ตำรวจเชียงใหม่ จำกัด
+คุณต่าย 086-9243442</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.(ขาดประจำ) ว.<br>2.รปภ.ไพโรจน์ อินต๊ะ ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0418545,18.7199126,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท เชียงใหม่ เฮลตี้โปรดักส์ จำกัด (สำนักงานใหญ่) 
+คุณพัชรินทร์ 086-1855658 </name>
+        <description><![CDATA[จำนวน 4 คน(ว.2/ค.2)<br>1.รปภ.ชัยวุฒิ สุนันต๊ะ ว.<br>2.รปภ.(ขาดประจำ) ว.<br>2.รปภ.ทักษิณ คำมูลแสน ค. 061-2910941<br>3.รปภ.กมลภพ ไชยวุฒิ ค. 089-7837378]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0506414,18.6862751,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>โรงงานแปรรูปสุกรแม่โจ้
+บริษัท เบทาโกรเกษตรอุตสาหกรรม จำกัด 
+คุณศรัณยู 064-2362823</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.สมพงษ์ ผลบุษบา ว.<br>2.รปภ.เก่งกาจ กัณหะยูวะ ค. 098-7943732]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0175578,18.9149881,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>ธนาคารออมสิน เขตเชียงใหม่ 3 (สาขาสารภี)
+คุณเอ (สำนักงานธนาคารออมสินเขตเชียงใหม่ 3) 088-2667781</name>
+        <description><![CDATA[จำนวน 1 คน(ว.1)<br>1.รปภ.(ขาดประจำ) ว.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0381217,18.7118095,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท เชอวาล เทคโนโลยี่ จำกัด
+คุณพิมพ์ใจ (กล้วย) /คุณณัฐพงษ์ 053-880788-9</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.สุชาย ควรอนุสร ว.<br>2.รปภ.(ขาดประจำ) ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.1495926,18.717022,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท เชียงใหม่ ออยล์ จำกัด (ปั๊มน้ำมันบางจาก) สันคือ
+คุณศิริวัฒน์ 081-9520235</name>
+        <description><![CDATA[จำนวน 1 คน(ค.1)<br>1.รปภ.(ขาดประจำ) ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0187716,18.7479309,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>ห้างหุ้นส่วนจำกัด สายเหนือการยาง (ดอนจั่น)
+คุณขวัญ 053-308860 ,081-4727120</name>
+        <description><![CDATA[จำนวน 1 คน(ค.1)<br>1.รปภ.นัทธพงศ์ แก้วจรัญ ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0337722,18.7488831,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท สยามนิสสัน เชียงใหม่ จำกัด (สาขาสำนักงานใหญ่) ดอนจั่น
+คุณศิริวัฒน์ 081-9520235</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.(ขาดประจำ) ว.<br>2.รปภ.วรวุฒิ แสงห้วยไชย ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0303007,18.763175,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท แม่ปิง ลอนดริ จำกัด
+คุณกุ้ง ฝ่ายบุคคล 053-424451 , 086-9191150</name>
+        <description><![CDATA[จำนวน 2 คน(ค.2)<br>1.รปภ.มงคล แซ่ก้วย ค. 098-4928007<br>2.รปภ.พงษ์ กาวิไชย์ ค. 082-1886998]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0213214,18.7444522,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท พงษ์ระวี จำกัด
+คุณสุมาลี 082-7629732
+คุณวัชรินทร์ 0827620119</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.(ขาดประจำ) ว.<br>2.รปภ.สุวิทย์ โพธิสุวรรณ ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0306058,18.7590876,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>ปตท. ระมิงค์ ออยล์
+บริษัท ระมิงค์ ออยล์ จำกัด
+คุณศิริวัฒน์ 081-9520235
+คุณส้ม ธุรการ 064-9898866 </name>
+        <description><![CDATA[จำนวน 1 คน(ค.1)<br>1.รปภ.จีรภัทร์ มณีขัติย์ ค. 084-1512464]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0194669,18.747429,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>ห้างหุ้นส่วนจำกัด เชียงใหม่เบเกอร์มาร์ท (เพื่อนครัว)
+คุณโยธิน 053-334111</name>
+        <description><![CDATA[จำนวน 3 คน (ว.2/ค.1)<br>1.รปภ.ประเทือง เอี่ยมชัย ว. 085-7256359<br>2.รปภ.สุนทร แสงเพชรวัฒนกุล ว. 064-1140827<br>3.รปภ.สมชาย ยี่ป๋า ค. 095-3412123]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0082681,18.7554986,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท เคนเบอร์จีโอเทคนิค (ไทยแลนด์) จำกัด (สำนักงาน)
+คุณแจน ฝ่ายบุคคลฯ 053-015234 , 089-8501199</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.เกรียงศักดิ์ จุมปูแพร่ ว. 089-7560498<br>2.รปภ.ลิขิต มูลสุข ค. 097-9832076]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0147835,18.761562,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ธารา จำกัด (สาขาวัดเกต)
+คุณประกายดาว 053-242428
+คุณหญิง 083-9438824</name>
+        <description><![CDATA[จำนวน 1 คน(ค.1)<br>1.รปภ.มงคล คั้งคีรี ค. 085-6205734]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0034134,18.791168,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>มูลนิธิดรุณาทร Compassion Foundation
+คุณแอปเปิ้ล /คุณธีรภรณ์ 089-9532026</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.(ขาดประจำ) ว.<br>2.รปภ.เจนวุธ เต็งสุวรรณ ค. 095-9165992]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.015966,18.7955113,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>สำนักงาน SCG ภาคเหนือ
+บริษัท เอสซีจี ซิเมนต์-ผลิตภัณฑ์ก่อสร้าง จำกัด
+คุณพุทธรักษ์ 090-4699245 
+คุณชไมพร 090-8803756</name>
+        <description><![CDATA[จำนวน 3 คน(ว.1/ค.2)<br>1.รปภ.คำมูล สิงห์แก้ว ว. 089-9986972<br>2.รปภ.สิทวัช มูลแดง ค.<br>3.รปภ.นรบดินทร์ เจริญวงศ์ ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0269234,18.7875668,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>โครงการกรีนพาร์คเชียงใหม่
+บริษัท คำพรพัฒนา จำกัด 
+คุณวิกานดา ฝ่ายบุคคลฯ 084-6879524</name>
+        <description><![CDATA[จำนวน 5 คน(ว.2/ค.3)<br>1.รปภ.จิตติ ชูนุช ว. 087-7860679<br>2.รปภ.ประวิทย์ พันทอง ว. 092-3627381<br>3.รปภ.วีระ ตะยามัน ค. 093-2800930<br>4.รปภ.พิชาติ ทรงอภิวัฒน์กุล ค. 090-8986707<br>5.รปภ.พงษ์ศักดิ์ จันทร์สา ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.021723,18.8065364,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ธารา จำกัด (แยกศาลเด็ก)
+คุณวีรนุช 053-244671 </name>
+        <description><![CDATA[จำนวน 3 คน(ว.1/ค.2)<br>1.รปภ.เสถียร ตนึงไตร ว.<br>2.รปภ.อดุลย์ โสกันเกตุ ค. 091-8768506<br>3.รปภ.พินิจ หมื่นลิ ค. ]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0204573,18.8049489,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>โกดังตำบลฟ้าฮ่าม
+บริษัท โรงพยาบาลเชียงใหม่ราม จำกัด
+คุณนิตยา 086-8981276</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.จอมแปง วัตรสูข ว. 088-4171780<br>2.รปภ.สัมฤทธิ์ นนทา ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.012394,18.827016,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>นิติบุคคลหมู่บ้านจัดสรรเลควิว พาร์ค 1 เชียงใหม่
+คุณสุทธิดา 083-9424838</name>
+        <description><![CDATA[จำนวน 2 คน (ว.1/ค.1)<br>1.รปภ.ยัน ฝั้นแบน ว.<br>2.รปภ.สามารถ แดนโพธิ์ ค. 093-5593157]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0130528,18.8168524,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>นิติบุคคลอาคารชุด เดอะยูนีค แอท รวมโชค
+คุณครีม (นิติฯ) 053-243458
+คุณต้า 080-2826362</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.สุนทร สุคันธรักษ์ ว. 098-8212199<br>2.รปภ.(ขาดประจำ) ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0130365,18.822436,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท เชียงใหม่เวียงพิงค์การยาง จำกัด
+คุณราตรี 081-7832100</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.(ขาดประจำ) ว.<br>2.รปภ.ออด ซอหนั่นต่า ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.010508,18.8091807,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>โครงการหมู่บ้าน ริช ชี่ ริช แลนด์
+บริษัท ริช ชี่ ริช แลนด์ จำกัด
+คุณเอกรัตน์ 053-014888 , 089-851669</name>
+        <description><![CDATA[จำนวน 3 คน(ว.1/ค.2)<br>1.รปภ.ศรศักดิ์ นามเมือง  ว. 091-3086591<br>2.รปภ.พีระพันธ์ จะเหมาะ ค. 085-7210679<br>3.รปภ.วุฒินันท์ แสงคำ ค. 098-9364524]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0068189,18.8545109,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท โฮมมอลล์ จำกัด
+คุณปาล์ม 081-5957374
+คุณเล็ก 080-7693664</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.(ขาดประจำ) ว.<br>2.รปภ.เธียรธัญ บัญชาโต ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0081741,18.8527467,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>โชว์รูมรถยนต์ AUDI
+บริษัท เชียงแสง เชียงใหม่ จำกัด (AUDI)
+คุณธนิฐตา 062-6536336</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.เอกนรินทร์ ศรีวิชัย ว. 092-9097963<br>2.รปภ.วรันทร์ธร พูลอัครนิมมาน ค. 092-6861989]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0283914,18.7679088,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท เชียงใหม่โฟรเซ่นฟูดส์ จำกัด (มหาชน) โรงงาน 1
+คุณอ้อย 053-844961-4
+น้อง 053-498195-7</name>
+        <description><![CDATA[จำนวน 4 คน(ว.2/ค.2)<br>1.รปภ.มนตรีศักดิ์ ใจชื่นชม ว. 061-0742711<br>2.รปภ.ลัง ทำทอง ว.<br>3.รปภ.(ขาดประจำ) ค.<br>4.รปภ.(ขาดประจำ) ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0156381,18.8585686,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>สถานีบริการน้ำมัน บางจาก (สันทราย)
+ห้างหุ้นส่วนจำกัด พรภวิษย์ ออยล์ เซอร์วิส
+คุณชมพูนุท 086-3654982</name>
+        <description><![CDATA[จำนวน 1 คน(ค.1)<br>1.รปภ.วิรัตน์ ธรรมสวัสดิ์ ค. 087-7051730]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0298698,18.8173807,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>วัดสันปูเลยสะหลีเวียงแก้ว
+คุณชัดเจน 063-7788080</name>
+        <description><![CDATA[จำนวน 1 คน (ว.1)<br>1.รปภ.ศักรินทร์ สุตินกาศ ว. 064-3296032]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0790948,18.8313422,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท อัฐญา จิวเวลรี่ จำกัด
+คุณปรียาพร 053-384518 
+ผจก.เบิร์ด 092-6535651</name>
+        <description><![CDATA[จำนวน 1 คน(ค.1)<br>1.รปภ.แก้ว อุ่นเรือน ค. 085-7069273]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0592126,18.7741134,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท โฮมสุขภัณฑ์ จำกัด (สำนักงานใหญ่)
+คุณแจง ฝ่ายบุคคล 053-126000 ต่อ 401-404</name>
+        <description><![CDATA[จำนวน 7 คน (ว.5/ค.2)<br>1.รปภ.ก๋วนแก้ว เรือนสอน (หน.) ว. 088-4016642<br>2.รปภ.ชาญณรงค์ บุญเชิญ (ผช.) ว. 094-7044303<br>3.รปภ.ศุภชัย ฐิตถาวร ว. 082-8939016<br>4.รปภ.กฤษดา ตาวงศ์  ว. 061-6280711<br>5.รปภ.(ขาดประจำ) ว.<br>6.รปภ.อนุชา ทรงอภิวัฒน์กุล ค. 061-1017670<br>7.รปภ.เหรียญทอง โสภา ค. 062-2476869]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0319475,18.7997661,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท เชียงใหม่วิทยาพาณิชย์ (1997) จำกัด
+คุณเดชา 085-6956692</name>
+        <description><![CDATA[จำนวน 1 คน(ค.1)<br>1.รปภ.สุรินทร์ ชัยศิริ ค. 09-2637140]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0494285,18.7581589,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>ห้างหุ้นส่วนจำกัด แสงชัยพาณิชย์ (สำนักงานใหญ่) แผนกอะไหล่
+ห้างหุ้นส่วนจำกัด แสงชัยพาณิชย์
+คุณจี้ 098-2695912</name>
+        <description><![CDATA[จำนวน 1 คน(ค.1)<br>1.รปภ.(ขาดประจำ) ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.006102,18.796102,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ธารา จำกัด (ศูนย์บริการอีซูซุ-เจริญเมือง)
+คุณนิตยา 053-242637</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.(ขาดประจำ) ว.<br>2.รปภ.นคร จาแสง ค. 085-7241702]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0193154,18.7847548,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ซี ที ซี มิวสิคเฮ้าส์ จำกัด ถนนแก้วนวรัฐ
+053-306652-3</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.มานะ ยวงยิ้ม ว. 081-1816069<br>2.รปภ.อนันต์ เงินแท้ ค. 090-6757981]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0052633,18.7955218,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>หจก. อีซูซุ ศาลาฟาสเตอร์ เชียงใหม่/
+ห้างหุ้นส่วนจำกัด อีซูซุ ศาลาฟาสเตอร์ เชียงใหม่ และแผนกรถเก่า
+คุณธัญญลักษณ์ 053-243256</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.สิทธิชัย ลาวัน ว. 088-9168388<br>2.รปภ.ณัฐกูล สมเตียม ค. 084-0583130]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0065901,18.7962389,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>ธนาคารออมสิน สาขาหนองหอย
+ธนาคารออมสินเขตเชียงใหม่ 1 (หนองหอย)
+คุณนุ่น 086-7319277
+คุณปาริฉัตร(ออมสินหนองหอย) 087-8074574</name>
+        <description><![CDATA[จำนวน 1 คน(ว.1)<br>1.รปภ.(ขาดประจำ)]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0055481,18.7643123,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>นิติบุคคลหมู่บ้านจัดสรร ศิริพร ดอนจั่น
+คุณไพโรจน์ 088-6340557</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.วิเชียร เจริญสุข ว.<br>2.รปภ.(ขาดประจำ) ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0606976,18.7513348,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>นิติบุคคลหมู่บ้านดิเออบาน่า 1
+นิติบุคคลหมู่บ้านจัดสรร ดิเออบาน่า 1
+คุณตะวัน 086-4299123</name>
+        <description><![CDATA[จำนวน 6 คน(ว.3/ค.3)<br>1.รปภ.ภากร มิตรสาธิต ว. 063-6657544<br>2.รปภ.ธนะกฤษ เอกกันทา ว. 099-6194674<br>3.รปภ.ธีรพงค์ จันทร์วงศ์ ว. 061-2761362<br>4.รปภ.เอกรินทร์ เป็งลือ ค. 088-2630933<br>5.รปภ.เกษมสันต์ วงค์ศักดิ์ศรี ค. 095-7715673<br>6.รปภ.เอกชัย จันทร์วงศ์ ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0308819,18.7553251,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>ธัญญ์ธารา รีสอร์ท เชียงใหม่
+บริษัท ธนสิน 2560 จำกัด
+คุณอุ๊ 083-9244190</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.วราฤทธิ์ จุ้ยพิทักษ์ ว. 082-9402419<br>2.รปภ.คเนญ หลงคำมา ค. 083-5353875]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0461966,18.7947438,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>โรงเรียนนานาชิตอเมริกาน่า ไชนีส (ACIS)
+บริษัทแอมบาสเดอร์ เอ็ดดูเคชั่น กรุ๊ป จำกัด
+คุณนลินรัตน์ 087-6588320</name>
+        <description><![CDATA[จำนวน 3 คน(ว.3)<br>1.รปภ.อัศดง วงศ์ษา ว. 098-9403994<br>2.รปภ.ยุทธภูมิ พรมคำปา ว. 064-4787781<br>3.รปภ.วุฒินันท์ แสงคำ ว. 098-9364524]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0321431,18.7489944,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>หอพักใจแก้วคอร์ท
+หอพักใจแก้วคอร์ท (คุณจันทร์ฉาย ใจสันติ์)
+คุณรัตน์  095-3590377</name>
+        <description><![CDATA[จำนวน 1 คน(ค.1)<br>1.รปภ.จารุวัฒน์ สอทธิศาสตร์ ค. 083-0466525]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0077752,18.7556174,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>โรงแรม บริค โฮเทล เชียงใหม่
+บริษัท เหม่ย เติง ทราเวล ไลฟ์ จำกัด
+คุณกัณต์ธีภพ 062-598043
+คุณศิริลักษณ์(การเงิน) 062-5980435 </name>
+        <description><![CDATA[จำนวน 2 คน(ค.2)<br>1.รปภ.สมพัฒน์ ธะนะตัน ค. 089-5617437<br>2.รปภ.(ขาดประจำ) ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0244706,18.8021445,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ซีแอล แกรนด์ จำกัด
+คุณณัฐวุฒิ (ผู้จัดการฝ่ายฯ) 095-1450160</name>
+        <description><![CDATA[จำนวน 2 คน (ว.1/ค.1)<br>1.รปภ.(ขาดประจำ) ว.<br>2.รปภ.ธนะกฤษ เอกกันทา ค. 099-6194674]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0526522,18.7465913,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท เชียงใหม่สยามทีวี จำกัด (สาขารวมโชค)
+คุณนัฐกาญจน์ ผู้จัดการบุคคล 095-1459292</name>
+        <description><![CDATA[จำนวน 4 คน(ว.3/ค.1)<br>1.รปภ.ธนพงษ์ เมืองมิ่ง ว. 081-7697183<br>2.รปภ.(ขาดประจำ) ว.<br>3.รปภ.(ขาดประจำ) ว.<br>4.รปภ.สมชาย เอกกวินธร ค.]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.012202,18.819317,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท สยามนิสสัน เชียงใหม่ จำกัด (สาขาสันผีเสื้อ) (MG CNX AUTO)
+คุณศิริวัฒน์ 081-9520235</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.(ขาดประจำ) ว.<br>2.รปภ.สุรินทร์ ชัยศิริ ค. 09-2637140]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            98.9921112,18.8470458,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>ปั๊มน้ำมันบางจากสันกำแพง
+บริษัท ธนสรณ์ ดีเวลลอปเม้นท์ จำกัด
+คุณธนสรณ์ 061-1969940 </name>
+        <description><![CDATA[จำนวน 1 คน (ค.1)<br>1.รปภ.สิริโชติ สุคนธ์ธารากุล ค. 097-3436834]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0695959807441,18.7795461648212,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท ธารา จำกัด (บ้านพักผู้บริหาร)
+คุณประกายดาว 053-242428
+คุณหญิง 086 - 4210515</name>
+        <description><![CDATA[จำนวน 1 คน (ค.1)<br>1.รปภ.(ขาดประจำ)]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0159444444444,18.8066388888889,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บริษัท เคนเบอร์จีโอเทคนิค (ไทยแลนด์) จำกัด (ศูนย์ซ่อมบำรุง KMA Park)
+คุณแจน ฝ่ายบุคคลฯ 053-015234 , 089-8501199</name>
+        <description><![CDATA[จำนวน 2 คน(ว.1/ค.1)<br>1.รปภ.สมพัฒน์ ธะนะตัน ว. 089-5617437<br>2.รปภ.สมศักดิ์ อินต๊ะแก้ว ค. 066-0028202]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0529394,18.7459885,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>บ้านพักคุณจตุรงค์
+คุณอร 080-0808188</name>
+        <description><![CDATA[จำนวน 1 คน (ค.1)<br>1.รปภ.ผดุงพล แก้วอิน ค. 063-8378541]]></description>
+        <styleUrl>#icon-1899-880E4F</styleUrl>
+        <Point>
+          <coordinates>
+            99.0063108680365,18.7604357391199,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
   </Document>
 </kml>
