@@ -7,6 +7,8 @@ const province = document.getElementById("province");
 const zone = document.getElementById("zone");
 
 const mapFrame = document.getElementById("mapFrame");
+// ให้ไฟล์อื่นเรียกใช้ได้
+window.mapFrame = mapFrame;
 
 const totalUnit = document.getElementById("totalUnit");
 
@@ -67,10 +69,11 @@ function loadZone() {
 async function loadMap() {
 
     const p = province.value;
-
     const z = zone.value;
 
     const data = maps[p][z];
+    // เก็บข้อมูลแผนที่ปัจจุบัน
+    window.currentMap = data;
 
     if (!data) return;
 

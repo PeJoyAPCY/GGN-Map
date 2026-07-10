@@ -22,6 +22,9 @@ const searchBtn =
 const clearBtn =
     document.getElementById("clearSearch");
 
+const loading =
+    document.getElementById("loading");
+
 // =========================================
 // โหลดข้อมูล KML
 // =========================================
@@ -291,29 +294,57 @@ function searchLocation() {
 
             item.addEventListener(
 
-                "click",
+    "click",
 
-                function () {
+    function () {
 
-                    const lat =
-                        this.dataset.lat;
+        const lat =
+            this.dataset.lat;
 
-                    const lng =
-                        this.dataset.lng;
+        const lng =
+            this.dataset.lng;
 
-                    window.open(
+        // ป้องกันกรณีแผนที่ยังไม่พร้อม
+        if (!window.currentMap) {
 
-                        `https://www.google.com/maps?q=${lat},${lng}`,
+            alert("กรุณาเลือกจังหวัดและโซนก่อน");
 
-                        "_blank"
+            return;
 
-                    );
+        }
 
-                }
+        const url = new URL(window.currentMap.map);
 
-            );
+        url.searchParams.set(
+            "ll",
+            `${lat},${lng}`
+        );
 
-        });
+        url.searchParams.set(
+            "z",
+            "17"
+        );
+
+        loading.style.display = "block";
+
+        window.mapFrame.onload = () => {
+
+            loading.style.display = "none";
+
+            window.mapFrame.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        };
+
+        window.mapFrame.src = url.toString();
+
+        }
+
+        );
+
+    });
 
 }
 // =========================================
