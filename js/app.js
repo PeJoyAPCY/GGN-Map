@@ -15,6 +15,7 @@ const totalUnit = document.getElementById("totalUnit");
 const openMap = document.getElementById("openMap");
 
 const loading = document.getElementById("loading");
+window.loading = loading;
 
 // -----------------------------------------
 // โหลดจังหวัด

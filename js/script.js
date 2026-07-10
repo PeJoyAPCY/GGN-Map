@@ -22,6 +22,7 @@ const searchBtn =
 const clearBtn =
     document.getElementById("clearSearch");
 
+
 // =========================================
 // โหลดข้อมูล KML
 // =========================================
@@ -322,11 +323,11 @@ function searchLocation() {
             "17"
         );
 
-        loading.style.display = "block";
+        window.loading.style.display = "block";
 
         window.mapFrame.onload = () => {
 
-            loading.style.display = "none";
+            window.loading.style.display = "none";
 
             window.mapFrame.scrollIntoView({
                 behavior: "smooth",
