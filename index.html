@@ -144,62 +144,6 @@ allowfullscreen>
 <script src="js/script.js"></script>
 <script src="js/app.js"></script>
 
-<script>
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const searchInput = document.getElementById("searchInput");
-    const searchBtn = document.getElementById("searchBtn");
-    const clearBtn = document.getElementById("clearSearch");
-    const searchResult = document.getElementById("searchResult");
-
-    // ปุ่มค้นหา
-    if (searchBtn) {
-
-        searchBtn.addEventListener("click", function () {
-
-            searchLocation();
-
-        });
-
-    }
-
-    // กด Enter
-    searchInput.addEventListener("keydown", function (e) {
-
-        if (e.key === "Enter") {
-
-            e.preventDefault();
-
-            searchLocation();
-
-        }
-
-    });
-        // ค้นหาทันทีเมื่อพิมพ์
-    searchInput.addEventListener("input", function () {
-
-        searchLocation();
-
-    });
-
-    // ปุ่มล้าง
-    clearBtn.addEventListener("click", function () {
-
-        searchInput.value = "";
-
-        searchResult.innerHTML =
-            '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
-
-        searchResult.style.display = "none";
-
-        searchInput.focus();
-
-    });
-
-});
-
-</script>
 
 </body>
 

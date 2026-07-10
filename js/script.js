@@ -158,8 +158,10 @@ async function loadKML(filePath, province, zone) {
 
         if (searchResult) {
 
-            searchResult.innerHTML =
-                '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
+        searchResult.innerHTML =
+            '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
+
+        searchResult.style.display = "none";
 
         }
 
@@ -196,6 +198,8 @@ function searchLocation() {
         searchResult.innerHTML =
             '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
 
+        searchResult.style.display = "none";
+
         return;
 
     }
@@ -208,6 +212,10 @@ function searchLocation() {
 
     });
 
+    console.log("Keyword =", keyword);
+    console.log("Locations =", allLocations.length);
+    console.log("Results =", results);
+
     if (results.length === 0) {
 
         searchResult.innerHTML = `
@@ -219,6 +227,7 @@ function searchLocation() {
             </p>
 
         `;
+        searchResult.style.display = "block";
 
         return;
 
@@ -272,6 +281,7 @@ function searchLocation() {
     });
 
     searchResult.innerHTML = html;
+    searchResult.style.display = "block";
 
     document
 
@@ -355,6 +365,8 @@ if (clearBtn) {
 
             searchResult.innerHTML =
                 '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
+
+            searchResult.style.display = "none";
 
             searchInput.focus();
 
