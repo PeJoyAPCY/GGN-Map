@@ -6,19 +6,42 @@
 
 let allLocations = [];
 
-const searchInput = document.getElementById("searchInput");
-const searchResult = document.getElementById("searchResult");
+// =========================================
+// Element
+// =========================================
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const searchResult =
+    document.getElementById("searchResult");
+
+const searchBtn =
+    document.getElementById("searchBtn");
+
+const clearBtn =
+    document.getElementById("clearSearch");
 
 // =========================================
-// โหลด KML
+// โหลดข้อมูล KML
 // =========================================
 
 async function loadKML(filePath, province, zone) {
 
     allLocations = [];
 
-    searchResult.innerHTML =
-        '<p class="empty">กำลังโหลดข้อมูล...</p>';
+    if (searchInput) {
+
+        searchInput.value = "";
+
+    }
+
+    if (searchResult) {
+
+        searchResult.innerHTML =
+            '<p class="empty">กำลังโหลดข้อมูล...</p>';
+
+    }
 
     try {
 
@@ -34,40 +57,76 @@ async function loadKML(filePath, province, zone) {
 
         const text = await response.text();
 
-        const xml = new DOMParser().parseFromString(
-            text,
-            "text/xml"
-        );
+        const xml =
+            new DOMParser().parseFromString(
+                text,
+                "application/xml"
+            );
+
+        const parserError =
+            xml.querySelector("parsererror");
+
+        if (parserError) {
+
+            console.error(parserError.textContent);
+
+            return;
+
+        }
 
         const placemarks =
-            xml.getElementsByTagName("Placemark");
+            Array.from(
+                xml.getElementsByTagName("*")
+            ).filter(node =>
+                node.localName === "Placemark"
+            );
+
+        console.log("KML Loaded");
+        console.log(placemarks.length);
 
         for (const place of placemarks) {
 
+            const elements =
+                Array.from(
+                    place.getElementsByTagName("*")
+                );
+
             const nameNode =
-                place.getElementsByTagName("name")[0];
+                elements.find(node =>
+                    node.localName === "name"
+                );
 
             const coordNode =
-                place.getElementsByTagName("coordinates")[0];
+                elements.find(node =>
+                    node.localName === "coordinates"
+                );
 
-            if (!coordNode) continue;
+            if (!coordNode)
+                continue;
 
             const name =
-                nameNode ?
-                nameNode.textContent.trim() :
-                "";
+                nameNode
+                ? nameNode.textContent.trim()
+                : "";
 
-            const coordinate =
-                coordNode.textContent.trim();
+            const coords =
+                coordNode.textContent
+                .trim()
+                .split(",");
 
-            const parts =
-                coordinate.split(",");
+            if (coords.length < 2)
+                continue;
 
             const lng =
-                parseFloat(parts[0]);
+                parseFloat(coords[0]);
 
             const lat =
-                parseFloat(parts[1]);
+                parseFloat(coords[1]);
+
+            if (
+                isNaN(lat) ||
+                isNaN(lng)
+            ) continue;
 
             allLocations.push({
 
@@ -85,35 +144,50 @@ async function loadKML(filePath, province, zone) {
 
         }
 
-        console.log("KML Loaded");
+        console.log(
+            "Total :",
+            allLocations.length
+        );
 
-        console.log(allLocations.length);
+        const totalUnit = document.getElementById("totalUnit");
 
-        document.getElementById("totalUnit").innerText =
-            allLocations.length;
+            if (totalUnit) {
+            totalUnit.textContent = allLocations.length;
 
-        searchResult.innerHTML =
-            '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
+        }
 
-    }
+        if (searchResult) {
 
-    catch (error) {
+            searchResult.innerHTML =
+                '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
+
+        }
+
+    } catch (error) {
 
         console.error(error);
 
-        searchResult.innerHTML =
-            '<p class="empty">โหลดข้อมูลไม่สำเร็จ</p>';
+        if (searchResult) {
+
+            searchResult.innerHTML =
+                '<p class="empty">โหลดข้อมูลไม่สำเร็จ</p>';
+
+        }
 
     }
 
 }
 // =========================================
-// ค้นหา
+// ค้นหาหน่วยงาน
 // =========================================
 
 function searchLocation() {
 
-    const keyword = searchInput.value
+    if (!searchInput || !searchResult)
+        return;
+
+    const keyword =
+        searchInput.value
         .trim()
         .toLowerCase();
 
@@ -126,14 +200,25 @@ function searchLocation() {
 
     }
 
-    const result = allLocations.filter(item =>
-        item.name.toLowerCase().includes(keyword)
-    );
+    const results = allLocations.filter(item => {
 
-    if (result.length === 0) {
+            return (item.name || "")
+                .toLowerCase()
+                .includes(keyword);
 
-        searchResult.innerHTML =
-            '<p class="empty">ไม่พบข้อมูล</p>';
+    });
+
+    if (results.length === 0) {
+
+        searchResult.innerHTML = `
+
+            <p class="empty">
+
+                ไม่พบข้อมูล
+
+            </p>
+
+        `;
 
         return;
 
@@ -141,21 +226,47 @@ function searchLocation() {
 
     let html = "";
 
-    result.forEach(item => {
+    html += `
+
+        <div class="result-count">
+
+            พบ ${results.length} รายการ
+
+        </div>
+
+    `;
+
+    results.forEach(item => {
 
         html += `
-        <div class="result-item"
-             data-lat="${item.lat}"
-             data-lng="${item.lng}">
 
-            <strong>${item.name}</strong><br>
+        <div
+            class="result-item"
+            data-lat="${item.lat}"
+            data-lng="${item.lng}">
+
+            <strong>
+
+                ${item.name}
+
+            </strong>
+
+            <br>
 
             <small>
+
+                จังหวัด :
                 ${item.province}
+
+                |
+
+                โซน :
                 ${item.zone}
+
             </small>
 
         </div>
+
         `;
 
     });
@@ -163,41 +274,104 @@ function searchLocation() {
     searchResult.innerHTML = html;
 
     document
+
         .querySelectorAll(".result-item")
-        .forEach(card => {
 
-            card.onclick = function () {
+        .forEach(item => {
 
-                const lat =
-                    this.dataset.lat;
+            item.addEventListener(
 
-                const lng =
-                    this.dataset.lng;
+                "click",
 
-                window.open(
+                function () {
 
-                    `https://www.google.com/maps?q=${lat},${lng}`,
+                    const lat =
+                        this.dataset.lat;
 
-                    "_blank"
+                    const lng =
+                        this.dataset.lng;
 
-                );
+                    window.open(
 
-            };
+                        `https://www.google.com/maps?q=${lat},${lng}`,
+
+                        "_blank"
+
+                    );
+
+                }
+
+            );
 
         });
 
 }
-
 // =========================================
 // Event
 // =========================================
 
-searchInput.addEventListener(
+if (searchBtn) {
 
-    "input",
+    searchBtn.addEventListener(
+        "click",
+        searchLocation
+    );
 
-    searchLocation
+}
 
-);
+if (searchInput) {
 
-console.log("GGN Search Ready");
+    // ค้นหาทันทีเมื่อพิมพ์
+    searchInput.addEventListener(
+        "input",
+        searchLocation
+    );
+
+    // กด Enter
+    searchInput.addEventListener(
+        "keydown",
+        function (e) {
+
+            if (e.key === "Enter") {
+
+                e.preventDefault();
+
+                searchLocation();
+
+            }
+
+        }
+    );
+
+}
+
+if (clearBtn) {
+
+    clearBtn.addEventListener(
+        "click",
+        function () {
+
+            searchInput.value = "";
+
+            searchResult.innerHTML =
+                '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
+
+            searchInput.focus();
+
+        }
+    );
+
+}
+
+// =========================================
+// Export
+// =========================================
+
+window.loadKML = loadKML;
+window.searchLocation = searchLocation;
+
+console.log("=================================");
+console.log("GGN MAP V2");
+console.log("Search System Ready");
+console.log("Locations :", allLocations.length);
+console.log("=================================");
