@@ -22,9 +22,6 @@ const searchBtn =
 const clearBtn =
     document.getElementById("clearSearch");
 
-const loading =
-    document.getElementById("loading");
-
 // =========================================
 // โหลดข้อมูล KML
 // =========================================
