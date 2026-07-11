@@ -29,32 +29,66 @@
 
     <header>
 
-        <div class="logo">
+        <div class="header-left">
 
-            <img
-                src="images/logo.png"
-                alt="GGN Logo">
+            <!-- Mobile Menu -->
 
-            <div>
+            <button
 
-                <h2>
+                id="menuToggle"
 
-                    GGN Operations Map
+                class="menu-toggle"
 
-                </h2>
+                type="button"
 
-                <p>
+                aria-label="เปิดเมนู">
 
-                    บริษัท รักษาความปลอดภัย
-                    เกรท การ์เดียน นอร์ทเทอร์น จำกัด
+                ☰
 
-                </p>
+            </button>
+
+            <div class="logo">
+
+                <img
+
+                    src="images/logo.png"
+
+                    alt="GGN Logo">
+
+                <div>
+
+                    <h2>
+
+                        GGN Operations Map
+
+                    </h2>
+
+                    <p>
+
+                        บริษัท รักษาความปลอดภัย
+                        เกรท การ์เดียน นอร์ทเทอร์น จำกัด
+
+                    </p>
+
+                </div>
 
             </div>
 
         </div>
 
     </header>
+
+    <!-- ===============================
+         Overlay (Mobile)
+    ================================ -->
+
+    <div
+
+        id="sidebarOverlay"
+
+        class="sidebar-overlay">
+
+    </div>
 
     <!-- =====================================
          MAIN
@@ -66,7 +100,42 @@
              SIDEBAR
         ================================== -->
 
-        <aside class="sidebar">
+        <aside
+
+            id="sidebar"
+
+            class="sidebar">
+            <!-- =================================
+                 Mobile Sidebar Header
+            ================================== -->
+
+            <div class="sidebar-mobile-header">
+
+                <h2>
+
+                    เมนูค้นหา
+
+                </h2>
+
+                <button
+
+                    id="closeSidebar"
+
+                    class="close-sidebar"
+
+                    type="button"
+
+                    aria-label="ปิดเมนู">
+
+                    ✕
+
+                </button>
+
+            </div>
+
+            <!-- =================================
+                 จังหวัด / โซน
+            ================================== -->
 
             <h2>
 
@@ -96,9 +165,9 @@
 
             <hr>
 
-            <!-- =============================
-                 SEARCH
-            ============================== -->
+            <!-- =================================
+                 Search
+            ================================== -->
 
             <h2>
 
@@ -142,9 +211,9 @@
 
             </div>
 
-            <!-- =============================
-                 SEARCH RESULT
-            ============================== -->
+            <!-- =================================
+                 Search Result
+            ================================== -->
 
             <div
 
@@ -161,9 +230,10 @@
             </div>
 
             <hr>
-            <!-- =============================
-                 DASHBOARD
-            ============================== -->
+
+            <!-- =================================
+                 Dashboard
+            ================================== -->
 
             <div class="dashboard">
 
@@ -185,23 +255,9 @@
 
             </div>
 
-            <!-- =============================
-                 OPEN MAP
-            ============================== -->
-
-            <button
-
-                id="openMap"
-
-                type="button">
-
-                เปิด Google My Maps
-
-            </button>
-
-            <!-- =============================
-                 LOADING
-            ============================== -->
+            <!-- =================================
+                 Loading
+            ================================== -->
 
             <div
 
@@ -220,61 +276,6 @@
         ================================== -->
 
         <main class="content">
-
-            <!-- =================================
-                 Floating Popup
-            ================================== -->
-
-            <div
-
-                id="mapPopup"
-
-                class="map-popup">
-
-                <div class="popup-header">
-
-                    <div
-                        id="popupTitle"
-                        class="popup-title">
-
-                        รายละเอียดหน่วยงาน
-
-                    </div>
-
-                    <button
-
-                        id="popupClose"
-
-                        class="popup-close"
-
-                        type="button">
-
-                        ✕
-
-                    </button>
-
-                </div>
-
-                <div
-
-                    id="popupContent"
-
-                    class="popup-content">
-
-                    <div class="popup-empty">
-
-                        📍 เลือกหน่วยงานจากผลการค้นหา
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- =================================
-                 Google My Maps
-            ================================== -->
-
             <iframe
 
                 id="mapFrame"
@@ -290,8 +291,53 @@
         </main>
 
     </div>
+
     <!-- =====================================
-         SCRIPT
+         Floating Popup
+    ====================================== -->
+
+    <div
+
+        id="mapPopup"
+
+        class="map-popup">
+
+        <div class="popup-header">
+
+            <h3 id="popupTitle">
+
+                รายละเอียดหน่วยงาน
+
+            </h3>
+
+            <button
+
+                id="closePopup"
+
+                class="popup-close"
+
+                type="button">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div
+
+            id="popupContent"
+
+            class="popup-content">
+
+            กรุณาเลือกหน่วยงาน
+
+        </div>
+
+    </div>
+
+    <!-- =====================================
+         JavaScript
     ====================================== -->
 
     <script src="js/maps.js"></script>
