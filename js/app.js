@@ -18,9 +18,6 @@ window.mapFrame =
 const totalUnit =
     document.getElementById("totalUnit");
 
-const openMap =
-    document.getElementById("openMap");
-
 const loading =
     document.getElementById("loading");
 
@@ -166,18 +163,6 @@ async function loadMap() {
     // -------------------------
     // ปุ่มเปิด Google My Maps
     // -------------------------
-
-    openMap.onclick = () => {
-
-        window.open(
-
-            data.viewer,
-
-            "_blank"
-
-        );
-
-    };
 
 }
 
