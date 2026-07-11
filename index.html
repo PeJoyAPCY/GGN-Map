@@ -3,147 +3,268 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>GGN Operations Map</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="css/style.css">
+    <title>
+
+        GGN Operations Map
+
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
 
 </head>
 
 <body>
 
-<header>
+    <!-- =========================
+         Header
+    ========================== -->
 
-<div class="logo">
+    <header>
 
-<img src="images/logo.png" alt="GGN Logo">
+        <div class="logo">
 
-<div>
+            <img
+                src="images/logo.png"
+                alt="GGN Logo">
 
-<h2>GGN Operations Map</h2>
+            <div>
 
-<p>บริษัท รักษาความปลอดภัย เกรท การ์เดียน นอร์ทเทอร์น จำกัด</p>
+                <h2>
 
-</div>
+                    GGN Operations Map
 
-</div>
+                </h2>
 
-</header>
+                <p>
 
-<div class="container">
+                    บริษัท รักษาความปลอดภัย
+                    เกรท การ์เดียน นอร์ทเทอร์น จำกัด
 
-<!-- Sidebar -->
-<div class="sidebar">
+                </p>
 
-<h2>ค้นหาพื้นที่</h2>
+            </div>
 
-<label for="province">จังหวัด</label>
+        </div>
 
-<select id="province"></select>
+    </header>
 
-<label for="zone">โซน</label>
+    <!-- =========================
+         Main
+    ========================== -->
 
-<select id="zone"></select>
+    <div class="container">
 
-<hr>
+        <!-- =====================
+             Sidebar
+        ====================== -->
 
-<h2>ค้นหาหน่วยงาน</h2>
+        <aside class="sidebar">
 
-<div class="search-box">
+            <!-- จังหวัด / โซน -->
 
-<input
-type="text"
-id="searchInput"
-placeholder="เช่น เคียวเซร่า หรือ เบอร์นิน่า"
-autocomplete="off"
-spellcheck="false">
+            <h2>
 
-<button
-id="searchBtn"
-type="button">
+                ค้นหาพื้นที่
 
-🔍 ค้นหา
+            </h2>
 
-</button>
+            <label for="province">
 
-<button
-id="clearSearch"
-type="button">
+                จังหวัด
 
-❌ ล้าง
+            </label>
 
-</button>
+            <select id="province">
 
-</div>
+            </select>
 
-<div
-id="searchResult"
-class="search-result">
+            <label for="zone">
 
-<p class="empty">
+                โซน
 
-พิมพ์ชื่อหน่วยงานเพื่อค้นหา
+            </label>
 
-</p>
+            <select id="zone">
 
-</div>
+            </select>
 
-<hr>
+            <hr>
 
-<div class="dashboard">
+            <!-- =====================
+                 Search
+            ====================== -->
 
-<h3>จำนวนหน่วยงาน</h3>
+            <h2>
 
-<div
-id="totalUnit"
-class="total">
+                ค้นหาหน่วยงาน
 
-0
+            </h2>
 
-</div>
+            <div class="search-box">
 
-</div>
+                <input
 
-<button
-id="openMap"
-type="button">
+                    type="text"
 
-เปิด Google My Maps
+                    id="searchInput"
 
-</button>
+                    placeholder="เช่น เคียวเซร่า หรือ เบอร์นิน่า"
 
-<div
-id="loading"
-style="display:none;text-align:center;padding:12px;">
+                    autocomplete="off"
 
-กำลังโหลดข้อมูล...
+                    spellcheck="false">
 
-</div>
+                <button
 
-</div>
+                    id="searchBtn"
 
-<!-- Map -->
+                    type="button">
 
-<div class="content">
+                    🔍 ค้นหา
 
-<iframe
-id="mapFrame"
-title="GGN Operations Map"
-loading="lazy"
-allowfullscreen>
+                </button>
 
-</iframe>
+                <button
 
-</div>
+                    id="clearSearch"
 
-</div>
+                    type="button">
 
-<script src="js/maps.js"></script>
-<script src="js/script.js"></script>
-<script src="js/app.js"></script>
+                    ❌ ล้าง
 
+                </button>
+
+            </div>
+
+            <!-- =====================
+                 Search Result
+            ====================== -->
+
+            <div
+
+                id="searchResult"
+
+                class="search-result">
+
+                <p class="empty">
+
+                    พิมพ์ชื่อหน่วยงานเพื่อค้นหา
+
+                </p>
+
+            </div>
+            <!-- =====================
+                 Information Panel
+            ====================== -->
+
+            <div
+
+                id="infoPanel"
+
+                class="info-panel">
+
+                <div class="info-empty">
+
+                    📍 เลือกหน่วยงานเพื่อดูรายละเอียด
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <!-- =====================
+                 Dashboard
+            ====================== -->
+
+            <div class="dashboard">
+
+                <h3>
+
+                    จำนวนหน่วยงาน
+
+                </h3>
+
+                <div
+
+                    id="totalUnit"
+
+                    class="total">
+
+                    0
+
+                </div>
+
+            </div>
+
+            <!-- =====================
+                 Button
+            ====================== -->
+
+            <button
+
+                id="openMap"
+
+                type="button">
+
+                เปิด Google My Maps
+
+            </button>
+
+            <!-- =====================
+                 Loading
+            ====================== -->
+
+            <div
+
+                id="loading"
+
+                style="display:none;text-align:center;padding:12px;">
+
+                กำลังโหลดข้อมูล...
+
+            </div>
+
+        </aside>
+
+        <!-- =====================
+             Map
+        ====================== -->
+
+        <main class="content">
+
+            <iframe
+
+                id="mapFrame"
+
+                title="GGN Operations Map"
+
+                loading="lazy"
+
+                allowfullscreen>
+
+            </iframe>
+
+        </main>
+
+    </div>
+    <!-- =========================
+         Script
+    ========================== -->
+
+    <script src="js/maps.js"></script>
+
+    <script src="js/script.js"></script>
+
+    <script src="js/app.js"></script>
 
 </body>
 

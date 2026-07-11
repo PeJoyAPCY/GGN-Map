@@ -10,181 +10,236 @@ body{
     color:#333;
 }
 
-/* ================= HEADER ================= */
+/* =========================================
+   HEADER
+========================================= */
 
 header{
+
     background:#71a7f8;
+
     color:#fff;
+
     padding:15px 30px;
+
     box-shadow:0 2px 8px rgba(0,0,0,.15);
+
 }
 
 .logo{
+
     display:flex;
+
     align-items:center;
+
 }
 
 .logo img{
+
     width:90px;
+
     margin-right:20px;
+
 }
 
 .logo h2{
+
     margin-bottom:5px;
+
 }
 
 .logo p{
+
     font-size:14px;
+
 }
 
-/* ================= MAIN ================= */
+/* =========================================
+   MAIN
+========================================= */
 
 .container{
+
     display:flex;
+
     height:calc(100vh - 120px);
+
 }
 
-/* ================= SIDEBAR ================= */
+/* =========================================
+   SIDEBAR
+========================================= */
 
 .sidebar{
+
     width:330px;
+
     background:#fff;
+
     padding:20px;
+
     overflow-y:auto;
+
     box-shadow:2px 0 10px rgba(0,0,0,.12);
+
 }
 
 .sidebar h2,
 .sidebar h3{
+
     color:#0D47A1;
+
     margin-bottom:15px;
+
 }
 
 .sidebar label{
+
     display:block;
+
     margin-top:15px;
+
     margin-bottom:8px;
+
     font-weight:bold;
+
 }
 
 .sidebar select,
 .sidebar input{
+
     width:100%;
+
     padding:10px 12px;
+
     border:1px solid #ccc;
+
     border-radius:6px;
+
     font-size:15px;
-    transition:.2s;
+
+    transition:.25s;
+
 }
 
 .sidebar select:focus,
 .sidebar input:focus{
+
     outline:none;
+
     border-color:#1565C0;
+
     box-shadow:0 0 6px rgba(21,101,192,.25);
+
 }
 
 .sidebar hr{
+
     margin:20px 0;
+
     border:none;
+
     border-top:1px solid #ddd;
+
 }
 
+/* =========================================
+   BUTTON
+========================================= */
+
 .sidebar button{
+
     width:100%;
+
     margin-top:12px;
+
     padding:12px;
+
     border:none;
+
     border-radius:6px;
+
     background:#1565C0;
+
     color:#fff;
+
     cursor:pointer;
+
     font-size:15px;
+
     transition:.25s;
+
 }
 
 .sidebar button:hover{
+
     background:#0D47A1;
+
 }
 
-/* ================= SEARCH ================= */
+/* =========================================
+   SEARCH RESULT
+========================================= */
 
 .search-result{
-    margin-top:10px;
-    border:1px solid #ddd;
-    border-radius:6px;
-    background:#fff;
-    display:none;
-    max-height:320px;
-    overflow-y:auto;
-    box-shadow:0 4px 10px rgba(0,0,0,.08);
-}
 
-/* จำนวนผลลัพธ์ */
+    margin-top:12px;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+    background:#fff;
+
+    display:none;
+
+    max-height:320px;
+
+    overflow-y:auto;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.08);
+
+}
 
 .result-count{
+
     padding:10px 14px;
-    font-size:13px;
-    color:#666;
-    background:#f5f5f5;
+
+    background:#f7f7f7;
+
     border-bottom:1px solid #ddd;
+
+    font-size:13px;
+
     font-weight:bold;
+
+    color:#666;
+
 }
-
-/* รายการ */
-
 .result-item{
-    padding:12px 15px;
+
+    padding:14px 16px;
+
+    border-bottom:1px solid #ececec;
+
     cursor:pointer;
-    border-bottom:1px solid #eee;
-    transition:.2s;
+
+    transition:
+        background .25s,
+        border-left .25s,
+        padding-left .25s;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:4px;
+
 }
 
 .result-item:last-child{
+
     border-bottom:none;
-}
-
-.result-item:hover{
-    background:#E3F2FD;
-}
-
-.result-item strong{
-    display:block;
-    color:#222;
-    font-size:15px;
-    margin-bottom:4px;
-}
-
-.result-item small{
-    color:#777;
-    font-size:12px;
-}
-
-.result-description{
-
-    margin-top:8px;
-
-    padding-top:8px;
-
-    border-top:1px solid #ddd;
-
-    color:#555;
-
-    font-size:13px;
-
-    white-space:pre-wrap;
-
-}
-
-/* ===========================
-   Search Result
-=========================== */
-
-.result-item{
-
-    cursor:pointer;
-
-    transition:all .25s ease;
 
 }
 
@@ -196,91 +251,262 @@ header{
 
 .result-item.active{
 
-    background:#d8eaff;
+    background:#dbeafe;
 
-    border-left:5px solid #1a73e8;
+    border-left:5px solid #1565C0;
 
     padding-left:12px;
 
 }
 
-/* ไม่พบข้อมูล */
+.result-title{
 
-.empty{
-    padding:18px;
-    text-align:center;
-    color:#888;
+    font-size:15px;
+
+    font-weight:bold;
+
+    color:#222;
+
+    line-height:1.4;
+
 }
 
-/* Dashboard */
+.result-sub{
+
+    font-size:12px;
+
+    color:#6b7280;
+
+}
+
+/* =========================================
+   INFORMATION PANEL
+========================================= */
+
+.info-panel{
+
+    margin-top:15px;
+
+    padding:15px;
+
+    background:#fff;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+    box-shadow:0 3px 8px rgba(0,0,0,.08);
+
+    min-height:180px;
+
+}
+
+.info-panel h3{
+
+    color:#1565C0;
+
+    margin-bottom:10px;
+
+    font-size:18px;
+
+}
+
+.info-panel hr{
+
+    margin:12px 0;
+
+}
+
+.info-panel p{
+
+    margin-bottom:10px;
+
+    font-size:14px;
+
+    line-height:1.6;
+
+}
+
+.info-panel strong{
+
+    color:#333;
+
+}
+
+.info-empty{
+
+    text-align:center;
+
+    color:#888;
+
+    padding:30px 10px;
+
+    font-size:14px;
+
+}
+
+.info-description{
+
+    margin-top:8px;
+
+    padding:10px;
+
+    background:#f8f9fa;
+
+    border-radius:6px;
+
+    border:1px solid #e5e7eb;
+
+    font-size:13px;
+
+    color:#444;
+
+    line-height:1.6;
+
+    white-space:pre-wrap;
+
+    word-break:break-word;
+
+}
+
+/* =========================================
+   DASHBOARD
+========================================= */
+
+.dashboard{
+
+    margin-top:15px;
+
+}
 
 .total{
+
     margin-top:10px;
+
     text-align:center;
+
     font-size:42px;
+
     font-weight:bold;
+
     color:#1565C0;
+
 }
 
-/* Loading */
+/* =========================================
+   LOADING
+========================================= */
 
 #loading{
-    margin-top:15px;
-    text-align:center;
-    color:#1565C0;
-    font-size:14px;
-}
 
-/* ================= CONTENT ================= */
+    margin-top:15px;
+
+    text-align:center;
+
+    color:#1565C0;
+
+    font-size:14px;
+
+}
+/* =========================================
+   CONTENT
+========================================= */
 
 .content{
+
     flex:1;
+
     background:#ddd;
+
+    position:relative;
+
 }
 
 iframe{
+
     width:100%;
+
     height:100%;
+
     border:none;
+
+    background:#fff;
+
 }
 
-/* ================= Scrollbar ================= */
+/* =========================================
+   SCROLLBAR
+========================================= */
 
 .sidebar::-webkit-scrollbar,
 .search-result::-webkit-scrollbar{
+
     width:8px;
+
 }
 
 .sidebar::-webkit-scrollbar-thumb,
 .search-result::-webkit-scrollbar-thumb{
+
     background:#bbb;
+
     border-radius:10px;
+
 }
 
 .sidebar::-webkit-scrollbar-thumb:hover,
 .search-result::-webkit-scrollbar-thumb:hover{
+
     background:#999;
+
 }
 
-/* ================= MOBILE ================= */
+/* =========================================
+   MOBILE
+========================================= */
 
-@media(max-width:768px){
+@media (max-width:768px){
 
-.container{
-    flex-direction:column;
-}
+    .container{
 
-.sidebar{
-    width:100%;
-    height:auto;
-}
+        flex-direction:column;
 
-.content{
-    height:600px;
-}
+        height:auto;
 
-iframe{
-    height:600px;
-}
+    }
+
+    .sidebar{
+
+        width:100%;
+
+        height:auto;
+
+        box-shadow:none;
+
+    }
+
+    .search-result{
+
+        max-height:220px;
+
+    }
+
+    .info-panel{
+
+        min-height:auto;
+
+    }
+
+    .content{
+
+        height:600px;
+
+    }
+
+    iframe{
+
+        height:600px;
+
+    }
 
 }
