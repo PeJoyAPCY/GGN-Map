@@ -220,9 +220,16 @@ function searchLocation() {
 
     const results = allLocations.filter(item => {
 
-            return (item.name || "")
-                .toLowerCase()
-                .includes(keyword);
+        const name =
+            (item.name || "").toLowerCase();
+
+        const description =
+            (item.description || "").toLowerCase();
+
+        return (
+            name.includes(keyword) ||
+            description.includes(keyword)
+        );
 
     });
 
@@ -264,7 +271,7 @@ function searchLocation() {
             html += `
 
             <div
-                class="result-item"
+                class="result-item active"
                 data-lat="${item.lat}"
                 data-lng="${item.lng}">
 
@@ -295,67 +302,107 @@ function searchLocation() {
     searchResult.innerHTML = html;
     searchResult.style.display = "block";
 
+    // =========================================
+// Event เมื่อคลิกผลการค้นหา
+// =========================================
+
     document
-
         .querySelectorAll(".result-item")
+            .forEach(item => {
 
-        .forEach(item => {
+                item.addEventListener("click", function () {
 
-            item.addEventListener(
+                    // -------------------------------
+                    // ไฮไลต์รายการที่เลือก
+                    // -------------------------------
 
-    "click",
+                    document
+                        .querySelectorAll(".result-item")
+                        .forEach(result => {
 
-    function () {
+                            result.classList.remove("active");
 
-        const lat =
-            this.dataset.lat;
+                        });
 
-        const lng =
-            this.dataset.lng;
+                    this.classList.add("active");
 
-        // ป้องกันกรณีแผนที่ยังไม่พร้อม
-        if (!window.currentMap) {
+                    // -------------------------------
+                    // อ่านค่าพิกัด
+                    // -------------------------------
 
-            alert("กรุณาเลือกจังหวัดและโซนก่อน");
+                    const lat = this.dataset.lat;
+                    const lng = this.dataset.lng;
 
-            return;
+                    console.log("Latitude :", lat);
+                    console.log("Longitude:", lng);
 
-        }
+                    // -------------------------------
+                    // ตรวจสอบว่าเลือกจังหวัด/โซนแล้วหรือยัง
+                    // -------------------------------
 
-        const url = new URL(window.currentMap.map);
+                    if (!window.currentMap) {
 
-        url.searchParams.set(
-            "ll",
-            `${lat},${lng}`
-        );
+                        alert("กรุณาเลือกจังหวัดและโซนก่อน");
 
-        url.searchParams.set(
-            "z",
-            "17"
-        );
+                        return;
 
-        window.loading.style.display = "block";
+                    }
 
-        window.mapFrame.onload = () => {
+                    // -------------------------------
+                    // สร้าง URL ใหม่ของ Google My Maps
+                    // -------------------------------
 
-            window.loading.style.display = "none";
+                    const url = new URL(window.currentMap.map);
 
-            window.mapFrame.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
+                    url.searchParams.set(
+                        "ll",
+                        `${lat},${lng}`
+                    );
+
+                    url.searchParams.set(
+                        "z",
+                        "17"
+                    );
+
+                    console.log("Open Map :", url.toString());
+
+                    // -------------------------------
+                    // แสดง Loading
+                    // -------------------------------
+
+                    window.loading.style.display = "block";
+
+                    // -------------------------------
+                    // เมื่อแผนที่โหลดเสร็จ
+                    // -------------------------------
+
+                    window.mapFrame.onload = () => {
+
+                        window.loading.style.display = "none";
+
+                        // เลื่อนหน้าจอไปที่แผนที่
+
+                        window.mapFrame.scrollIntoView({
+
+                            behavior: "smooth",
+
+                            block: "center"
+
+                        });
+
+                    };
+
+                    // -------------------------------
+                    // โหลดแผนที่
+                    // -------------------------------
+
+                    window.mapFrame.src = url.toString();
+
+                });
+
             });
 
-        };
-
-        window.mapFrame.src = url.toString();
-
         }
-
-        );
-
-    });
-
-}
 // =========================================
 // Event
 // =========================================

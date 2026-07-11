@@ -176,6 +176,34 @@ header{
 
 }
 
+/* ===========================
+   Search Result
+=========================== */
+
+.result-item{
+
+    cursor:pointer;
+
+    transition:all .25s ease;
+
+}
+
+.result-item:hover{
+
+    background:#eef6ff;
+
+}
+
+.result-item.active{
+
+    background:#d8eaff;
+
+    border-left:5px solid #1a73e8;
+
+    padding-left:12px;
+
+}
+
 /* ไม่พบข้อมูล */
 
 .empty{
