@@ -1,25 +1,35 @@
 // =========================================
-// GGN MAP V2
+// GGN MAP V1.3
 // app.js
 // =========================================
 
-const province = document.getElementById("province");
-const zone = document.getElementById("zone");
+const province =
+    document.getElementById("province");
 
-const mapFrame = document.getElementById("mapFrame");
-// ให้ไฟล์อื่นเรียกใช้ได้
-window.mapFrame = mapFrame;
+const zone =
+    document.getElementById("zone");
 
-const totalUnit = document.getElementById("totalUnit");
+const mapFrame =
+    document.getElementById("mapFrame");
 
-const openMap = document.getElementById("openMap");
+window.mapFrame =
+    mapFrame;
 
-const loading = document.getElementById("loading");
-window.loading = loading;
+const totalUnit =
+    document.getElementById("totalUnit");
 
-// -----------------------------------------
+const openMap =
+    document.getElementById("openMap");
+
+const loading =
+    document.getElementById("loading");
+
+window.loading =
+    loading;
+
+// =========================================
 // โหลดจังหวัด
-// -----------------------------------------
+// =========================================
 
 function loadProvince() {
 
@@ -28,9 +38,13 @@ function loadProvince() {
     Object.keys(maps).forEach(name => {
 
         province.innerHTML += `
+
             <option value="${name}">
+
                 ${name}
+
             </option>
+
         `;
 
     });
@@ -39,22 +53,27 @@ function loadProvince() {
 
 }
 
-// -----------------------------------------
+// =========================================
 // โหลดโซน
-// -----------------------------------------
+// =========================================
 
 function loadZone() {
 
-    const p = province.value;
+    const p =
+        province.value;
 
     zone.innerHTML = "";
 
     Object.keys(maps[p]).forEach(name => {
 
         zone.innerHTML += `
+
             <option value="${name}">
+
                 ${name}
+
             </option>
+
         `;
 
     });
@@ -63,60 +82,135 @@ function loadZone() {
 
 }
 
-// -----------------------------------------
+// =========================================
 // โหลดแผนที่
-// -----------------------------------------
+// =========================================
 
 async function loadMap() {
 
-    const p = province.value;
-    const z = zone.value;
+    const p =
+        province.value;
 
-    const data = maps[p][z];
+    const z =
+        zone.value;
+
+    const data =
+        maps[p][z];
+
+    if (!data)
+        return;
+
+    // -------------------------
     // เก็บข้อมูลแผนที่ปัจจุบัน
-    window.currentMap = data;
+    // -------------------------
 
-    if (!data) return;
+    window.currentMap =
+        data;
 
-    loading.style.display = "block";
+    // -------------------------
+    // ซ่อน Popup
+    // -------------------------
 
-    mapFrame.src = data.map;
+    if (window.hidePopup) {
 
-    totalUnit.innerText = data.total;
+        window.hidePopup();
+
+    }
+
+    loading.style.display =
+        "block";
+
+    mapFrame.src =
+        data.map;
+
+    totalUnit.innerText =
+        data.total;
+    // -------------------------
+    // โหลด Google My Maps
+    // -------------------------
 
     await loadKML(
+
         data.kml,
+
         p,
+
         z
+
     );
 
-    loading.style.display = "none";
+    // -------------------------
+    // ซ่อนผลการค้นหา
+    // -------------------------
+
+    const searchResult =
+        document.getElementById("searchResult");
+
+    if (searchResult) {
+
+        searchResult.style.display =
+            "none";
+
+        searchResult.innerHTML =
+            '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
+
+    }
+
+    // -------------------------
+    // โหลดเสร็จ
+    // -------------------------
+
+    loading.style.display =
+        "none";
+
+    // -------------------------
+    // ปุ่มเปิด Google My Maps
+    // -------------------------
 
     openMap.onclick = () => {
 
         window.open(
+
             data.viewer,
+
             "_blank"
+
         );
 
     };
 
 }
 
-// -----------------------------------------
+// =========================================
+// Event
+// =========================================
 
 province.addEventListener(
+
     "change",
+
     loadZone
+
 );
 
 zone.addEventListener(
+
     "change",
+
     loadMap
+
 );
 
-// -----------------------------------------
+// =========================================
+// Start
+// =========================================
 
 loadProvince();
 
-console.log("GGN App Ready");
+console.log("=================================");
+
+console.log("GGN MAP V1.3");
+
+console.log("Application Ready");
+
+console.log("=================================");

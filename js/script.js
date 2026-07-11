@@ -1,15 +1,12 @@
 // =========================================
-// GGN MAP V2
-// script.js
-// ระบบค้นหาหน่วยงาน
-// =========================================
-
-// =========================================
-// Global
+// GGN MAP V1.3
+// Search + Floating Popup
 // =========================================
 
 let allLocations = [];
+
 let currentResults = [];
+
 let selectedLocation = null;
 
 // =========================================
@@ -28,61 +25,116 @@ const searchBtn =
 const clearBtn =
     document.getElementById("clearSearch");
 
-// Information Card
-const infoPanel =
-    document.getElementById("infoPanel");
+// =========================================
+// Popup
+// =========================================
 
+const mapPopup =
+    document.getElementById("mapPopup");
+
+const popupTitle =
+    document.getElementById("popupTitle");
+
+const popupContent =
+    document.getElementById("popupContent");
+
+const popupClose =
+    document.getElementById("popupClose");
+
+// =========================================
+// Popup Function
+// =========================================
+
+function hidePopup() {
+
+    if (!mapPopup)
+        return;
+
+    mapPopup.classList.remove("show");
+
+}
+
+function showPopup(item) {
+
+    if (!mapPopup)
+        return;
+
+    popupTitle.innerHTML =
+        item.name || "ไม่ระบุชื่อ";
+
+    popupContent.innerHTML = `
+
+        <strong>จังหวัด</strong><br>
+
+        ${item.province}
+
+        <hr>
+
+        <strong>โซน</strong><br>
+
+        ${item.zone}
+
+        <hr>
+
+        <div class="popup-description">
+
+            ${item.description || "ไม่มีรายละเอียด"}
+
+        </div>
+
+    `;
+
+    mapPopup.classList.add("show");
+
+}
+
+// =========================================
+// Close Popup
+// =========================================
+
+if (popupClose) {
+
+    popupClose.addEventListener(
+
+        "click",
+
+        hidePopup
+
+    );
+
+}
 // =========================================
 // โหลดข้อมูล KML
 // =========================================
 
 async function loadKML(filePath, province, zone) {
 
-    // ล้างข้อมูลเดิม
     allLocations = [];
+
     currentResults = [];
+
     selectedLocation = null;
 
-    // ล้างช่องค้นหา
+    hidePopup();
+
     if (searchInput) {
 
         searchInput.value = "";
 
     }
 
-    // ล้างผลค้นหา
     if (searchResult) {
 
         searchResult.innerHTML =
             '<p class="empty">กำลังโหลดข้อมูล...</p>';
 
-        searchResult.style.display = "block";
-
-    }
-
-    // ล้าง Information Card
-    if (infoPanel) {
-
-        infoPanel.innerHTML = `
-
-            <div class="info-empty">
-
-                📍 เลือกหน่วยงานเพื่อดูรายละเอียด
-
-            </div>
-
-        `;
-
     }
 
     try {
 
-        console.log("=================================");
-        console.log("Loading KML");
-        console.log(filePath);
+        console.log("Loading :", filePath);
 
-        const response =
-            await fetch(filePath);
+        const response = await fetch(filePath);
 
         if (!response.ok) {
 
@@ -90,8 +142,7 @@ async function loadKML(filePath, province, zone) {
 
         }
 
-        const text =
-            await response.text();
+        const text = await response.text();
 
         const xml =
             new DOMParser().parseFromString(
@@ -110,10 +161,6 @@ async function loadKML(filePath, province, zone) {
 
         }
 
-        // ---------------------------------
-        // อ่าน Placemark
-        // ---------------------------------
-
         const placemarks =
             Array.from(
                 xml.getElementsByTagName("*")
@@ -121,14 +168,9 @@ async function loadKML(filePath, province, zone) {
                 node.localName === "Placemark"
             );
 
-        console.log(
-            "Placemark :",
-            placemarks.length
-        );
+        console.log("KML Loaded");
 
-        // ---------------------------------
-        // อ่านข้อมูลแต่ละจุด
-        // ---------------------------------
+        console.log(placemarks.length);
 
         for (const place of placemarks) {
 
@@ -157,13 +199,13 @@ async function loadKML(filePath, province, zone) {
 
             const name =
                 nameNode
-                    ? nameNode.textContent.trim()
-                    : "";
+                ? nameNode.textContent.trim()
+                : "";
 
             const description =
                 descriptionNode
-                    ? descriptionNode.textContent.trim()
-                    : "";
+                ? descriptionNode.textContent.trim()
+                : "";
 
             const coords =
                 coordNode.textContent
@@ -182,11 +224,7 @@ async function loadKML(filePath, province, zone) {
             if (
                 isNaN(lat) ||
                 isNaN(lng)
-            ) {
-
-                continue;
-
-            }
+            ) continue;
 
             allLocations.push({
 
@@ -206,9 +244,10 @@ async function loadKML(filePath, province, zone) {
 
         }
 
-        // ---------------------------------
-        // Dashboard
-        // ---------------------------------
+        console.log(
+            "Total :",
+            allLocations.length
+        );
 
         const totalUnit =
             document.getElementById("totalUnit");
@@ -220,24 +259,11 @@ async function loadKML(filePath, province, zone) {
 
         }
 
-        console.log(
-            "Total Locations :",
-            allLocations.length
-        );
+        searchResult.innerHTML =
+            '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
 
-        // ---------------------------------
-        // พร้อมค้นหา
-        // ---------------------------------
-
-        if (searchResult) {
-
-            searchResult.innerHTML =
-
-                '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
-
-            searchResult.style.display = "none";
-
-        }
+        searchResult.style.display =
+            "none";
 
     }
 
@@ -245,15 +271,8 @@ async function loadKML(filePath, province, zone) {
 
         console.error(error);
 
-        if (searchResult) {
-
-            searchResult.innerHTML =
-
-                '<p class="empty">โหลดข้อมูลไม่สำเร็จ</p>';
-
-            searchResult.style.display = "block";
-
-        }
+        searchResult.innerHTML =
+            '<p class="empty">โหลดข้อมูลไม่สำเร็จ</p>';
 
     }
 
@@ -273,114 +292,94 @@ function searchLocation() {
             .trim()
             .toLowerCase();
 
-    // -----------------------------
-    // ยังไม่พิมพ์
-    // -----------------------------
-
     if (keyword === "") {
 
-        currentResults = [];
+        searchResult.innerHTML =
+            '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
+
+        searchResult.style.display =
+            "none";
+
+        hidePopup();
+
+        return;
+
+    }
+
+    const results =
+        allLocations.filter(item => {
+
+            const name =
+                (item.name || "")
+                    .toLowerCase();
+
+            const description =
+                (item.description || "")
+                    .toLowerCase();
+
+            return (
+
+                name.includes(keyword) ||
+
+                description.includes(keyword)
+
+            );
+
+        });
+
+    currentResults = results;
+
+    if (results.length === 0) {
 
         searchResult.innerHTML =
 
-            '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
+            '<p class="empty">ไม่พบข้อมูล</p>';
 
-        searchResult.style.display = "none";
+        searchResult.style.display =
+            "block";
 
-        return;
-
-    }
-
-    // -----------------------------
-    // ค้นหา
-    // -----------------------------
-
-    currentResults = allLocations.filter(item => {
-
-        const name =
-            (item.name || "")
-                .toLowerCase();
-
-        const description =
-            (item.description || "")
-                .toLowerCase();
-
-        return (
-
-            name.includes(keyword) ||
-
-            description.includes(keyword)
-
-        );
-
-    });
-
-    console.log("=================================");
-    console.log("Keyword :", keyword);
-    console.log("Result :", currentResults.length);
-
-    // -----------------------------
-    // ไม่พบข้อมูล
-    // -----------------------------
-
-    if (currentResults.length === 0) {
-
-        searchResult.innerHTML = `
-
-            <p class="empty">
-
-                ไม่พบข้อมูล
-
-            </p>
-
-        `;
-
-        searchResult.style.display = "block";
+        hidePopup();
 
         return;
 
     }
-
-    renderSearchResults();
-
-}
-
-// =========================================
-// แสดงผลการค้นหา
-// =========================================
-
-function renderSearchResults() {
 
     let html = `
 
         <div class="result-count">
 
-            พบ ${currentResults.length} รายการ
+            พบ ${results.length} รายการ
 
         </div>
 
     `;
 
-    currentResults.forEach((item, index) => {
+    results.forEach(item => {
 
         html += `
 
             <div
+
                 class="result-item"
-                data-index="${index}">
+
+                data-lat="${item.lat}"
+
+                data-lng="${item.lng}">
 
                 <div class="result-title">
 
-                    📍 ${item.name}
+                    ${item.name}
 
                 </div>
 
                 <div class="result-sub">
 
+                    จังหวัด :
                     ${item.province}
 
-                    •
+                    |
 
+                    โซน :
                     ${item.zone}
 
                 </div>
@@ -393,170 +392,121 @@ function renderSearchResults() {
 
     searchResult.innerHTML = html;
 
-    searchResult.style.display = "block";
-
-    bindResultEvents();
-
-}
-
-// =========================================
-// Information Card
-// =========================================
-
-function showInfo(item) {
-
-    if (!infoPanel)
-        return;
-
-    infoPanel.innerHTML = `
-
-        <h3>
-
-            📍 ${item.name}
-
-        </h3>
-
-        <hr>
-
-        <p>
-
-            <strong>จังหวัด</strong>
-
-            <br>
-
-            ${item.province}
-
-        </p>
-
-        <br>
-
-        <p>
-
-            <strong>โซน</strong>
-
-            <br>
-
-            ${item.zone}
-
-        </p>
-
-        <br>
-
-        <p>
-
-            <strong>รายละเอียด</strong>
-
-        </p>
-
-        <div class="info-description">
-
-            ${item.description || "-"}
-
-        </div>
-
-    `;
-
-}
-
-// =========================================
-// Event ของผลการค้นหา
-// =========================================
-
-function bindResultEvents() {
+    searchResult.style.display =
+        "block";
+    // =========================================
+    // Event เมื่อคลิกผลการค้นหา
+    // =========================================
 
     document
+
         .querySelectorAll(".result-item")
-        .forEach(item => {
 
-            item.addEventListener("click", function () {
+        .forEach((element, index) => {
 
-                // -------------------------
-                // Highlight
-                // -------------------------
+            element.addEventListener(
 
-                document
-                    .querySelectorAll(".result-item")
-                    .forEach(result => {
+                "click",
 
-                        result.classList.remove("active");
+                function () {
 
-                    });
+                    // ---------------------------
+                    // Highlight
+                    // ---------------------------
 
-                this.classList.add("active");
+                    document
 
-                // -------------------------
-                // ข้อมูลที่เลือก
-                // -------------------------
+                        .querySelectorAll(".result-item")
 
-                const index =
-                    Number(this.dataset.index);
+                        .forEach(item => {
 
-                const location =
-                    currentResults[index];
+                            item.classList.remove("active");
 
-                if (!location)
-                    return;
+                        });
 
-                selectedLocation =
-                    location;
+                    this.classList.add("active");
 
-                // -------------------------
-                // แสดง Information Card
-                // -------------------------
+                    // ---------------------------
+                    // Location
+                    // ---------------------------
 
-                showInfo(location);
+                    const item =
+                        currentResults[index];
 
-                // -------------------------
-                // ตรวจสอบแผนที่
-                // -------------------------
+                    selectedLocation =
+                        item;
 
-                if (!window.currentMap) {
+                    // ---------------------------
+                    // ตรวจสอบแผนที่
+                    // ---------------------------
 
-                    alert("กรุณาเลือกจังหวัดและโซนก่อน");
+                    if (!window.currentMap) {
 
-                    return;
+                        alert(
+
+                            "กรุณาเลือกจังหวัดและโซนก่อน"
+
+                        );
+
+                        return;
+
+                    }
+
+                    // ---------------------------
+                    // Zoom Google My Maps
+                    // ---------------------------
+
+                    const url =
+                        new URL(
+                            window.currentMap.map
+                        );
+
+                    url.searchParams.set(
+
+                        "ll",
+
+                        `${item.lat},${item.lng}`
+
+                    );
+
+                    url.searchParams.set(
+
+                        "z",
+
+                        "17"
+
+                    );
+
+                    window.loading.style.display =
+                        "block";
+
+                    window.mapFrame.onload = () => {
+
+                        window.loading.style.display =
+                            "none";
+
+                        window.mapFrame.scrollIntoView({
+
+                            behavior: "smooth",
+
+                            block: "center"
+
+                        });
+
+                        // -----------------------
+                        // แสดง Popup
+                        // -----------------------
+
+                        showPopup(item);
+
+                    };
+
+                    window.mapFrame.src =
+                        url.toString();
 
                 }
 
-                // -------------------------
-                // ซูม Google My Maps
-                // -------------------------
-
-                const url =
-                    new URL(window.currentMap.map);
-
-                url.searchParams.set(
-                    "ll",
-                    `${location.lat},${location.lng}`
-                );
-
-                url.searchParams.set(
-                    "z",
-                    "17"
-                );
-
-                window.loading.style.display =
-                    "block";
-
-                window.mapFrame.onload = () => {
-
-                    window.loading.style.display =
-                        "none";
-
-                    window.mapFrame.scrollIntoView({
-
-                        behavior: "smooth",
-
-                        block: "center"
-
-                    });
-
-                };
-
-                window.mapFrame.src =
-                    url.toString();
-
-            });
+            );
 
         });
 
@@ -580,8 +530,6 @@ if (searchBtn) {
 
 if (searchInput) {
 
-    // ค้นหาทันทีเมื่อพิมพ์
-
     searchInput.addEventListener(
 
         "input",
@@ -589,8 +537,6 @@ if (searchInput) {
         searchLocation
 
     );
-
-    // กด Enter
 
     searchInput.addEventListener(
 
@@ -622,33 +568,18 @@ if (clearBtn) {
 
             searchInput.value = "";
 
-            currentResults = [];
-
-            selectedLocation = null;
-
             searchResult.innerHTML =
 
                 '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
 
             searchResult.style.display =
-
                 "none";
 
-            // รีเซ็ต Information Card
+            currentResults = [];
 
-            if (infoPanel) {
+            selectedLocation = null;
 
-                infoPanel.innerHTML = `
-
-                    <div class="info-empty">
-
-                        📍 เลือกหน่วยงานเพื่อดูรายละเอียด
-
-                    </div>
-
-                `;
-
-            }
+            hidePopup();
 
             searchInput.focus();
 
@@ -662,13 +593,20 @@ if (clearBtn) {
 // Export
 // =========================================
 
-window.loadKML =
-    loadKML;
+window.loadKML = loadKML;
 
-window.searchLocation =
-    searchLocation;
+window.searchLocation = searchLocation;
+
+window.showPopup = showPopup;
+
+window.hidePopup = hidePopup;
 
 console.log("=================================");
-console.log("GGN MAP V2");
-console.log("Search Ready");
+
+console.log("GGN MAP V1.3");
+
+console.log("Floating Popup Ready");
+
+console.log("Locations :", allLocations.length);
+
 console.log("=================================");
