@@ -54,39 +54,49 @@ function hidePopup() {
 
 }
 
-function showPopup(item) {
+            function showPopup(item) {
 
-    if (!mapPopup)
-        return;
+        if (!mapPopup)
+            return;
 
-    popupTitle.innerHTML =
-        item.name || "ไม่ระบุชื่อ";
+        popupTitle.textContent =
+            item.name || "ไม่ระบุชื่อ";
 
-    popupContent.innerHTML = `
+        const desc =
+            (item.description || "")
+                .replace(/<br\s*\/?>/gi, "\n")
+                .replace(/<\/div>/gi, "\n")
+                .replace(/<[^>]*>/g, "")
+                .replace(/\n{2,}/g, "\n")
+                .trim();
 
-        <strong>จังหวัด</strong><br>
+        popupContent.innerHTML = `
 
-        ${item.province}
+        <div class="popup-info">
 
-        <hr>
+        <strong>จังหวัด :</strong> ${item.province}
 
-        <strong>โซน</strong><br>
+        </div>
 
-        ${item.zone}
+        <div class="popup-info">
+
+        <strong>โซน :</strong> ${item.zone}
+
+        </div>
 
         <hr>
 
         <div class="popup-description">
 
-            ${item.description || "ไม่มีรายละเอียด"}
+        ${item.description.replace(/\n+/g,"<br>")}
 
         </div>
 
-    `;
+        `;
 
-    mapPopup.classList.add("show");
+        mapPopup.classList.add("show");
 
-}
+    }
 
 // =========================================
 // Close Popup
