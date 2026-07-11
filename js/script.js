@@ -161,6 +161,7 @@ async function loadKML(filePath, province, zone) {
             "Total :",
             allLocations.length
         );
+        console.log(allLocations[0]);
 
         const totalUnit = document.getElementById("totalUnit");
 
@@ -258,40 +259,38 @@ function searchLocation() {
 
     `;
 
-    results.forEach(item => {
+        results.forEach(item => {
 
-        html += `
+            html += `
 
-        <div
-            class="result-item"
-            data-lat="${item.lat}"
-            data-lng="${item.lng}">
+            <div
+                class="result-item"
+                data-lat="${item.lat}"
+                data-lng="${item.lng}">
 
-            <strong>
+                <strong>
+                    ${item.name}
+                </strong>
 
-                ${item.name}
+                <br>
 
-            </strong>
+                <small>
+                    จังหวัด :
+                    ${item.province}
+                    |
+                    โซน :
+                    ${item.zone}
+                </small>
 
-            <br>
+                <div class="result-description">
+                    ${item.description || ""}
+                </div>
 
-            <small>
+            </div>
 
-                จังหวัด :
-                ${item.province}
+            `;
 
-                |
-
-                โซน :
-                ${item.zone}
-
-            </small>
-
-        </div>
-
-        `;
-
-    });
+        });
 
     searchResult.innerHTML = html;
     searchResult.style.display = "block";

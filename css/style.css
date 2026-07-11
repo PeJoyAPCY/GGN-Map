@@ -160,6 +160,22 @@ header{
     font-size:12px;
 }
 
+.result-description{
+
+    margin-top:8px;
+
+    padding-top:8px;
+
+    border-top:1px solid #ddd;
+
+    color:#555;
+
+    font-size:13px;
+
+    white-space:pre-wrap;
+
+}
+
 /* ไม่พบข้อมูล */
 
 .empty{
