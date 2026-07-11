@@ -94,13 +94,18 @@ async function loadKML(filePath, province, zone) {
 
             const nameNode =
                 elements.find(node =>
-                    node.localName === "name"
-                );
+                node.localName === "name"
+            );
+
+            const descriptionNode =
+                elements.find(node =>
+                node.localName === "description"
+            );
 
             const coordNode =
                 elements.find(node =>
-                    node.localName === "coordinates"
-                );
+                node.localName === "coordinates"
+            );
 
             if (!coordNode)
                 continue;
@@ -108,6 +113,11 @@ async function loadKML(filePath, province, zone) {
             const name =
                 nameNode
                 ? nameNode.textContent.trim()
+                : "";
+
+            const description =
+                descriptionNode
+                ? descriptionNode.textContent.trim()
                 : "";
 
             const coords =
@@ -132,6 +142,8 @@ async function loadKML(filePath, province, zone) {
             allLocations.push({
 
                 name,
+
+                description,
 
                 lat,
 
