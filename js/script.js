@@ -40,6 +40,7 @@ const popupContent =
 
 const togglePopup =
     document.getElementById("togglePopup");
+    console.log("togglePopup =", togglePopup);
 
 // =========================================
 // Popup Function
