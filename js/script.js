@@ -40,7 +40,6 @@ const popupContent =
 
 const togglePopup =
     document.getElementById("togglePopup");
-    console.log("togglePopup =", togglePopup);
 
 // =========================================
 // Popup Function
@@ -103,8 +102,12 @@ function hidePopup() {
         popupCollapsed
         );
 
-        togglePopup.textContent =
-        popupCollapsed ? "+" : "−";
+        console.log("togglePopup =", togglePopup);
+
+        if (togglePopup) {
+            togglePopup.textContent =
+            popupCollapsed ? "+" : "−";
+        }
 
     }
 
