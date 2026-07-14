@@ -41,62 +41,44 @@ function hidePopup() {
 
 function showPopup(item) {
 
-    if (
-        !mapPopup ||
-        !popupTitle ||
-        !popupContent
-    ) return;
+    if (!mapPopup) return;
 
     popupTitle.textContent =
         item.name || "ไม่ระบุชื่อ";
 
     const desc =
         (item.description || "")
-            .replace(/<br\s*\/?>/gi, "\n")
-            .replace(/<\/div>/gi, "\n")
-            .replace(/<[^>]*>/g, "")
-            .replace(/\n{2,}/g, "\n")
-            .trim();
+        .replace(/<br\s*\/?>/gi,"\n")
+        .replace(/<\/div>/gi,"\n")
+        .replace(/<[^>]*>/g,"")
+        .trim();
 
     popupContent.innerHTML = `
 
         <div class="popup-info">
-
             <strong>จังหวัด :</strong>
-
             ${item.province}
-
         </div>
 
         <div class="popup-info">
-
             <strong>โซน :</strong>
-
             ${item.zone}
-
         </div>
 
         <hr>
 
         <div class="popup-description">
-
             ${desc.replace(/\n/g,"<br>")}
-
         </div>
 
     `;
 
-    mapPopup.classList.add("show");
-
-    mapPopup.classList.toggle(
-
-        "collapsed",
-
-        popupCollapsed
-
-    );
+    popupContent.style.display =
+        popupCollapsed ? "none" : "block";
 
     updatePopupArrow();
+
+    mapPopup.classList.add("show");
 
 }
 
@@ -130,27 +112,18 @@ function initPopup() {
     const header =
         document.getElementById("popupHeader");
 
-    if (!header)
-        return;
+    if (!header) return;
 
-        header.addEventListener("click", function () {
+    header.onclick = function () {
 
-            console.log("HEADER CLICK");
+        popupCollapsed = !popupCollapsed;
 
-            popupCollapsed = !popupCollapsed;
+        popupContent.style.display =
+            popupCollapsed ? "none" : "block";
 
-            console.log("popupCollapsed =", popupCollapsed);
+        updatePopupArrow();
 
-            mapPopup.classList.toggle(
-                "collapsed",
-                popupCollapsed
-            );
-
-            console.log(mapPopup.className);
-
-            updatePopupArrow();
-
-        });
+    };
 
 }
 
