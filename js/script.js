@@ -5,6 +5,8 @@
 
 let allLocations = [];
 
+let masterLocations = [];
+
 let currentResults = [];
 
 let selectedLocation = null;
