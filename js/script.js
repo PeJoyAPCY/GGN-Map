@@ -38,8 +38,8 @@ const popupTitle =
 const popupContent =
     document.getElementById("popupContent");
 
-const popupClose =
-    document.getElementById("popupClose");
+const togglePopup =
+    document.getElementById("togglePopup");
 
 // =========================================
 // Popup Function
@@ -96,23 +96,41 @@ function hidePopup() {
 
         mapPopup.classList.add("show");
 
+        // ถ้าเคยพับไว้ ให้คงสถานะเดิม
+        mapPopup.classList.toggle(
+        "collapsed",
+        popupCollapsed
+        );
+
+        togglePopup.textContent =
+        popupCollapsed ? "+" : "−";
+
     }
 
 // =========================================
-// Close Popup
+// Popup Collapse
 // =========================================
 
-if (popupClose) {
+let popupCollapsed = false;
 
-    popupClose.addEventListener(
+if (togglePopup) {
 
-        "click",
+    togglePopup.addEventListener("click", () => {
 
-        hidePopup
+        popupCollapsed = !popupCollapsed;
 
-    );
+        mapPopup.classList.toggle(
+            "collapsed",
+            popupCollapsed
+        );
+
+        togglePopup.textContent =
+            popupCollapsed ? "+" : "−";
+
+    });
 
 }
+
 // =========================================
 // โหลดข้อมูล KML
 // =========================================
