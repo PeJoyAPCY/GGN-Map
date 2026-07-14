@@ -96,7 +96,7 @@ function showPopup(item) {
 
     );
 
-    updatePopupButton();
+    updatePopupArrow();
 
 }
 
