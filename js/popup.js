@@ -104,21 +104,20 @@ function showPopup(item) {
 // Button
 // =========================================
 
-function updatePopupButton() {
+// =========================================
+// Update Arrow
+// =========================================
 
-    const btn =
-        document.getElementById("togglePopup");
+function updatePopupArrow() {
 
-    if (!btn)
+    const arrow =
+        document.getElementById("popupArrow");
+
+    if (!arrow)
         return;
 
-    btn.textContent =
-
-        popupCollapsed
-
-            ? "+"
-
-            : "−";
+    arrow.textContent =
+        popupCollapsed ? "▶" : "▼";
 
 }
 
@@ -128,13 +127,13 @@ function updatePopupButton() {
 
 function initPopup() {
 
-    const btn =
-        document.getElementById("togglePopup");
+    const header =
+        document.getElementById("popupHeader");
 
-    if (!btn)
+    if (!header)
         return;
 
-    btn.addEventListener(
+    header.addEventListener(
 
         "click",
 
@@ -151,13 +150,11 @@ function initPopup() {
 
             );
 
-            updatePopupButton();
+            updatePopupArrow();
 
         }
 
     );
-
-    updatePopupButton();
 
 }
 
