@@ -133,28 +133,24 @@ function initPopup() {
     if (!header)
         return;
 
-    header.addEventListener(
+        header.addEventListener("click", function () {
 
-        "click",
+            console.log("HEADER CLICK");
 
-        function () {
+            popupCollapsed = !popupCollapsed;
 
-            popupCollapsed =
-                !popupCollapsed;
+            console.log("popupCollapsed =", popupCollapsed);
 
             mapPopup.classList.toggle(
-
                 "collapsed",
-
                 popupCollapsed
-
             );
+
+            console.log(mapPopup.className);
 
             updatePopupArrow();
 
-        }
-
-    );
+        });
 
 }
 
