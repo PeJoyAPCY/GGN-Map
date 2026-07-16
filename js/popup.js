@@ -1,10 +1,6 @@
 // =========================================
+// GGN Operations Map
 // popup.js
-// Floating Popup
-// =========================================
-
-// =========================================
-// Element
 // =========================================
 
 const mapPopup =
@@ -16,123 +12,144 @@ const popupTitle =
 const popupContent =
     document.getElementById("popupContent");
 
-// =========================================
-// State
-// =========================================
+const togglePopup =
+    document.getElementById("togglePopup");
 
 let popupCollapsed = false;
 
 // =========================================
-// Hide
+// แสดง Popup
 // =========================================
 
-function hidePopup() {
+function showPopup(item){
 
-    if (!mapPopup)
+    if(!mapPopup)
         return;
 
-    mapPopup.classList.remove("show");
-
-}
-
-// =========================================
-// Show
-// =========================================
-
-function showPopup(item) {
-
-    if (!mapPopup) return;
-
     popupTitle.textContent =
-        item.name || "ไม่ระบุชื่อ";
-
-    const desc =
-        (item.description || "")
-        .replace(/<br\s*\/?>/gi,"\n")
-        .replace(/<\/div>/gi,"\n")
-        .replace(/<[^>]*>/g,"")
-        .trim();
+        item.name;
 
     popupContent.innerHTML = `
 
         <div class="popup-info">
-            <strong>จังหวัด :</strong>
+
+            <strong>จังหวัด</strong>
+
             ${item.province}
+
         </div>
 
         <div class="popup-info">
-            <strong>โซน :</strong>
+
+            <strong>เขต</strong>
+
             ${item.zone}
+
         </div>
 
-        <hr>
-
         <div class="popup-description">
-            ${desc.replace(/\n/g,"<br>")}
+
+            ${item.description || "-"}
+
+        </div>
+
+        <div class="popup-action">
+
+            <button
+                class="navigate-btn"
+                onclick="openNavigation(${item.lat},${item.lng})">
+
+                🧭 นำทาง
+
+            </button>
+
         </div>
 
     `;
 
-    popupContent.style.display =
-        popupCollapsed ? "none" : "block";
+    mapPopup.classList.remove("hidden");
 
-    updatePopupArrow();
+    if(popupCollapsed){
 
-    mapPopup.classList.add("show");
+        popupCollapsed=false;
+
+        popupContent.style.display="block";
+
+        togglePopup.textContent="−";
+
+    }
 
 }
 
 // =========================================
-// Button
+// ซ่อน Popup
 // =========================================
 
-// =========================================
-// Update Arrow
-// =========================================
+function hidePopup(){
 
-function updatePopupArrow() {
-
-    const arrow =
-        document.getElementById("popupArrow");
-
-    if (!arrow)
+    if(!mapPopup)
         return;
 
-    arrow.textContent =
-        popupCollapsed ? "▶" : "▼";
+    mapPopup.classList.add("hidden");
 
 }
 
 // =========================================
-// Init
+// พับ / ขยาย
 // =========================================
 
-function initPopup() {
+function togglePopupContent(){
 
-    const header =
-        document.getElementById("popupHeader");
+    popupCollapsed=!popupCollapsed;
 
-    if (!header) return;
+    if(popupCollapsed){
 
-    header.onclick = function () {
+        popupContent.style.display="none";
 
-        popupCollapsed = !popupCollapsed;
+        togglePopup.textContent="+";
 
-        popupContent.style.display =
-            popupCollapsed ? "none" : "block";
+    }else{
 
-        updatePopupArrow();
+        popupContent.style.display="block";
 
-    };
+        togglePopup.textContent="−";
+
+    }
 
 }
 
 // =========================================
-// Export
+// เปิด Google Maps
 // =========================================
 
-window.showPopup = showPopup;
+function openNavigation(lat,lng){
 
-window.hidePopup = hidePopup;
+    window.open(
 
-window.initPopup = initPopup;
+        `https://www.google.com/maps?q=${lat},${lng}`,
+
+        "_blank"
+
+    );
+
+}
+
+// =========================================
+// Event
+// =========================================
+
+function initPopup(){
+
+    if(togglePopup){
+
+        togglePopup.addEventListener(
+
+            "click",
+
+            togglePopupContent
+
+        );
+
+    }
+
+}

@@ -1,244 +1,147 @@
 // =========================================
+// GGN Operations Map
 // kml.js
-// Load KML
+// โหลดข้อมูล KML ทั้งหมด
 // =========================================
 
-async function loadKML(
-    filePath,
-    province,
-    zone
-) {
+let masterLocations = [];
 
-    allLocations = [];
-
-    currentResults = [];
-
-    selectedLocation = null;
-
-    hidePopup();
-
-    if (searchInput) {
-
-        searchInput.value = "";
-
-    }
-
-    if (searchResult) {
-
-        searchResult.innerHTML =
-            '<p class="empty">กำลังโหลดข้อมูล...</p>';
-
-    }
+// โหลด KML 1 ไฟล์
+async function loadKML(filePath, province, zone) {
 
     try {
 
-        console.log(
-            "Loading :",
-            filePath
-        );
-
-        const response =
-            await fetch(filePath);
+        const response = await fetch(filePath);
 
         if (!response.ok) {
 
-            throw new Error(
-                response.status
-            );
+            throw new Error(filePath);
 
         }
 
-        const text =
-            await response.text();
+        const text = await response.text();
 
         const xml =
-            new DOMParser()
-
-            .parseFromString(
-
+            new DOMParser().parseFromString(
                 text,
-
-                "application/xml"
-
+                "text/xml"
             );
 
-        const parserError =
-            xml.querySelector(
-                "parsererror"
-            );
+        if (xml.querySelector("parsererror")) {
 
-        if (parserError) {
-
-            console.error(
-
-                parserError.textContent
-
-            );
+            console.error("KML Parse Error :", filePath);
 
             return;
 
         }
 
         const placemarks =
+            xml.getElementsByTagName("Placemark");
 
-            Array.from(
+        for (const place of placemarks) {
 
-                xml.getElementsByTagName("*")
+            const name =
+                place.getElementsByTagName("name")[0]
+                ?.textContent
+                ?.trim() || "";
 
-            )
+            const description =
+                place.getElementsByTagName("description")[0]
+                ?.textContent
+                ?.trim() || "";
 
-            .filter(node =>
+            const coordinateText =
+                place.getElementsByTagName("coordinates")[0]
+                ?.textContent
+                ?.trim() || "";
 
-                node.localName ===
-                "Placemark"
+            if (!coordinateText)
+                continue;
 
-            );
-
-        console.log(
-
-            "Placemark :",
-
-            placemarks.length
-
-        );
-
-        placemarks.forEach(place => {
-
-            const elements =
-
-                Array.from(
-
-                    place.getElementsByTagName("*")
-
-                );
-
-            const getNode = name =>
-
-                elements.find(
-
-                    item =>
-
-                        item.localName === name
-
-                );
-
-            const coordNode =
-                getNode("coordinates");
-
-            if (!coordNode)
-                return;
-
-            const coords =
-                coordNode.textContent
-
-                    .trim()
-
-                    .split(",");
-
-            if (coords.length < 2)
-                return;
-
-            const lat =
-                parseFloat(coords[1]);
+            const coord =
+                coordinateText.split(",");
 
             const lng =
-                parseFloat(coords[0]);
+                parseFloat(coord[0]);
 
-            if (
+            const lat =
+                parseFloat(coord[1]);
 
-                isNaN(lat) ||
+            masterLocations.push({
 
-                isNaN(lng)
+                name,
 
-            ) return;
+                description,
 
-            allLocations.push({
+                province,
 
-                name:
-
-                    getNode("name")
-                        ?.textContent
-                        .trim()
-
-                    || "",
-
-                description:
-
-                    getNode("description")
-                        ?.textContent
-                        .trim()
-
-                    || "",
+                zone,
 
                 lat,
 
                 lng,
 
-                province,
-
-                zone
+                coordinates: coordinateText
 
             });
 
-        });
+        }
 
         console.log(
-
-            "Total :",
-
-            allLocations.length
-
+            province,
+            zone,
+            placemarks.length,
+            "Locations Loaded"
         );
-
-        const totalUnit =
-
-            document.getElementById(
-
-                "totalUnit"
-
-            );
-
-        if (totalUnit) {
-
-            totalUnit.textContent =
-
-                allLocations.length;
-
-        }
-
-        if (searchResult) {
-
-            searchResult.innerHTML =
-
-                '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
-
-            searchResult.style.display =
-
-                "none";
-
-        }
 
     }
 
-    catch (error) {
+    catch (err) {
 
-        console.error(error);
-
-        if (searchResult) {
-
-            searchResult.innerHTML =
-
-                '<p class="empty">โหลดข้อมูลไม่สำเร็จ</p>';
-
-        }
+        console.error(
+            "Load Error :",
+            filePath,
+            err
+        );
 
     }
 
 }
 
-// =========================================
-// Export
-// =========================================
+// โหลดทุกจังหวัด
+async function loadAllPlaces() {
 
-window.loadKML =
-    loadKML;
+    masterLocations = [];
+
+    for (const province in maps) {
+
+        for (const zone in maps[province]) {
+
+            const item =
+                maps[province][zone];
+
+            await loadKML(
+
+                item.kml,
+
+                province,
+
+                zone
+
+            );
+
+        }
+
+    }
+
+    console.log(
+
+        "Total :",
+
+        masterLocations.length,
+
+        "Locations"
+
+    );
+
+}

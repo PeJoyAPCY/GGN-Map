@@ -1,11 +1,10 @@
 // =========================================
+// GGN Operations Map
 // search.js
-// Search Location
+// ระบบค้นหาทั่วประเทศ
 // =========================================
 
-// =========================================
-// Element
-// =========================================
+let currentResults = [];
 
 const searchInput =
     document.getElementById("searchInput");
@@ -20,28 +19,21 @@ const clearBtn =
     document.getElementById("clearSearch");
 
 // =========================================
-// Search
+// ค้นหา
 // =========================================
 
-function searchLocation() {
-
-    if (!searchInput || !searchResult)
-        return;
+function performSearch() {
 
     const keyword =
         searchInput.value
-            .trim()
-            .toLowerCase();
+        .trim()
+        .toLowerCase();
 
-    if (keyword === "") {
+    searchResult.innerHTML = "";
 
-        searchResult.innerHTML =
-            '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
+    if (!keyword) {
 
-        searchResult.style.display =
-            "none";
-
-        hidePopup();
+        currentResults = [];
 
         return;
 
@@ -50,257 +42,223 @@ function searchLocation() {
     currentResults =
         masterLocations.filter(item => {
 
-        return (
+            return (
 
-            (item.name || "")
+                item.name
                 .toLowerCase()
                 .includes(keyword)
 
-            ||
+                ||
 
-            (item.description || "")
+                item.description
                 .toLowerCase()
                 .includes(keyword)
 
-        );
+            );
 
-    });
+        });
+
+    renderResults();
+
+}
+
+// =========================================
+// แสดงผลลัพธ์
+// =========================================
+
+function renderResults() {
 
     if (currentResults.length === 0) {
 
         searchResult.innerHTML =
-            '<p class="empty">ไม่พบข้อมูล</p>';
 
-        searchResult.style.display =
-            "block";
+        `<div class="no-result">
 
-        hidePopup();
+            ไม่พบข้อมูล
+
+        </div>`;
 
         return;
 
     }
 
-    let html = `
+    let html =
 
-        <div class="result-count">
+    `<div class="result-count">
 
-            พบ ${currentResults.length} รายการ
+        พบ ${currentResults.length} รายการ
 
-        </div>
+    </div>`;
 
-    `;
+    currentResults.forEach((item,index)=>{
 
-    currentResults.forEach(item => {
+        html +=
 
-        html += `
+        `
 
-            <div
-                class="result-item">
+        <div
 
-                <div class="result-title">
+            class="result-item"
 
-                    ${item.name}
+            data-index="${index}"
 
-                </div>
+        >
 
-                <div class="result-sub">
+            <div class="result-title">
 
-                    จังหวัด :
-
-                    ${item.province}
-
-                    |
-
-                    โซน :
-
-                    ${item.zone}
-
-                </div>
+                ${item.name}
 
             </div>
+
+            <div class="result-location">
+
+                ${item.province}
+
+                |
+
+                ${item.zone}
+
+            </div>
+
+        </div>
 
         `;
 
     });
 
-    searchResult.innerHTML =
-        html;
-
-    searchResult.style.display =
-        "block";
-
-    bindSearchResult();
-
-}
-
-// =========================================
-// Click Result
-// =========================================
-
-function bindSearchResult() {
+    searchResult.innerHTML = html;
 
     document
+    .querySelectorAll(".result-item")
+    .forEach(item=>{
 
-        .querySelectorAll(".result-item")
+        item.addEventListener(
 
-        .forEach((element, index) => {
+            "click",
 
-            element.onclick = function () {
+            resultClick
 
-                document
-
-                    .querySelectorAll(".result-item")
-
-                    .forEach(item => {
-
-                        item.classList.remove("active");
-
-                    });
-
-                this.classList.add("active");
-
-                const item =
-                    currentResults[index];
-
-                selectedLocation =
-                    item;
-
-            // เปลี่ยนจังหวัด
-
-                province.value =
-                    item.province;
-
-            // โหลดรายการโซนใหม่
-
-                loadZone();
-
-            // เปลี่ยนโซน
-
-                zone.value =
-                    item.zone;
-
-            // โหลดแผนที่ของโซนนั้น
-
-                loadMap().then(() => {
-
-                    const mapData =
-                        maps[item.province][item.zone];
-
-                    const url =
-                        new URL(
-                            mapData.map
-                        );
-
-                    url.searchParams.set(
-                        "ll",
-                        `${item.lat},${item.lng}`
-                    );
-
-                    url.searchParams.set(
-                        "z",
-                        "17"
-                    );
-
-                    loading.style.display =
-                        "block";
-
-                    mapFrame.onload = () => {
-
-                        loading.style.display =
-                            "none";
-
-                        mapFrame.scrollIntoView({
-
-                            behavior: "smooth",
-
-                            block: "center"
-
-                        });
-
-                        showPopup(item);
-
-                    };
-
-                    mapFrame.src =
-                        url.toString();
-
-            });
-
-        };
+        );
 
     });
 
 }
-        
+
 // =========================================
-// Event
+// คลิกผลลัพธ์
 // =========================================
 
-function initSearch() {
+function resultClick(e){
 
-    if (searchBtn) {
+    const index =
+        e.currentTarget.dataset.index;
 
-        searchBtn.onclick =
-            searchLocation;
+    const item =
+        currentResults[index];
 
-    }
+    zoomToLocation(item);
 
-    if (searchInput) {
-
-        searchInput.oninput =
-            searchLocation;
-
-        searchInput.onkeydown =
-            function (e) {
-
-                if (e.key === "Enter") {
-
-                    e.preventDefault();
-
-                    searchLocation();
-
-                }
-
-            };
-
-    }
-
-    if (clearBtn) {
-
-        clearBtn.onclick =
-            function () {
-
-                searchInput.value = "";
-
-                currentResults = [];
-
-                selectedLocation = null;
-
-                searchResult.innerHTML =
-                    '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
-
-                searchResult.style.display =
-                    "none";
-
-                hidePopup();
-
-                searchInput.focus();
-
-            };
-
-    }
+    showPopup(item);
 
 }
 
 // =========================================
-// Export
+// Zoom Google My Map
 // =========================================
 
-window.searchLocation =
-    searchLocation;
+function zoomToLocation(item){
 
-window.initSearch =
-    initSearch;
+    if(!window.currentMap)
+        return;
 
-window.loadAllLocations =
-    loadAllLocations;
+    const url =
+        new URL(window.currentMap.map);
+
+    url.searchParams.set(
+
+        "ll",
+
+        `${item.lat},${item.lng}`
+
+    );
+
+    url.searchParams.set(
+
+        "z",
+
+        "17"
+
+    );
+
+    mapFrame.src =
+        url.toString();
+
+}
+
+// =========================================
+// ล้างการค้นหา
+// =========================================
+
+function clearSearch(){
+
+    searchInput.value="";
+
+    currentResults=[];
+
+    searchResult.innerHTML="";
+
+}
+
+// =========================================
+// Event
+// =========================================
+
+function initSearch(){
+
+    searchInput.addEventListener(
+
+        "input",
+
+        performSearch
+
+    );
+
+    searchInput.addEventListener(
+
+        "keypress",
+
+        e=>{
+
+            if(e.key==="Enter")
+
+                performSearch();
+
+        }
+
+    );
+
+    if(searchBtn){
+
+        searchBtn.addEventListener(
+
+            "click",
+
+            performSearch
+
+        );
+
+    }
+
+    if(clearBtn){
+
+        clearBtn.addEventListener(
+
+            "click",
+
+            clearSearch
+
+        );
+
+    }
+
+}
