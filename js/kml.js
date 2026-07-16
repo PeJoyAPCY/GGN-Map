@@ -1,147 +1,244 @@
 // =========================================
-// GGN Operations Map
 // kml.js
-// โหลดข้อมูล KML ทั้งหมด
+// Load KML
 // =========================================
 
-let masterLocations = [];
+async function loadKML(
+    filePath,
+    province,
+    zone
+) {
 
-// โหลด KML 1 ไฟล์
-async function loadKML(filePath, province, zone) {
+    allLocations = [];
+
+    currentResults = [];
+
+    selectedLocation = null;
+
+    hidePopup();
+
+    if (searchInput) {
+
+        searchInput.value = "";
+
+    }
+
+    if (searchResult) {
+
+        searchResult.innerHTML =
+            '<p class="empty">กำลังโหลดข้อมูล...</p>';
+
+    }
 
     try {
 
-        const response = await fetch(filePath);
+        console.log(
+            "Loading :",
+            filePath
+        );
+
+        const response =
+            await fetch(filePath);
 
         if (!response.ok) {
 
-            throw new Error(filePath);
+            throw new Error(
+                response.status
+            );
 
         }
 
-        const text = await response.text();
+        const text =
+            await response.text();
 
         const xml =
-            new DOMParser().parseFromString(
+            new DOMParser()
+
+            .parseFromString(
+
                 text,
-                "text/xml"
+
+                "application/xml"
+
             );
 
-        if (xml.querySelector("parsererror")) {
+        const parserError =
+            xml.querySelector(
+                "parsererror"
+            );
 
-            console.error("KML Parse Error :", filePath);
+        if (parserError) {
+
+            console.error(
+
+                parserError.textContent
+
+            );
 
             return;
 
         }
 
         const placemarks =
-            xml.getElementsByTagName("Placemark");
 
-        for (const place of placemarks) {
+            Array.from(
 
-            const name =
-                place.getElementsByTagName("name")[0]
-                ?.textContent
-                ?.trim() || "";
+                xml.getElementsByTagName("*")
 
-            const description =
-                place.getElementsByTagName("description")[0]
-                ?.textContent
-                ?.trim() || "";
+            )
 
-            const coordinateText =
-                place.getElementsByTagName("coordinates")[0]
-                ?.textContent
-                ?.trim() || "";
+            .filter(node =>
 
-            if (!coordinateText)
-                continue;
+                node.localName ===
+                "Placemark"
 
-            const coord =
-                coordinateText.split(",");
+            );
 
-            const lng =
-                parseFloat(coord[0]);
+        console.log(
+
+            "Placemark :",
+
+            placemarks.length
+
+        );
+
+        placemarks.forEach(place => {
+
+            const elements =
+
+                Array.from(
+
+                    place.getElementsByTagName("*")
+
+                );
+
+            const getNode = name =>
+
+                elements.find(
+
+                    item =>
+
+                        item.localName === name
+
+                );
+
+            const coordNode =
+                getNode("coordinates");
+
+            if (!coordNode)
+                return;
+
+            const coords =
+                coordNode.textContent
+
+                    .trim()
+
+                    .split(",");
+
+            if (coords.length < 2)
+                return;
 
             const lat =
-                parseFloat(coord[1]);
+                parseFloat(coords[1]);
 
-            masterLocations.push({
+            const lng =
+                parseFloat(coords[0]);
 
-                name,
+            if (
 
-                description,
+                isNaN(lat) ||
 
-                province,
+                isNaN(lng)
 
-                zone,
+            ) return;
+
+            allLocations.push({
+
+                name:
+
+                    getNode("name")
+                        ?.textContent
+                        .trim()
+
+                    || "",
+
+                description:
+
+                    getNode("description")
+                        ?.textContent
+                        .trim()
+
+                    || "",
 
                 lat,
 
                 lng,
 
-                coordinates: coordinateText
-
-            });
-
-        }
-
-        console.log(
-            province,
-            zone,
-            placemarks.length,
-            "Locations Loaded"
-        );
-
-    }
-
-    catch (err) {
-
-        console.error(
-            "Load Error :",
-            filePath,
-            err
-        );
-
-    }
-
-}
-
-// โหลดทุกจังหวัด
-async function loadAllPlaces() {
-
-    masterLocations = [];
-
-    for (const province in maps) {
-
-        for (const zone in maps[province]) {
-
-            const item =
-                maps[province][zone];
-
-            await loadKML(
-
-                item.kml,
-
                 province,
 
                 zone
 
+            });
+
+        });
+
+        console.log(
+
+            "Total :",
+
+            allLocations.length
+
+        );
+
+        const totalUnit =
+
+            document.getElementById(
+
+                "totalUnit"
+
             );
+
+        if (totalUnit) {
+
+            totalUnit.textContent =
+
+                allLocations.length;
+
+        }
+
+        if (searchResult) {
+
+            searchResult.innerHTML =
+
+                '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
+
+            searchResult.style.display =
+
+                "none";
 
         }
 
     }
 
-    console.log(
+    catch (error) {
 
-        "Total :",
+        console.error(error);
 
-        masterLocations.length,
+        if (searchResult) {
 
-        "Locations"
+            searchResult.innerHTML =
 
-    );
+                '<p class="empty">โหลดข้อมูลไม่สำเร็จ</p>';
+
+        }
+
+    }
 
 }
+
+// =========================================
+// Export
+// =========================================
+
+window.loadKML =
+    loadKML;

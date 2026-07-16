@@ -1,7 +1,9 @@
 // =========================================
-// GGN Operations Map
+// GGN MAP V1.4
 // app.js
 // =========================================
+
+// ---------- Element ----------
 
 const province =
     document.getElementById("province");
@@ -12,17 +14,99 @@ const zone =
 const mapFrame =
     document.getElementById("mapFrame");
 
+window.mapFrame =
+    mapFrame;
+
 const totalUnit =
     document.getElementById("totalUnit");
 
 const loading =
     document.getElementById("loading");
 
-// เก็บแผนที่ปัจจุบัน
-window.currentMap = null;
+window.loading =
+    loading;
+
+// ---------- Mobile Drawer ----------
+
+const sidebar =
+    document.getElementById("sidebar");
+
+const menuToggle =
+    document.getElementById("menuToggle");
+
+const closeSidebar =
+    document.getElementById("closeSidebar");
+
+const sidebarOverlay =
+    document.getElementById("sidebarOverlay");
 
 // =========================================
-// โหลดรายชื่อจังหวัด
+// Drawer
+// =========================================
+
+function openDrawer(){
+
+    if(!sidebar) return;
+
+    sidebar.classList.add("show");
+
+    sidebarOverlay.classList.add("show");
+
+}
+
+function closeDrawer(){
+
+    if(!sidebar) return;
+
+    sidebar.classList.remove("show");
+
+    sidebarOverlay.classList.remove("show");
+
+}
+
+// เปิด Drawer
+
+if(menuToggle){
+
+    menuToggle.addEventListener(
+
+        "click",
+
+        openDrawer
+
+    );
+
+}
+
+// ปิด Drawer
+
+if(closeSidebar){
+
+    closeSidebar.addEventListener(
+
+        "click",
+
+        closeDrawer
+
+    );
+
+}
+
+// แตะพื้นหลัง
+
+if(sidebarOverlay){
+
+    sidebarOverlay.addEventListener(
+
+        "click",
+
+        closeDrawer
+
+    );
+
+}
+// =========================================
+// โหลดจังหวัด
 // =========================================
 
 function loadProvince() {
@@ -31,13 +115,15 @@ function loadProvince() {
 
     Object.keys(maps).forEach(name => {
 
-        const option =
-            document.createElement("option");
+        province.innerHTML += `
 
-        option.value = name;
-        option.textContent = name;
+            <option value="${name}">
 
-        province.appendChild(option);
+                ${name}
+
+            </option>
+
+        `;
 
     });
 
@@ -46,27 +132,27 @@ function loadProvince() {
 }
 
 // =========================================
-// โหลดเขต
+// โหลดโซน
 // =========================================
 
 function loadZone() {
 
-    zone.innerHTML = "";
-
-    const provinceName =
+    const p =
         province.value;
 
-    Object.keys(
-        maps[provinceName]
-    ).forEach(name => {
+    zone.innerHTML = "";
 
-        const option =
-            document.createElement("option");
+    Object.keys(maps[p]).forEach(name => {
 
-        option.value = name;
-        option.textContent = name;
+        zone.innerHTML += `
 
-        zone.appendChild(option);
+            <option value="${name}">
+
+                ${name}
+
+            </option>
+
+        `;
 
     });
 
@@ -75,52 +161,69 @@ function loadZone() {
 }
 
 // =========================================
-// โหลด Google My Map
+// โหลดแผนที่
 // =========================================
 
 async function loadMap() {
 
-    loading.style.display = "flex";
-
-    const provinceName =
+    const p =
         province.value;
 
-    const zoneName =
+    const z =
         zone.value;
 
-    const item =
-        maps[provinceName][zoneName];
+    const data =
+        maps[p][z];
 
-    window.currentMap = item;
+    if (!data)
+        return;
 
-    mapFrame.src = item.map;
+    window.currentMap =
+        data;
+
+    if (window.hidePopup) {
+
+        window.hidePopup();
+
+    }
+
+    loading.style.display =
+        "block";
+
+    mapFrame.src =
+        data.map;
 
     totalUnit.textContent =
-        item.total;
+        data.total;
 
-    mapFrame.onload = () => {
+    await loadKML(
 
-        loading.style.display = "none";
+        data.kml,
 
-    };
+        p,
 
-}
+        z
 
-// =========================================
-// โหลดข้อมูลค้นหาทั้งหมด
-// =========================================
+    );
 
-async function initializeSystem(){
+    loading.style.display =
+        "none";
 
-    loading.style.display="flex";
+    // ซ่อนผลค้นหาเมื่อเปลี่ยนพื้นที่
 
-    await loadAllPlaces();
+    const searchResult =
+        document.getElementById("searchResult");
 
-    initPopup();
+    if (searchResult) {
 
-    initSearch();
+        searchResult.style.display =
+            "none";
 
-    loading.style.display="none";
+    }
+
+    // มือถือปิด Drawer หลังเลือกจังหวัด/โซน
+
+    closeDrawer();
 
 }
 
@@ -145,19 +248,45 @@ zone.addEventListener(
 );
 
 // =========================================
-// Start
+// Desktop Resize
 // =========================================
 
 window.addEventListener(
 
-    "DOMContentLoaded",
+    "resize",
 
-    async ()=>{
+    function () {
 
-        loadProvince();
+        if (window.innerWidth > 768) {
 
-        await initializeSystem();
+            closeDrawer();
+
+        }
 
     }
 
 );
+
+// =========================================
+// Export
+// =========================================
+
+window.openDrawer =
+    openDrawer;
+
+window.closeDrawer =
+    closeDrawer;
+
+// =========================================
+// Start
+// =========================================
+
+loadProvince();
+
+console.log("=================================");
+
+console.log("GGN MAP V1.4");
+
+console.log("Responsive Ready");
+
+console.log("=================================");

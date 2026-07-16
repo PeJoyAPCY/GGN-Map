@@ -1,10 +1,11 @@
 // =========================================
-// GGN Operations Map
 // search.js
-// ระบบค้นหาทั่วประเทศ
+// Search Location
 // =========================================
 
-let currentResults = [];
+// =========================================
+// Element
+// =========================================
 
 const searchInput =
     document.getElementById("searchInput");
@@ -19,193 +20,201 @@ const clearBtn =
     document.getElementById("clearSearch");
 
 // =========================================
-// ค้นหา
+// Search
 // =========================================
 
-function performSearch() {
+function searchLocation() {
+
+    if (!searchInput || !searchResult)
+        return;
 
     const keyword =
         searchInput.value
-        .trim()
-        .toLowerCase();
+            .trim()
+            .toLowerCase();
 
-    searchResult.innerHTML = "";
-
-    if (!keyword) {
-
-        currentResults = [];
-
-        return;
-
-    }
-
-    currentResults =
-        masterLocations.filter(item => {
-
-            return (
-
-                item.name
-                .toLowerCase()
-                .includes(keyword)
-
-                ||
-
-                item.description
-                .toLowerCase()
-                .includes(keyword)
-
-            );
-
-        });
-
-    renderResults();
-
-}
-
-// =========================================
-// แสดงผลลัพธ์
-// =========================================
-
-function renderResults() {
-
-    if (currentResults.length === 0) {
+    if (keyword === "") {
 
         searchResult.innerHTML =
+            '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
 
-        `<div class="no-result">
+        searchResult.style.display =
+            "none";
 
-            ไม่พบข้อมูล
-
-        </div>`;
+        hidePopup();
 
         return;
 
     }
 
-    let html =
+    currentResults = allLocations.filter(item => {
 
-    `<div class="result-count">
+        return (
 
-        พบ ${currentResults.length} รายการ
+            (item.name || "")
+                .toLowerCase()
+                .includes(keyword)
 
-    </div>`;
+            ||
 
-    currentResults.forEach((item,index)=>{
-
-        html +=
-
-        `
-
-        <div
-
-            class="result-item"
-
-            data-index="${index}"
-
-        >
-
-            <div class="result-title">
-
-                ${item.name}
-
-            </div>
-
-            <div class="result-location">
-
-                ${item.province}
-
-                |
-
-                ${item.zone}
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
-    searchResult.innerHTML = html;
-
-    document
-    .querySelectorAll(".result-item")
-    .forEach(item=>{
-
-        item.addEventListener(
-
-            "click",
-
-            resultClick
+            (item.description || "")
+                .toLowerCase()
+                .includes(keyword)
 
         );
 
     });
 
-}
+    if (currentResults.length === 0) {
 
-// =========================================
-// คลิกผลลัพธ์
-// =========================================
+        searchResult.innerHTML =
+            '<p class="empty">ไม่พบข้อมูล</p>';
 
-function resultClick(e){
+        searchResult.style.display =
+            "block";
 
-    const index =
-        e.currentTarget.dataset.index;
+        hidePopup();
 
-    const item =
-        currentResults[index];
-
-    zoomToLocation(item);
-
-    showPopup(item);
-
-}
-
-// =========================================
-// Zoom Google My Map
-// =========================================
-
-function zoomToLocation(item){
-
-    if(!window.currentMap)
         return;
 
-    const url =
-        new URL(window.currentMap.map);
+    }
 
-    url.searchParams.set(
+    let html = `
 
-        "ll",
+        <div class="result-count">
 
-        `${item.lat},${item.lng}`
+            พบ ${currentResults.length} รายการ
 
-    );
+        </div>
 
-    url.searchParams.set(
+    `;
 
-        "z",
+    currentResults.forEach(item => {
 
-        "17"
+        html += `
 
-    );
+            <div
+                class="result-item">
 
-    mapFrame.src =
-        url.toString();
+                <div class="result-title">
+
+                    ${item.name}
+
+                </div>
+
+                <div class="result-sub">
+
+                    จังหวัด :
+
+                    ${item.province}
+
+                    |
+
+                    โซน :
+
+                    ${item.zone}
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+    searchResult.innerHTML =
+        html;
+
+    searchResult.style.display =
+        "block";
+
+    bindSearchResult();
 
 }
 
 // =========================================
-// ล้างการค้นหา
+// Click Result
 // =========================================
 
-function clearSearch(){
+function bindSearchResult() {
 
-    searchInput.value="";
+    document
 
-    currentResults=[];
+        .querySelectorAll(".result-item")
 
-    searchResult.innerHTML="";
+        .forEach((element, index) => {
+
+            element.onclick = function () {
+
+                document
+
+                    .querySelectorAll(".result-item")
+
+                    .forEach(item => {
+
+                        item.classList.remove("active");
+
+                    });
+
+                this.classList.add("active");
+
+                const item =
+                    currentResults[index];
+
+                selectedLocation =
+                    item;
+
+                if (!window.currentMap) {
+
+                    alert(
+                        "กรุณาเลือกจังหวัดและโซนก่อน"
+                    );
+
+                    return;
+
+                }
+
+                const url =
+                    new URL(
+                        window.currentMap.map
+                    );
+
+                url.searchParams.set(
+                    "ll",
+                    `${item.lat},${item.lng}`
+                );
+
+                url.searchParams.set(
+                    "z",
+                    "17"
+                );
+
+                loading.style.display =
+                    "block";
+
+                mapFrame.onload = () => {
+
+                    loading.style.display =
+                        "none";
+
+                    mapFrame.scrollIntoView({
+
+                        behavior: "smooth",
+
+                        block: "center"
+
+                    });
+
+                    showPopup(item);
+
+                };
+
+                mapFrame.src =
+                    url.toString();
+
+            };
+
+        });
 
 }
 
@@ -213,52 +222,68 @@ function clearSearch(){
 // Event
 // =========================================
 
-function initSearch(){
+function initSearch() {
 
-    searchInput.addEventListener(
+    if (searchBtn) {
 
-        "input",
-
-        performSearch
-
-    );
-
-    searchInput.addEventListener(
-
-        "keypress",
-
-        e=>{
-
-            if(e.key==="Enter")
-
-                performSearch();
-
-        }
-
-    );
-
-    if(searchBtn){
-
-        searchBtn.addEventListener(
-
-            "click",
-
-            performSearch
-
-        );
+        searchBtn.onclick =
+            searchLocation;
 
     }
 
-    if(clearBtn){
+    if (searchInput) {
 
-        clearBtn.addEventListener(
+        searchInput.oninput =
+            searchLocation;
 
-            "click",
+        searchInput.onkeydown =
+            function (e) {
 
-            clearSearch
+                if (e.key === "Enter") {
 
-        );
+                    e.preventDefault();
+
+                    searchLocation();
+
+                }
+
+            };
+
+    }
+
+    if (clearBtn) {
+
+        clearBtn.onclick =
+            function () {
+
+                searchInput.value = "";
+
+                currentResults = [];
+
+                selectedLocation = null;
+
+                searchResult.innerHTML =
+                    '<p class="empty">พิมพ์ชื่อหน่วยงานเพื่อค้นหา</p>';
+
+                searchResult.style.display =
+                    "none";
+
+                hidePopup();
+
+                searchInput.focus();
+
+            };
 
     }
 
 }
+
+// =========================================
+// Export
+// =========================================
+
+window.searchLocation =
+    searchLocation;
+
+window.initSearch =
+    initSearch;
