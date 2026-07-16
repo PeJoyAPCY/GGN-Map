@@ -47,7 +47,8 @@ function searchLocation() {
 
     }
 
-    currentResults = allLocations.filter(item => {
+    currentResults =
+        allLocationsMaster.filter(item => {
 
         return (
 
@@ -164,57 +165,66 @@ function bindSearchResult() {
                 selectedLocation =
                     item;
 
-                if (!window.currentMap) {
+            // เปลี่ยนจังหวัด
 
-                    alert(
-                        "กรุณาเลือกจังหวัดและโซนก่อน"
+                province.value =
+                    item.province;
+
+            // โหลดรายการโซนใหม่
+
+                loadZone();
+
+            // เปลี่ยนโซน
+
+                zone.value =
+                    item.zone;
+
+            // โหลดแผนที่ของโซนนั้น
+
+                loadMap().then(() => {
+
+                    const mapData =
+                        maps[item.province][item.zone];
+
+                    const url =
+                        new URL(
+                            mapData.map
+                        );
+
+                    url.searchParams.set(
+                        "ll",
+                        `${item.lat},${item.lng}`
                     );
 
-                    return;
-
-                }
-
-                const url =
-                    new URL(
-                        window.currentMap.map
+                    url.searchParams.set(
+                        "z",
+                        "17"
                     );
-
-                url.searchParams.set(
-                    "ll",
-                    `${item.lat},${item.lng}`
-                );
-
-                url.searchParams.set(
-                    "z",
-                    "17"
-                );
-
-                loading.style.display =
-                    "block";
-
-                mapFrame.onload = () => {
 
                     loading.style.display =
-                        "none";
+                        "block";
 
-                    mapFrame.scrollIntoView({
+                    mapFrame.onload = () => {
 
-                        behavior: "smooth",
+                        loading.style.display =
+                            "none";
 
-                        block: "center"
+                        mapFrame.scrollIntoView({
 
-                    });
+                            behavior: "smooth",
 
-                    showPopup(item);
+                            block: "center"
 
-                };
+                        });
 
-                mapFrame.src =
-                    url.toString();
+                        showPopup(item);
 
-            };
+                    };
 
-        });
+                    mapFrame.src =
+                        url.toString();
+
+            });
 
 }
 
@@ -287,3 +297,6 @@ window.searchLocation =
 
 window.initSearch =
     initSearch;
+
+window.loadAllLocations =
+    loadAllLocations;

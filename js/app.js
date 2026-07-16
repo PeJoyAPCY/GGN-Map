@@ -281,12 +281,28 @@ window.closeDrawer =
 // Start
 // =========================================
 
-loadProvince();
+async function startApp(){
 
-console.log("=================================");
+    await loadAllLocationsMaster();
 
-console.log("GGN MAP V1.4");
+    async function startApp() {
 
-console.log("Responsive Ready");
+    await loadAllLocationsMaster();
 
-console.log("=================================");
+    loadProvince();
+
+}
+
+startApp();
+
+    console.log("=================================");
+
+    console.log("GGN MAP V1.4");
+
+    console.log("Responsive Ready");
+
+    console.log("=================================");
+
+}
+
+startApp();
