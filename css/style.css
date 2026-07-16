@@ -883,6 +883,66 @@ iframe{
 
 }
 
+/* ================= NAVIGATE BUTTON ================= */
+
+.navigate-btn{
+
+    width:100%;
+
+    margin-top:12px;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#2E7D32;
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.navigate-btn:hover{
+
+    background:#1B5E20;
+
+}
+
+.navigate-btn:active{
+
+    transform:scale(.98);
+
+}
+
+.navigate-btn::before{
+
+    content:"📍 ";
+
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width:768px){
+
+    .navigate-btn{
+
+        padding:14px;
+
+        font-size:16px;
+
+    }
+
+}
+
 /* ================= DESKTOP ================= */
 
 @media (min-width:1025px){

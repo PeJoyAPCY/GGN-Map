@@ -55,21 +55,27 @@ function showPopup(item) {
 
     popupContent.innerHTML = `
 
-        <div class="popup-info">
-            <strong>จังหวัด :</strong>
-            ${item.province}
-        </div>
+    <div class="popup-info">
+        <strong>จังหวัด :</strong>
+        ${item.province}
+    </div>
 
-        <div class="popup-info">
-            <strong>โซน :</strong>
-            ${item.zone}
-        </div>
+    <div class="popup-info">
+        <strong>โซน :</strong>
+        ${item.zone}
+    </div>
 
-        <hr>
+    <hr>
 
-        <div class="popup-description">
-            ${desc.replace(/\n/g,"<br>")}
-        </div>
+    <div class="popup-description">
+        ${desc.replace(/\n/g,"<br>")}
+    </div>
+
+    <button
+        class="navigate-btn"
+        onclick="alert('🚧 ฟังก์ชันนำทางกำลังพัฒนา')">
+        📍 นำทาง
+    </button>
 
     `;
 
