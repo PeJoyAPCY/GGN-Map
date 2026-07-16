@@ -1,9 +1,11 @@
 // =========================================
-// GGN MAP V1.4
+// GGN MAP V2.1
 // app.js
 // =========================================
 
-// ---------- Element ----------
+// =========================================
+// Element
+// =========================================
 
 const province =
     document.getElementById("province");
@@ -14,19 +16,21 @@ const zone =
 const mapFrame =
     document.getElementById("mapFrame");
 
-window.mapFrame =
-    mapFrame;
-
 const totalUnit =
     document.getElementById("totalUnit");
 
 const loading =
     document.getElementById("loading");
 
+window.mapFrame =
+    mapFrame;
+
 window.loading =
     loading;
 
-// ---------- Mobile Drawer ----------
+// =========================================
+// Mobile Drawer
+// =========================================
 
 const sidebar =
     document.getElementById("sidebar");
@@ -44,29 +48,41 @@ const sidebarOverlay =
 // Drawer
 // =========================================
 
-function openDrawer(){
+function openDrawer() {
 
-    if(!sidebar) return;
+    if (!sidebar)
+        return;
 
     sidebar.classList.add("show");
 
-    sidebarOverlay.classList.add("show");
+    if (sidebarOverlay) {
+
+        sidebarOverlay.classList.add("show");
+
+    }
 
 }
 
-function closeDrawer(){
+function closeDrawer() {
 
-    if(!sidebar) return;
+    if (!sidebar)
+        return;
 
     sidebar.classList.remove("show");
 
-    sidebarOverlay.classList.remove("show");
+    if (sidebarOverlay) {
+
+        sidebarOverlay.classList.remove("show");
+
+    }
 
 }
 
-// เปิด Drawer
+// =========================================
+// Drawer Event
+// =========================================
 
-if(menuToggle){
+if (menuToggle) {
 
     menuToggle.addEventListener(
 
@@ -78,9 +94,7 @@ if(menuToggle){
 
 }
 
-// ปิด Drawer
-
-if(closeSidebar){
+if (closeSidebar) {
 
     closeSidebar.addEventListener(
 
@@ -92,9 +106,7 @@ if(closeSidebar){
 
 }
 
-// แตะพื้นหลัง
-
-if(sidebarOverlay){
+if (sidebarOverlay) {
 
     sidebarOverlay.addEventListener(
 
@@ -105,6 +117,90 @@ if(sidebarOverlay){
     );
 
 }
+
+// =========================================
+// Wait Map Loaded
+// =========================================
+
+async function waitMapLoaded(url) {
+
+    loading.style.display =
+        "block";
+
+    await new Promise(resolve => {
+
+        mapFrame.onload = () => {
+
+            loading.style.display =
+                "none";
+
+            resolve();
+
+        };
+
+        mapFrame.src =
+            url;
+
+    });
+
+}
+
+// =========================================
+// Zoom To Location
+// =========================================
+
+async function zoomToLocation(item) {
+
+    if (!window.currentMap)
+        return;
+
+    const url = new URL(
+
+        window.currentMap.map
+
+    );
+
+    url.searchParams.set(
+
+        "ll",
+
+        `${item.lat},${item.lng}`
+
+    );
+
+    url.searchParams.set(
+
+        "z",
+
+        "17"
+
+    );
+
+    await waitMapLoaded(
+
+        url.toString()
+
+    );
+
+    if (window.showPopup) {
+
+        showPopup(item);
+
+    }
+
+    mapFrame.scrollIntoView({
+
+        behavior: "smooth",
+
+        block: "center"
+
+    });
+
+}
+
+window.zoomToLocation =
+    zoomToLocation;
+
 // =========================================
 // โหลดจังหวัด
 // =========================================
@@ -127,7 +223,13 @@ function loadProvince() {
 
     });
 
-    loadZone();
+    province.selectedIndex = 0;
+
+    renderZone();
+
+    zone.selectedIndex = 0;
+
+    loadMap();
 
 }
 
@@ -135,12 +237,17 @@ function loadProvince() {
 // โหลดโซน
 // =========================================
 
-function loadZone() {
+function renderZone() {
 
-    const p =
-        province.value;
+    const p = province.value;
 
     zone.innerHTML = "";
+
+    if (!maps[p]) {
+
+        return;
+
+    }
 
     Object.keys(maps[p]).forEach(name => {
 
@@ -156,6 +263,14 @@ function loadZone() {
 
     });
 
+}
+
+function loadZone() {
+
+    renderZone();
+
+    zone.selectedIndex = 0;
+
     loadMap();
 
 }
@@ -166,66 +281,106 @@ function loadZone() {
 
 async function loadMap() {
 
-    const p =
-        province.value;
+    const p = province.value;
 
-    const z =
-        zone.value;
+    const z = zone.value;
 
-    const data =
-        maps[p][z];
+    const data = maps[p]?.[z];
 
-    if (!data)
-        return;
+    if (!data) {
 
-    window.currentMap =
-        data;
+        return false;
+
+    }
+
+    window.currentMap = {
+
+        ...data,
+
+        province: p,
+
+        zone: z
+
+    };
 
     if (window.hidePopup) {
 
-        window.hidePopup();
+        hidePopup();
 
     }
 
-    loading.style.display =
-        "block";
+    await waitMapLoaded(
 
-    mapFrame.src =
-        data.map;
-
-    totalUnit.textContent =
-        data.total;
-
-    await loadKML(
-
-        data.kml,
-
-        p,
-
-        z
+        data.map
 
     );
 
-    loading.style.display =
-        "none";
+    if (totalUnit) {
 
-    // ซ่อนผลค้นหาเมื่อเปลี่ยนพื้นที่
+        totalUnit.textContent =
 
-    const searchResult =
-        document.getElementById("searchResult");
-
-    if (searchResult) {
-
-        searchResult.style.display =
-            "none";
+            data.total;
 
     }
 
-    // มือถือปิด Drawer หลังเลือกจังหวัด/โซน
-
     closeDrawer();
 
+    return true;
+
 }
+
+// =========================================
+// Change Map
+// =========================================
+
+async function changeMap(
+
+    provinceName,
+
+    zoneName
+
+) {
+
+    if (
+
+        !maps[provinceName] ||
+
+        !maps[provinceName][zoneName]
+
+    ) {
+
+        return false;
+
+    }
+
+    province.value = provinceName;
+
+    renderZone();
+
+    zone.value = zoneName;
+
+    return await loadMap();
+
+}
+
+// =========================================
+// Initial
+// =========================================
+
+async function init() {
+
+    loading.style.display =
+
+        "block";
+
+    await loadAllKML();
+
+    loadProvince();
+
+}
+
+window.changeMap =
+    changeMap;
 
 // =========================================
 // Event
@@ -255,7 +410,7 @@ window.addEventListener(
 
     "resize",
 
-    function () {
+    () => {
 
         if (window.innerWidth > 768) {
 
@@ -277,16 +432,86 @@ window.openDrawer =
 window.closeDrawer =
     closeDrawer;
 
+window.loadProvince =
+    loadProvince;
+
+window.renderZone =
+    renderZone;
+
+window.loadZone =
+    loadZone;
+
+window.loadMap =
+    loadMap;
+
+window.changeMap =
+    changeMap;
+
+window.waitMapLoaded =
+    waitMapLoaded;
+
+window.zoomToLocation =
+    zoomToLocation;
+
 // =========================================
 // Start
 // =========================================
 
-loadProvince();
+(async function () {
 
-console.log("=================================");
+    try {
 
-console.log("GGN MAP V1.4");
+        console.log("=================================");
 
-console.log("Responsive Ready");
+        console.log("GGN MAP V2.1");
 
-console.log("=================================");
+        console.log("Loading KML...");
+
+        console.log("=================================");
+
+        await init();
+
+        if (window.initSearch) {
+
+            initSearch();
+
+        }
+
+        console.log(
+
+            "KML Loaded :",
+
+            allLocations.length,
+
+            "Locations"
+
+        );
+
+        console.log(
+
+            "GGN MAP Ready"
+
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+
+            "Application Start Error",
+
+            error
+
+        );
+
+        if (loading) {
+
+            loading.style.display =
+                "none";
+
+        }
+
+    }
+
+})();

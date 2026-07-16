@@ -2,31 +2,17 @@
 // kml.js
 // Load KML
 // =========================================
+let kmlLoaded = false;
 
 async function loadKML(
     filePath,
     province,
-    zone
+    zone,
+    clear = false
 ) {
+    if (clear) {
 
     allLocations = [];
-
-    currentResults = [];
-
-    selectedLocation = null;
-
-    hidePopup();
-
-    if (searchInput) {
-
-        searchInput.value = "";
-
-    }
-
-    if (searchResult) {
-
-        searchResult.innerHTML =
-            '<p class="empty">กำลังโหลดข้อมูล...</p>';
 
     }
 
@@ -154,6 +140,12 @@ async function loadKML(
 
             allLocations.push({
 
+                id:
+                    province + "_" +
+                    zone + "_" +
+                    lat + "_" +
+                    lng,
+
                 name:
 
                     getNode("name")
@@ -237,8 +229,66 @@ async function loadKML(
 }
 
 // =========================================
+// Load All KML
+// =========================================
+
+async function loadAllKML(force = false) {
+      
+        if(kmlLoaded){
+
+        return;
+
+        }
+
+    allLocations = [];
+
+    const jobs = [];
+
+    for (const province in maps) {
+
+        for (const zone in maps[province]) {
+
+            const data = maps[province][zone];
+
+            jobs.push(
+
+                loadKML(
+
+                    data.kml,
+
+                    province,
+
+                    zone,
+
+                    false
+
+                )
+
+            );
+
+        }
+
+    }
+
+    await Promise.all(jobs);
+
+    console.log(
+
+        "โหลด KML ทั้งหมด",
+
+        allLocations.length,
+
+        "รายการ"
+
+    );
+    
+    kmlLoaded = true;
+
+}
+
+// =========================================
 // Export
 // =========================================
 
-window.loadKML =
-    loadKML;
+window.loadKML = loadKML;
+window.loadAllKML = loadAllKML;
