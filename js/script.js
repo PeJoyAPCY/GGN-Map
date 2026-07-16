@@ -40,20 +40,22 @@ async function loadAllPlaces(){
                         p.getElementsByTagName("name")[0]
                         ?.textContent || "";
 
+                    const description =
+                        p.getElementsByTagName("description")[0]?.textContent || "";
+
                     const coordinates =
-                        p.getElementsByTagName("coordinates")[0]
-                        ?.textContent || "";
+                        p.getElementsByTagName("coordinates")[0]?.textContent || "";
+
+                    const coord = coordinates.split(",");
 
                     masterLocations.push({
-
                         name:name,
-
+                        description:description,
                         province:province,
-
                         zone:zone,
-
+                        lat:parseFloat(coord[1]),
+                        lng:parseFloat(coord[0]),
                         coordinates:coordinates
-
                     });
 
                 }
@@ -76,9 +78,11 @@ async function loadAllPlaces(){
 // Init
 // =========================================
 
+(async()=>{
+await loadAllPlaces();
 initPopup();
-
 initSearch();
+})();
 
 console.log("=================================");
 

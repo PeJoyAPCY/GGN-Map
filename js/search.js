@@ -48,7 +48,7 @@ function searchLocation() {
     }
 
     currentResults =
-        allLocationsMaster.filter(item => {
+        masterLocations.filter(item => {
 
         return (
 
@@ -226,8 +226,12 @@ function bindSearchResult() {
 
             });
 
-}
+        };
 
+    });
+
+}
+        
 // =========================================
 // Event
 // =========================================
