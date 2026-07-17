@@ -73,8 +73,10 @@ function showPopup(item) {
 
     <button
         class="navigate-btn"
-        onclick="alert('🚧 ฟังก์ชันนำทางกำลังพัฒนา')">
+        id="navigateBtn">
+
         📍 นำทาง
+
     </button>
 
     `;
@@ -85,6 +87,22 @@ function showPopup(item) {
     updatePopupArrow();
 
     mapPopup.classList.add("show");
+
+    const navigateBtn =
+    document.getElementById("navigateBtn");
+
+    if (
+        navigateBtn &&
+        window.showNavigationPanel
+        ) {
+
+            navigateBtn.onclick = function () {
+
+                showNavigationPanel(item);
+
+            };
+
+        }
 
 }
 
