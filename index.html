@@ -16,10 +16,18 @@
     </title>
 
     <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+    <link
         rel="stylesheet"
         href="css/style.css">
 
 </head>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script src="js/route.js"></script>
 
 <body>
 
@@ -280,6 +288,27 @@
 
         </main>
 
+<!-- =====================================
+    Route Panel
+====================================== -->
+
+        <div
+            id="routePanel"
+            class="route-panel">
+
+            <div class="route-header">
+
+                🧭 ระบบนำทาง
+
+            </div>
+
+            <div
+                id="routeMap">
+
+            </div>
+
+        </div>
+
     </div>
 
     <!-- =====================================
@@ -319,8 +348,6 @@
         </div>
 
     </div>
-
-
 
     <!-- =====================================
          JavaScript
