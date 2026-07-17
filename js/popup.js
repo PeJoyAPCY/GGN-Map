@@ -73,7 +73,7 @@ function showPopup(item) {
 
     <button
         class="navigate-btn"
-        onclick="alert('🚧 ฟังก์ชันนำทางกำลังพัฒนา')">
+        onclick="navigateTo(${item.lat}, ${item.lng})">
         📍 นำทาง
     </button>
 
@@ -132,6 +132,75 @@ function initPopup() {
     };
 
 }
+
+// =========================================
+// Navigate
+// =========================================
+
+function navigateTo(lat, lng) {
+
+    if (!navigator.geolocation) {
+
+        alert("อุปกรณ์ไม่รองรับ GPS");
+
+        return;
+
+    }
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position){
+
+            const origin =
+                `${position.coords.latitude},${position.coords.longitude}`;
+
+            const destination =
+                `${lat},${lng}`;
+
+            const url =
+                `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=driving`;
+
+            window.open(url, "_blank");
+
+        },
+
+        function(error){
+
+            switch(error.code){
+
+                case error.PERMISSION_DENIED:
+                    alert("กรุณาอนุญาตการเข้าถึงตำแหน่ง");
+                    break;
+
+                case error.POSITION_UNAVAILABLE:
+                    alert("ไม่สามารถระบุตำแหน่งได้");
+                    break;
+
+                case error.TIMEOUT:
+                    alert("หมดเวลาการค้นหาตำแหน่ง");
+                    break;
+
+                default:
+                    alert("เกิดข้อผิดพลาดในการระบุตำแหน่ง");
+            }
+
+        },
+
+        {
+
+            enableHighAccuracy:true,
+
+            timeout:10000,
+
+            maximumAge:0
+
+        }
+
+    );
+
+}
+
+window.navigateTo = navigateTo;
 
 // =========================================
 // Export
