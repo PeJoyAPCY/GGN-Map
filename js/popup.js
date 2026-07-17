@@ -73,13 +73,12 @@ function showPopup(item) {
         </div>
 
         <button
+            type="button"
             class="navigate-btn"
-            onclick="navigateTo(
-                ${item.lat},
-                ${item.lng},
-                '${(item.name || "").replace(/'/g, "\\'")}'
-            )">
+            id="navigateBtn">
+
             📍 นำทาง
+
         </button>
 
     `;
@@ -93,7 +92,39 @@ function showPopup(item) {
 
     mapPopup.classList.add("show");
 
+    // ============================
+    // Event
+    // ============================
+
+    const navigateBtn =
+        document.getElementById("navigateBtn");
+
+    if (navigateBtn) {
+
+        navigateBtn.addEventListener(
+
+            "click",
+
+            function () {
+
+                navigateTo(
+
+                    item.lat,
+
+                    item.lng,
+
+                    item.name
+
+                );
+
+            }
+
+        );
+
+    }
+
 }
+
 // =========================================
 // Update Arrow
 // =========================================
@@ -123,18 +154,24 @@ function initPopup() {
     if (!header)
         return;
 
-    header.onclick = function () {
+    header.addEventListener(
 
-        popupCollapsed = !popupCollapsed;
+        "click",
 
-        popupContent.style.display =
-            popupCollapsed
-                ? "none"
-                : "block";
+        function () {
 
-        updatePopupArrow();
+            popupCollapsed = !popupCollapsed;
 
-    };
+            popupContent.style.display =
+                popupCollapsed
+                    ? "none"
+                    : "block";
+
+            updatePopupArrow();
+
+        }
+
+    );
 
 }
 
@@ -145,7 +182,12 @@ function initPopup() {
 function navigateTo(lat, lng, name = "") {
 
     // ตรวจสอบพิกัด
-    if (isNaN(lat) || isNaN(lng)) {
+    if (
+        typeof lat !== "number" ||
+        typeof lng !== "number" ||
+        isNaN(lat) ||
+        isNaN(lng)
+    ) {
 
         alert("ไม่พบพิกัดของหน่วยงาน");
 
@@ -154,19 +196,17 @@ function navigateTo(lat, lng, name = "") {
     }
 
     // ยืนยันก่อนนำทาง
-    const confirmNavigate =
-        confirm(`ต้องการนำทางไปยัง\n\n${name}`);
+    const ok = confirm(
+        `ต้องการนำทางไปยัง\n\n${name || "ปลายทาง"} ?`
+    );
 
-    if (!confirmNavigate)
+    if (!ok)
         return;
 
-    // ตรวจสอบการรองรับ GPS
+    // ถ้า Browser ไม่รองรับ GPS
     if (!navigator.geolocation) {
 
-        const url =
-            `https://www.google.com/maps/search/?api=1&query=${lat},${lng}&hl=th`;
-
-        window.location.href = url;
+        openDestination(lat, lng);
 
         return;
 
@@ -189,16 +229,11 @@ function navigateTo(lat, lng, name = "") {
             window.location.href = url;
 
         },
+
         // Error
         function () {
 
-            // หากไม่สามารถใช้ GPS ได้
-            // ให้เปิดตำแหน่งปลายทางแทน
-
-            const url =
-                `https://www.google.com/maps/search/?api=1&query=${lat},${lng}&hl=th`;
-
-            window.location.href = url;
+            openDestination(lat, lng);
 
         },
 
@@ -217,11 +252,24 @@ function navigateTo(lat, lng, name = "") {
 
 }
 
-window.navigateTo = navigateTo;
+// =========================================
+// Open Destination
+// =========================================
+
+function openDestination(lat, lng) {
+
+    const url =
+        `https://www.google.com/maps/search/?api=1&query=${lat},${lng}&hl=th`;
+
+    window.location.href = url;
+
+}
 
 // =========================================
 // Export
 // =========================================
+
+window.navigateTo = navigateTo;
 
 window.showPopup = showPopup;
 
