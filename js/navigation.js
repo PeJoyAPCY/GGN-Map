@@ -10,6 +10,19 @@
 let currentDestination = null;
 
 // =========================================
+// Element
+// =========================================
+
+const navigationPanel =
+    document.getElementById("navigationPanel");
+
+const navigationInfo =
+    document.getElementById("navigationInfo");
+
+const startNavigationBtn =
+    document.getElementById("startNavigationBtn");
+
+// =========================================
 // Set Destination
 // =========================================
 
@@ -31,6 +44,52 @@ function setDestination(item) {
 function getDestination() {
 
     return currentDestination;
+
+}
+
+// =========================================
+// Show Navigation Panel
+// =========================================
+
+function showNavigationPanel(item) {
+
+    if (
+        !navigationPanel ||
+        !navigationInfo
+    ) return;
+
+    currentDestination = item;
+
+    navigationInfo.innerHTML = `
+
+        <strong>${item.name}</strong>
+
+        <br><br>
+
+        📍 จังหวัด :
+        ${item.province}
+
+        <br>
+
+        🗂 โซน :
+        ${item.zone}
+
+    `;
+
+    navigationPanel.classList.add("show");
+
+}
+
+// =========================================
+// Hide Navigation Panel
+// =========================================
+
+function hideNavigationPanel() {
+
+    if (!navigationPanel)
+        return;
+
+    navigationPanel.classList.remove("show");
 
 }
 
@@ -129,3 +188,7 @@ window.getDestination = getDestination;
 window.getCurrentLocation = getCurrentLocation;
 
 window.startNavigation = startNavigation;
+
+window.showNavigationPanel = showNavigationPanel;
+
+window.hideNavigationPanel = hideNavigationPanel;
