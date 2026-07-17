@@ -41,57 +41,59 @@ function hidePopup() {
 
 function showPopup(item) {
 
-    if (!mapPopup) return;
+    if (!mapPopup)
+        return;
 
     popupTitle.textContent =
         item.name || "ไม่ระบุชื่อ";
 
     const desc =
         (item.description || "")
-        .replace(/<br\s*\/?>/gi,"\n")
-        .replace(/<\/div>/gi,"\n")
-        .replace(/<[^>]*>/g,"")
-        .trim();
+            .replace(/<br\s*\/?>/gi, "\n")
+            .replace(/<\/div>/gi, "\n")
+            .replace(/<[^>]*>/g, "")
+            .trim();
 
     popupContent.innerHTML = `
 
-    <div class="popup-info">
-        <strong>จังหวัด :</strong>
-        ${item.province}
-    </div>
+        <div class="popup-info">
+            <strong>จังหวัด :</strong>
+            ${item.province}
+        </div>
 
-    <div class="popup-info">
-        <strong>โซน :</strong>
-        ${item.zone}
-    </div>
+        <div class="popup-info">
+            <strong>โซน :</strong>
+            ${item.zone}
+        </div>
 
-    <hr>
+        <hr>
 
-    <div class="popup-description">
-        ${desc.replace(/\n/g,"<br>")}
-    </div>
+        <div class="popup-description">
+            ${desc.replace(/\n/g, "<br>")}
+        </div>
 
-    <button
-        class="navigate-btn"
-        onclick="navigateTo(${item.lat}, ${item.lng})">
-        📍 นำทาง
-    </button>
+        <button
+            class="navigate-btn"
+            onclick="navigateTo(
+                ${item.lat},
+                ${item.lng},
+                '${(item.name || "").replace(/'/g, "\\'")}'
+            )">
+            📍 นำทาง
+        </button>
 
     `;
 
     popupContent.style.display =
-        popupCollapsed ? "none" : "block";
+        popupCollapsed
+            ? "none"
+            : "block";
 
     updatePopupArrow();
 
     mapPopup.classList.add("show");
 
 }
-
-// =========================================
-// Button
-// =========================================
-
 // =========================================
 // Update Arrow
 // =========================================
@@ -118,14 +120,17 @@ function initPopup() {
     const header =
         document.getElementById("popupHeader");
 
-    if (!header) return;
+    if (!header)
+        return;
 
     header.onclick = function () {
 
         popupCollapsed = !popupCollapsed;
 
         popupContent.style.display =
-            popupCollapsed ? "none" : "block";
+            popupCollapsed
+                ? "none"
+                : "block";
 
         updatePopupArrow();
 
@@ -137,11 +142,31 @@ function initPopup() {
 // Navigate
 // =========================================
 
-function navigateTo(lat, lng) {
+function navigateTo(lat, lng, name = "") {
 
+    // ตรวจสอบพิกัด
+    if (isNaN(lat) || isNaN(lng)) {
+
+        alert("ไม่พบพิกัดของหน่วยงาน");
+
+        return;
+
+    }
+
+    // ยืนยันก่อนนำทาง
+    const confirmNavigate =
+        confirm(`ต้องการนำทางไปยัง\n\n${name}`);
+
+    if (!confirmNavigate)
+        return;
+
+    // ตรวจสอบการรองรับ GPS
     if (!navigator.geolocation) {
 
-        alert("อุปกรณ์ไม่รองรับ GPS");
+        const url =
+            `https://www.google.com/maps/search/?api=1&query=${lat},${lng}&hl=th`;
+
+        window.location.href = url;
 
         return;
 
@@ -149,7 +174,8 @@ function navigateTo(lat, lng) {
 
     navigator.geolocation.getCurrentPosition(
 
-        function(position){
+        // Success
+        function (position) {
 
             const origin =
                 `${position.coords.latitude},${position.coords.longitude}`;
@@ -158,41 +184,32 @@ function navigateTo(lat, lng) {
                 `${lat},${lng}`;
 
             const url =
-                `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=driving`;
+                `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&travelmode=driving&hl=th`;
 
-            window.open(url, "_blank");
+            window.location.href = url;
+
+        },
+        // Error
+        function () {
+
+            // หากไม่สามารถใช้ GPS ได้
+            // ให้เปิดตำแหน่งปลายทางแทน
+
+            const url =
+                `https://www.google.com/maps/search/?api=1&query=${lat},${lng}&hl=th`;
+
+            window.location.href = url;
 
         },
 
-        function(error){
-
-            switch(error.code){
-
-                case error.PERMISSION_DENIED:
-                    alert("กรุณาอนุญาตการเข้าถึงตำแหน่ง");
-                    break;
-
-                case error.POSITION_UNAVAILABLE:
-                    alert("ไม่สามารถระบุตำแหน่งได้");
-                    break;
-
-                case error.TIMEOUT:
-                    alert("หมดเวลาการค้นหาตำแหน่ง");
-                    break;
-
-                default:
-                    alert("เกิดข้อผิดพลาดในการระบุตำแหน่ง");
-            }
-
-        },
-
+        // Options
         {
 
-            enableHighAccuracy:true,
+            enableHighAccuracy: true,
 
-            timeout:10000,
+            timeout: 10000,
 
-            maximumAge:0
+            maximumAge: 0
 
         }
 
