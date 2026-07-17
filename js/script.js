@@ -13,6 +13,10 @@ let selectedLocation = null;
 // Init
 // =========================================
 
+initPopup();
+
+initSearch();
+
 console.log("=================================");
 
 console.log("GGN MAP V2");
