@@ -56,22 +56,32 @@ function showNavigationPanel(item) {
     if (
         !navigationPanel ||
         !navigationInfo
-    ) return;
+    ) {
+
+        console.warn(
+            "Navigation Panel ยังไม่มีใน HTML"
+        );
+
+        return;
+
+    }
 
     currentDestination = item;
 
     navigationInfo.innerHTML = `
 
-        <strong>${item.name}</strong>
+        <h3>${item.name}</h3>
 
-        <br><br>
+        <br>
 
-        📍 จังหวัด :
+        <b>จังหวัด</b>
+
         ${item.province}
 
         <br>
 
-        🗂 โซน :
+        <b>โซน</b>
+
         ${item.zone}
 
     `;
