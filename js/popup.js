@@ -72,14 +72,8 @@ function showPopup(item) {
     </div>
 
     <button
-        class="navigate-btn"
-        onclick="showNavigationPanel({
-            name:'${item.name}',
-            province:'${item.province}',
-            zone:'${item.zone}',
-            lat:${item.lat},
-            lng:${item.lng}
-        })">
+        id="navigateBtn"
+        class="navigate-btn">
 
         📍 นำทาง
 
@@ -97,20 +91,17 @@ function showPopup(item) {
     const navigateBtn =
     document.getElementById("navigateBtn");
 
-            if (
-                navigateBtn &&
-                window.showNavigationPanel
-                ) {
+            if (navigateBtn) {
 
-            navigateBtn.onclick = function () {
+                navigateBtn.onclick = function () {
 
-                setDestination(item);
+                    setDestination(item);
 
-                showNavigationPanel(item);
+                    showNavigationPanel(item);
 
-            };
+                };
 
-        }
+            }
 
 }
 
