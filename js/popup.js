@@ -41,73 +41,89 @@ function hidePopup() {
 
 function showPopup(item) {
 
-    if (!mapPopup) return;
+    if (!mapPopup)
+        return;
 
     popupTitle.textContent =
         item.name || "ไม่ระบุชื่อ";
 
     const desc =
         (item.description || "")
-        .replace(/<br\s*\/?>/gi,"\n")
-        .replace(/<\/div>/gi,"\n")
-        .replace(/<[^>]*>/g,"")
-        .trim();
+            .replace(/<br\s*\/?>/gi, "\n")
+            .replace(/<\/div>/gi, "\n")
+            .replace(/<[^>]*>/g, "")
+            .trim();
 
     popupContent.innerHTML = `
 
-    <div class="popup-info">
-        <strong>จังหวัด :</strong>
-        ${item.province}
-    </div>
+        <div class="popup-info">
+            <strong>จังหวัด :</strong>
+            ${item.province}
+        </div>
 
-    <div class="popup-info">
-        <strong>โซน :</strong>
-        ${item.zone}
-    </div>
+        <div class="popup-info">
+            <strong>โซน :</strong>
+            ${item.zone}
+        </div>
 
-    <hr>
+        <hr>
 
-    <div class="popup-description">
-        ${desc.replace(/\n/g,"<br>")}
-    </div>
+        <div class="popup-description">
+            ${desc.replace(/\n/g, "<br>")}
+        </div>
 
-    <button
-        id="navigateBtn"
-        class="navigate-btn">
+        <button
+            type="button"
+            class="navigate-btn"
+            id="navigateBtn">
 
-        📍 นำทาง
+            📍 นำทาง
 
-    </button>
+        </button>
 
     `;
 
     popupContent.style.display =
-        popupCollapsed ? "none" : "block";
+        popupCollapsed
+            ? "none"
+            : "block";
 
     updatePopupArrow();
 
     mapPopup.classList.add("show");
 
+    // ============================
+    // Event
+    // ============================
+
     const navigateBtn =
-    document.getElementById("navigateBtn");
+        document.getElementById("navigateBtn");
 
-            if (navigateBtn) {
+    if (navigateBtn) {
 
-                navigateBtn.onclick = function () {
+        navigateBtn.addEventListener(
 
-                    setDestination(item);
+            "click",
 
-                    showNavigationPanel(item);
+            function () {
 
-                };
+                navigateTo(
+
+                    item.lat,
+
+                    item.lng,
+
+                    item.name
+
+                );
 
             }
 
-}
+        );
 
-// =========================================
-// Button
-// =========================================
+    }
+
+}
 
 // =========================================
 // Update Arrow
@@ -135,24 +151,125 @@ function initPopup() {
     const header =
         document.getElementById("popupHeader");
 
-    if (!header) return;
+    if (!header)
+        return;
 
-    header.onclick = function () {
+    header.addEventListener(
 
-        popupCollapsed = !popupCollapsed;
+        "click",
 
-        popupContent.style.display =
-            popupCollapsed ? "none" : "block";
+        function () {
 
-        updatePopupArrow();
+            popupCollapsed = !popupCollapsed;
 
-    };
+            popupContent.style.display =
+                popupCollapsed
+                    ? "none"
+                    : "block";
+
+            updatePopupArrow();
+
+        }
+
+    );
+
+}
+
+// =========================================
+// Navigate
+// =========================================
+
+function navigateTo(lat, lng, name = "") {
+
+    // ตรวจสอบพิกัด
+    if (
+        typeof lat !== "number" ||
+        typeof lng !== "number" ||
+        isNaN(lat) ||
+        isNaN(lng)
+    ) {
+
+        alert("ไม่พบพิกัดของหน่วยงาน");
+
+        return;
+
+    }
+
+    // ยืนยันก่อนนำทาง
+    const ok = confirm(
+        `ต้องการนำทางไปยัง\n\n${name || "ปลายทาง"} ?`
+    );
+
+    if (!ok)
+        return;
+
+    // ถ้า Browser ไม่รองรับ GPS
+    if (!navigator.geolocation) {
+
+        openDestination(lat, lng);
+
+        return;
+
+    }
+
+    navigator.geolocation.getCurrentPosition(
+
+        // Success
+        function (position) {
+
+            const origin =
+                `${position.coords.latitude},${position.coords.longitude}`;
+
+            const destination =
+                `${lat},${lng}`;
+
+            const url =
+                `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&travelmode=driving&hl=th`;
+
+            window.location.href = url;
+
+        },
+
+        // Error
+        function () {
+
+            openDestination(lat, lng);
+
+        },
+
+        // Options
+        {
+
+            enableHighAccuracy: true,
+
+            timeout: 10000,
+
+            maximumAge: 0
+
+        }
+
+    );
+
+}
+
+// =========================================
+// Open Destination
+// =========================================
+
+function openDestination(lat, lng) {
+
+    const url =
+        `https://www.google.com/maps/search/?api=1&query=${lat},${lng}&hl=th`;
+
+    window.location.href = url;
 
 }
 
 // =========================================
 // Export
 // =========================================
+
+window.navigateTo = navigateTo;
 
 window.showPopup = showPopup;
 

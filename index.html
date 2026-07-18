@@ -10,7 +10,9 @@
         content="width=device-width, initial-scale=1.0">
 
     <title>
+
         GGN Operations Map
+
     </title>
 
     <link
@@ -32,9 +34,13 @@
             <!-- Mobile Menu -->
 
             <button
+
                 id="menuToggle"
+
                 class="menu-toggle"
+
                 type="button"
+
                 aria-label="เปิดเมนู">
 
                 ☰
@@ -44,18 +50,24 @@
             <div class="logo">
 
                 <img
+
                     src="images/logo.png"
+
                     alt="GGN Logo">
 
                 <div>
 
                     <h2>
+
                         GGN Operations Map
+
                     </h2>
 
                     <p>
+
                         บริษัท รักษาความปลอดภัย
                         เกรท การ์เดียน นอร์ทเทอร์น จำกัด
+
                     </p>
 
                 </div>
@@ -66,18 +78,20 @@
 
     </header>
 
-    <!-- =====================================
-         Mobile Overlay
-    ====================================== -->
+    <!-- ===============================
+         Overlay (Mobile)
+    ================================ -->
 
     <div
+
         id="sidebarOverlay"
+
         class="sidebar-overlay">
 
     </div>
 
     <!-- =====================================
-         MAIN CONTAINER
+         MAIN
     ====================================== -->
 
     <div class="container">
@@ -87,23 +101,30 @@
         ================================== -->
 
         <aside
-            id="sidebar"
-            class="sidebar">
 
-            <!-- =============================
-                 Sidebar Mobile Header
-            ============================== -->
+            id="sidebar"
+
+            class="sidebar">
+            <!-- =================================
+                 Mobile Sidebar Header
+            ================================== -->
 
             <div class="sidebar-mobile-header">
 
                 <h2>
+
                     เมนูค้นหา
+
                 </h2>
 
                 <button
+
                     id="closeSidebar"
+
                     class="close-sidebar"
+
                     type="button"
+
                     aria-label="ปิดเมนู">
 
                     ✕
@@ -112,43 +133,66 @@
 
             </div>
 
-            <!-- =============================
+            <!-- =================================
                  จังหวัด / โซน
-            ============================== -->
+            ================================== -->
 
-            <h2>ค้นหาพื้นที่</h2>
+            <h2>
+
+                ค้นหาพื้นที่
+
+            </h2>
 
             <label for="province">
+
                 จังหวัด
+
             </label>
 
-            <select id="province"></select>
+            <select id="province">
+
+            </select>
 
             <label for="zone">
+
                 โซน
+
             </label>
 
-            <select id="zone"></select>
+            <select id="zone">
+
+            </select>
 
             <hr>
 
-            <!-- =============================
+            <!-- =================================
                  Search
-            ============================== -->
+            ================================== -->
 
-            <h2>ค้นหาหน่วยงาน</h2>
+            <h2>
+
+                ค้นหาหน่วยงาน
+
+            </h2>
 
             <div class="search-box">
 
                 <input
-                    id="searchInput"
+
                     type="text"
+
+                    id="searchInput"
+
                     placeholder="เช่น เคียวเซร่า หรือ เบอร์นิน่า"
+
                     autocomplete="off"
+
                     spellcheck="false">
 
                 <button
+
                     id="clearSearch"
+
                     type="button">
 
                     ❌ ล้าง
@@ -157,12 +201,14 @@
 
             </div>
 
-            <!-- =============================
+            <!-- =================================
                  Search Result
-            ============================== -->
+            ================================== -->
 
             <div
+
                 id="searchResult"
+
                 class="search-result">
 
                 <p class="empty">
@@ -172,12 +218,12 @@
                 </p>
 
             </div>
-```html
+
             <hr>
 
-            <!-- =============================
+            <!-- =================================
                  Dashboard
-            ============================== -->
+            ================================== -->
 
             <div class="dashboard">
 
@@ -188,7 +234,9 @@
                 </h3>
 
                 <div
+
                     id="totalUnit"
+
                     class="total">
 
                     0
@@ -197,12 +245,14 @@
 
             </div>
 
-            <!-- =============================
+            <!-- =================================
                  Loading
-            ============================== -->
+            ================================== -->
 
             <div
+
                 id="loading"
+
                 style="display:none;text-align:center;padding:12px;">
 
                 กำลังโหลดข้อมูล...
@@ -216,11 +266,14 @@
         ================================== -->
 
         <main class="content">
-
             <iframe
+
                 id="mapFrame"
+
                 title="GGN Operations Map"
+
                 loading="lazy"
+
                 allowfullscreen>
 
             </iframe>
@@ -233,32 +286,32 @@
          Floating Popup
     ====================================== -->
 
+    <div id="mapPopup" class="map-popup">
+
     <div
-        id="mapPopup"
-        class="map-popup">
+        id="popupHeader"
+        class="popup-header">
+
+        <h3 id="popupTitle">
+
+            รายละเอียดหน่วยงาน
+
+        </h3>
+
+        <span
+            id="popupArrow"
+            class="popup-arrow">
+
+            ▼
+
+        </span>
+
+    </div>
 
         <div
-            id="popupHeader"
-            class="popup-header">
 
-            <h3 id="popupTitle">
-
-                รายละเอียดหน่วยงาน
-
-            </h3>
-
-            <span
-                id="popupArrow"
-                class="popup-arrow">
-
-                ▼
-
-            </span>
-
-        </div>
-
-        <div
             id="popupContent"
+
             class="popup-content">
 
             กรุณาเลือกหน่วยงาน
@@ -267,81 +320,24 @@
 
     </div>
 
-    <!-- =====================================
-         Navigation Panel
-    ====================================== -->
 
-    <div
-        id="navigationPanel"
-        class="navigation-panel">
 
-        <div class="navigation-header">
-
-            <h3>
-
-                🧭 นำทาง
-
-            </h3>
-
-        </div>
-
-        <div
-            id="navigationInfo"
-            class="navigation-info">
-
-            ยังไม่ได้เลือกปลายทาง
-
-        </div>
-
-        <div class="navigation-action">
-
-            <button
-                id="startNavigationBtn"
-                type="button">
-
-                🚗 เริ่มนำทาง
-
-            </button>
-
-            <button
-                id="closeNavigationBtn"
-                type="button">
-
-                ✖ ปิด
-
-            </button>
-
-        </div>
-
-    </div>
-```
-```html
     <!-- =====================================
          JavaScript
     ====================================== -->
 
-    <!-- ข้อมูลแผนที่ -->
     <script src="js/maps.js"></script>
 
-    <!-- โหลด KML -->
-    <script src="js/kml.js"></script>
-
-    <!-- ตัวแปร Global -->
-    <script src="js/script.js"></script>
-
-    <!-- Popup -->
     <script src="js/popup.js"></script>
 
-    <!-- Navigation -->
-    <script src="js/navigation.js"></script>
-
-    <!-- Search -->
     <script src="js/search.js"></script>
 
-    <!-- Main Application -->
+    <script src="js/kml.js"></script>
+
+    <script src="js/script.js"></script>
+
     <script src="js/app.js"></script>
 
 </body>
 
 </html>
-```
