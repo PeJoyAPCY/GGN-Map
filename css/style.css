@@ -980,3 +980,21 @@ iframe{
 }
 
 }
+
+.popup-header{
+
+    cursor:pointer;
+
+    user-select:none;
+
+    position:relative;
+
+    z-index:3001;
+
+}
+
+.popup-arrow{
+
+    pointer-events:none;
+
+}

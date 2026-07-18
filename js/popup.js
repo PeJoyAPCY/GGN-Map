@@ -83,10 +83,7 @@ function showPopup(item) {
 
     `;
 
-    popupContent.style.display =
-        popupCollapsed
-            ? "none"
-            : "block";
+    popupContent.hidden = popupCollapsed;
 
     updatePopupArrow();
 
@@ -154,24 +151,15 @@ function initPopup() {
     if (!header)
         return;
 
-    header.addEventListener(
+    header.addEventListener("click", () => {
 
-        "click",
+        popupCollapsed = !popupCollapsed;
 
-        function () {
+        popupContent.hidden = popupCollapsed;
 
-            popupCollapsed = !popupCollapsed;
+        updatePopupArrow();
 
-            popupContent.style.display =
-                popupCollapsed
-                    ? "none"
-                    : "block";
-
-            updatePopupArrow();
-
-        }
-
-    );
+    });
 
 }
 
@@ -276,3 +264,7 @@ window.showPopup = showPopup;
 window.hidePopup = hidePopup;
 
 window.initPopup = initPopup;
+
+window.addEventListener("load", () => {
+    initPopup();
+});
