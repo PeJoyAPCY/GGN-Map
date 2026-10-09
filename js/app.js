@@ -275,58 +275,48 @@ function loadZone() {
 
 }
 
-// =========================================
-// โหลดแผนที่
-// =========================================
+
+ // =========================================
+ // โหลดแผนที่
+ // =========================================
 
 async function loadMap() {
 
     const p = province.value;
-
     const z = zone.value;
-
     const data = maps[p]?.[z];
 
     if (!data) {
-
         return false;
-
     }
 
     window.currentMap = {
-
         ...data,
-
         province: p,
-
         zone: z
-
     };
 
     if (window.hidePopup) {
-
         hidePopup();
-
     }
 
-    await waitMapLoaded(
+    await waitMapLoaded(data.map);
 
-        data.map
-
-    );
-
+    // นับจำนวนจุดจากข้อมูลที่โหลดออนไลน์จริง
     if (totalUnit) {
 
-        totalUnit.textContent =
+        const zoneLocations = allLocations.filter(
+            item =>
+                item.province === p &&
+                item.zone === z
+        );
 
-            data.total;
-
+        totalUnit.textContent = zoneLocations.length;
     }
 
     closeDrawer();
 
     return true;
-
 }
 
 // =========================================
