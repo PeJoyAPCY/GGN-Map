@@ -156,10 +156,7 @@ async function fetchKML(url, province, zone) {
     return parseKMLText(text, province, zone);
 }
 
-
-// =========================================
-// LOAD ONE MAP
-// =========================================
+//load KML for a specific province and zone
 
 async function loadKML(
     filePath,
@@ -172,10 +169,9 @@ async function loadKML(
     }
 
     console.log(
-        `[GGN Map] กำลังโหลด ${province} / ${zone}`
+        `[GGN Map] กำลังโหลดออนไลน์ ${province} / ${zone}`
     );
 
-    // 1. Try Google My Maps first
     try {
         const onlineUrl = getOnlineKMLUrl(
             province,
@@ -198,43 +194,10 @@ async function loadKML(
 
         return locations.length;
 
-    } catch (onlineError) {
-        console.warn(
-            `[GGN Map] โหลดออนไลน์ไม่สำเร็จ: ${province} / ${zone}`,
-            onlineError.message
-        );
-    }
-
-    // 2. Fallback to local KML
-    try {
-        const response = await fetch(filePath);
-
-        if (!response.ok) {
-            throw new Error("HTTP " + response.status);
-        }
-
-        const text = await response.text();
-
-        const locations = parseKMLText(
-            text,
-            province,
-            zone
-        );
-
-        allLocations.push(...locations);
-
-        console.warn(
-            `[GGN Map] ใช้ไฟล์สำรอง: ${filePath}`,
-            locations.length,
-            "จุด"
-        );
-
-        return locations.length;
-
-    } catch (fallbackError) {
+    } catch (error) {
         console.error(
-            `[GGN Map] โหลดทั้งออนไลน์และไฟล์สำรองไม่สำเร็จ: ${province} / ${zone}`,
-            fallbackError
+            `[GGN Map] โหลดออนไลน์ไม่สำเร็จ: ${province} / ${zone}`,
+            error
         );
 
         return 0;
